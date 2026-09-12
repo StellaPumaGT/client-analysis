@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What DuPont Actually Sells — The Science, at Sixth-Grade Level</title>
+<style>
+:root {
+  --bg: #14120F; --surface: #1E1B17; --border: #2E2A24; --ink: #F0EDE8;
+  --muted: #2A2620; --accent: #D04A02; --accent-bg: #2A1A12;
+  --gold: #C9A84C; --gold-bg: #1E1A0F; --green: #3D8B6E; --green-bg: #0F1E18;
+  --text-secondary: #A09890; --text-tertiary: #6A6058;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body { background: var(--bg); color: var(--ink); font-family: Georgia,'Times New Roman',serif; line-height: 1.75; padding-bottom: 4rem; }
+.top-bar { background: #0E0C0A; border-bottom: 1px solid var(--border); padding: .75rem 1.25rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .5rem; position: sticky; top: 0; z-index: 100; }
+.top-bar-title { font-size: 13px; font-weight: 700; font-family: system-ui,sans-serif; color: var(--ink); }
+.top-bar-sub { font-size: 11px; color: var(--text-tertiary); font-family: system-ui,sans-serif; }
+.chapter-nav { background: var(--surface); border-bottom: 1px solid var(--border); padding: .5rem 1.25rem; display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
+.chapter-nav select { background: var(--muted); border: 1px solid var(--border); color: var(--ink); border-radius: 5px; padding: .3rem .6rem; font-size: 12px; font-family: system-ui,sans-serif; cursor: pointer; }
+.nav-btn { background: var(--muted); border: 1px solid var(--border); color: var(--ink); border-radius: 5px; padding: .3rem .75rem; font-size: 12px; font-family: system-ui,sans-serif; cursor: pointer; }
+.nav-btn:hover { background: var(--border); }
+.progress-lbl { font-size: 11px; color: var(--text-tertiary); font-family: system-ui,sans-serif; margin-left: auto; }
+.audio-bar { background: var(--surface); border-bottom: 1px solid var(--border); padding: .5rem 1.25rem; display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
+.audio-btn { background: var(--accent); color: #fff; border: none; border-radius: 5px; padding: .35rem .9rem; font-size: 12px; font-family: system-ui,sans-serif; cursor: pointer; font-weight: 700; }
+.audio-btn.secondary { background: var(--muted); color: var(--ink); }
+.audio-seg-lbl { font-size: 11px; color: var(--text-secondary); font-family: system-ui,sans-serif; }
+.content { max-width: 720px; margin: 0 auto; padding: 2rem 1.25rem; }
+.ch-eyebrow { font-size: 11px; font-family: system-ui,sans-serif; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; margin-bottom: .5rem; }
+.ch-title { font-size: 2rem; font-weight: 700; line-height: 1.2; margin-bottom: .375rem; }
+.ch-subtitle { font-size: 1.05rem; color: var(--text-secondary); margin-bottom: 2rem; font-style: italic; }
+.seg { margin-bottom: 1.5rem; font-size: 1.0625rem; line-height: 1.8; }
+.seg.highlight { background: var(--accent-bg); border-left: 3px solid var(--accent); padding: .875rem 1rem; border-radius: 0 6px 6px 0; font-size: .975rem; }
+.seg.highlight.gold { background: var(--gold-bg); border-color: var(--gold); }
+.seg.highlight.green { background: var(--green-bg); border-color: var(--green); }
+.seg.active-seg { background: #2A2010; border-radius: 4px; padding: 0 .25rem; transition: background .3s; }
+.sect { font-size: 1.1rem; font-weight: 700; font-family: system-ui,sans-serif; margin: 2rem 0 .75rem; color: var(--gold); }
+.experiment { background: var(--green-bg); border: 1px solid var(--green); border-radius: 8px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+.experiment-title { font-size: 12px; font-weight: 700; font-family: system-ui,sans-serif; color: var(--green); text-transform: uppercase; letter-spacing: .06em; margin-bottom: .5rem; }
+.experiment p { font-size: .95rem; margin-bottom: .5rem; line-height: 1.65; }
+.experiment p:last-child { margin-bottom: 0; }
+.audit-box { background: var(--accent-bg); border: 1px solid var(--accent); border-radius: 8px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+.audit-box-title { font-size: 12px; font-weight: 700; font-family: system-ui,sans-serif; color: var(--accent); text-transform: uppercase; letter-spacing: .06em; margin-bottom: .5rem; }
+.audit-box p { font-size: .95rem; margin-bottom: .5rem; line-height: 1.65; }
+.audit-box p:last-child { margin-bottom: 0; }
+.def { border-bottom: 1px dashed var(--text-tertiary); cursor: help; }
+.product { display: inline-block; font-family: system-ui,sans-serif; font-size: 11px; font-weight: 700; background: var(--muted); border: 1px solid var(--border); border-radius: 4px; padding: 1px 7px; margin: 1px; color: var(--ink); }
+.ch-divider { border: none; border-top: 1px solid var(--border); margin: 3rem 0; }
+.chapter-section { display: none; }
+.chapter-section.active { display: block; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <div>
+    <div class="top-bar-title">What DuPont Actually Sells</div>
+    <div class="top-bar-sub">The Science, at Sixth-Grade Level &middot; DuPont de Nemours (DD)</div>
+  </div>
+</div>
+<div class="chapter-nav">
+  <button class="nav-btn" onclick="prevChapter()">&#8592; Prev</button>
+  <select id="chapterSelect" onchange="goToChapter(this.value)"></select>
+  <button class="nav-btn" onclick="nextChapter()">Next &#8594;</button>
+  <span class="progress-lbl" id="progressLbl"></span>
+</div>
+<div class="audio-bar">
+  <button class="audio-btn" id="playBtn" onclick="togglePlay()">&#9654; Read Aloud</button>
+  <button class="audio-btn secondary" onclick="prevSeg()">&#8592;</button>
+  <button class="audio-btn secondary" onclick="nextSeg()">&#8594;</button>
+  <span class="audio-seg-lbl" id="audioLbl">Press play to listen</span>
+</div>
+
+<!-- CHAPTER 1 -->
+<div class="chapter-section active" id="ch0">
+  <div class="content">
+    <div class="ch-eyebrow">Chapter 1 of 9</div>
+    <h1 class="ch-title">Everything Is a Chain</h1>
+    <div class="ch-subtitle">Polymers: the building block of everything DuPont makes</div>
+
+    <div class="seg">Pull a piece of nylon stocking between your fingers and it stretches — soft, slippery, almost alive. Now look at a nylon rope on a fishing boat. It is rigid, coarse, and strong enough to hold a thousand pounds. Both are made of exactly the same chemical building block. The difference is not what the molecule <em>is</em>. The difference is how many of them are chained together, and how those chains are arranged.</div>
+
+    <div class="seg">A <span class="def" title="A small molecule that can join with others of its kind to form a long chain.">monomer</span> is a small molecule — a single link. A <span class="def" title="A very long molecule made of repeating monomer units; the word comes from Greek: poly = many, meros = parts.">polymer</span> is what you get when you snap thousands of those links together into a chain. The word comes from Greek: <em>poly</em> means many, <em>meros</em> means parts. Nature invented polymers first. Your hair is a polymer (keratin). Your DNA is a polymer. The starch in bread is a polymer made of glucose. DuPont learned to make synthetic ones — and once you understand that trick, you understand almost every product the company sells.</div>
+
+    <div class="seg">Here is why chains matter: individual water molecules are slippery and flow past each other freely. But hook a million of them together into a long chain and suddenly the chains tangle around each other like spaghetti in a pot. That tangle resists pulling apart. That resistance is <em>strength</em>. The longer the chain, the more tangling, the stronger the material.</div>
+
+    <div class="sect">Length, Branching, and Cross-Linking</div>
+
+    <div class="seg">Chain length is only the first dial engineers can turn. The second is <span class="def" title="Side chains that branch off a main polymer backbone, like branches on a tree, making the material softer and less dense.">branching</span>. Imagine the main chain has smaller side-chains sticking out of it at angles, like branches on a tree. Those branches keep the main chains from packing tightly together. Result: the material is softer, lighter, and more flexible. Low-density polyethylene (the thin plastic film in a grocery bag) is branched. High-density polyethylene (a hard plastic bottle) is straight with almost no branches — so the chains pack tight and the material is stiff.</div>
+
+    <div class="seg">The third dial is <span class="def" title="Chemical bonds that link polymer chains to each other sideways, like rungs on a ladder, making the network rigid and resistant to heat.">cross-linking</span>. A cross-link is a chemical bond that reaches sideways from one chain and grabs onto a neighboring chain — like rungs connecting two ladders. Cross-link enough chains and you turn a liquid into a solid that cannot melt. Vulcanized rubber (the kind in car tires) is cross-linked with sulfur. Epoxy glue sets hard because the two components react to form a dense network of cross-links. You cannot un-cross-link something without breaking the bonds — which is why epoxy is permanent and why hard thermoset plastics cannot be recycled simply by remelting.</div>
+
+    <div class="seg highlight gold">Every material DuPont sells is essentially a set of answers to three questions: How long is the chain? Is it branched? Is it cross-linked? Change one of those answers and you get a completely different material — different strength, flexibility, melting point, chemical resistance, and feel in your hand.</div>
+
+    <div class="sect">Why DuPont Is a Polymer Company</div>
+
+    <div class="seg">DuPont started making gunpowder in 1802 — a very different kind of chemistry. But in the 1930s the company hired a chemist named Wallace Carothers, who figured out how to make long-chain synthetic polymers in the lab. His work produced nylon in 1935. Nylon was the first fully synthetic polymer fiber ever made, and it changed clothing, parachutes, toothbrushes, and fishing line all at once. It also proved a principle that DuPont has never let go of: if you design the polymer carefully, you can engineer almost any property you want into the material.</div>
+
+    <div class="seg">Today DuPont does not make nylon anymore — that business was spun off years ago. But the <em>philosophy</em> is still completely intact. Filmtec™ membranes are carefully designed polymer films with precisely sized pores. Tyvek® is a tangle of ultra-fine polyethylene fibers, engineered so tightly that it behaves more like paper than plastic. Vespel® parts are made from polyimide — a polymer with rigid ring-shaped monomers that stack like plates, giving it the ability to survive temperatures that would melt most metals. Amberlite™ resins are polymer beads with charged chemical sites on their surface, catching specific ions out of water like tiny magnets.</div>
+
+    <div class="seg">The chain is always the point. This chapter is the key that unlocks every chapter that follows. When you hear that a DuPont product is "high performance," what that actually means is: the polymer was designed, down to the monomer level, to do one specific job better than any naturally occurring material can.</div>
+
+    <div class="experiment">
+      <div class="experiment-title">&#9878; Kitchen Experiment: The Oobleck Trick</div>
+      <p><strong>What you need:</strong> 1 cup cornstarch, ½ cup water, a bowl, and your hands.</p>
+      <p><strong>What to do:</strong> Mix the cornstarch and water slowly. Do not use a mixer — stir gently with your fingers. Now hit the surface hard and fast with your palm. Then slowly drag your finger through it.</p>
+      <p><strong>What happens:</strong> Hit it fast and your hand bounces off something that feels like concrete. Stir it slowly and it flows like thick cream. It is the same mixture both times.</p>
+      <p><strong>Why it works:</strong> Cornstarch granules are polymer particles suspended in water. When you apply force slowly, the particles have time to slide past each other — liquid behavior. When force comes fast, the particles jam together and lock — solid behavior. This is called a <em>non-Newtonian fluid</em>, and it shows that molecular structure creates surprising behavior that has nothing to do with what the material "is made of" in a simple sense. The same molecule, differently arranged in time, has completely different properties.</p>
+    </div>
+
+    <div class="audit-box">
+      <div class="audit-box-title">&#9775; Audit Angle: Revenue Recognition for Custom Polymers</div>
+      <p>Revenue recognition for standard polymer products is relatively straightforward: DuPont ships goods, control transfers to the customer at delivery, and revenue is recognized at that point-in-time (ASC 606, Step 5).</p>
+      <p>The complexity enters when DuPont makes a polymer formulated to a customer's exact specification — a custom grade of Filmtec membrane for a specific semiconductor fab's water chemistry, for example. The auditor must ask: is this a <em>distinct performance obligation</em>, or is it a contract modification of an existing supply agreement? If the product has no alternative use and DuPont has an enforceable right to payment for work completed to date, ASC 606 requires recognizing revenue <em>over time</em> as the product is manufactured, not just at shipment.</p>
+      <p>Custom polymer contracts also raise questions about variable consideration: what happens if a batch fails the customer's incoming quality test? Estimated returns and credits must be constrained and disclosed.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CHAPTER 2 -->
+<div class="chapter-section" id="ch1">
+  <div class="content">
+    <div class="ch-eyebrow">Chapter 2 of 9</div>
+    <h1 class="ch-title">Why Rain Beads Up But Air Gets Through</h1>
+    <div class="ch-subtitle">Surface tension, porosity, and the magic of Tyvek</div>
+
+    <div class="seg">Walk outside in a light drizzle wearing a Tyvek suit — the kind construction workers and hazmat responders wear — and the rain beads up and rolls off. You stay dry. But you do not roast inside, either, because sweat vapor escapes right through the fabric. Two things that seem to contradict each other are happening at the same time: water is blocked and air is not. Understanding how that is possible requires understanding two different physical phenomena: <span class="def" title="The tendency of liquid surfaces to contract, caused by water molecules pulling on each other.">surface tension</span> and <span class="def" title="The property of a material having tiny connected holes (pores) through which some things can pass and others cannot.">porosity</span>.</div>
+
+    <div class="seg">Surface tension exists because water molecules are attracted to each other. Each molecule pulls on its neighbors equally from all sides — except at the surface, where there are no neighbors above. So surface water molecules get pulled sideways and downward, which makes the surface act like a stretched elastic skin. This is why a water strider walks on a pond without sinking, and why water forms spherical droplets rather than just spreading into a flat puddle. A water droplet is surface tension winning against gravity for as long as it can.</div>
+
+    <div class="seg">Now imagine a tiny hole in a material — say, one-tenth of a millimeter across. A water droplet is much larger than that hole. For the droplet to squeeze through, it would have to deform, breaking its surface and losing the energy that holds it together. If the material's surface is also <span class="def" title="Water-repelling; from Greek hydro (water) + phobos (fear). Hydrophobic surfaces have very low surface energy.">hydrophobic</span> — meaning the water molecules do not want to stick to it — then the droplet has no reason to enter at all. It sits on the surface and rolls off. Rain is blocked.</div>
+
+    <div class="sect">The Lotus Leaf Principle</div>
+
+    <div class="seg">The lotus leaf is the most famous example of hydrophobic surface design in nature. Under a microscope, the leaf surface is covered in microscopic waxy bumps. A water droplet resting on those bumps actually touches very little of the leaf's surface area — most of the contact is with air trapped between the bumps. Because water barely touches the leaf, it has almost nothing to grip. Droplets roll off instantly, taking dust and dirt with them. This is called the <em>lotus effect</em>, and materials scientists spend entire careers trying to replicate it in synthetic surfaces.</div>
+
+    <div class="seg">DuPont's approach with Tyvek does not copy the lotus bumps. It uses a different trick: the material itself is made of polyethylene, which is naturally hydrophobic. And the fibers are spun into a tangle so dense that pores are tiny — too small for liquid water droplets to enter — but large enough for individual water vapor molecules, which are thousands of times smaller than droplets, to pass straight through. The pores do not need to be open channels; they are tortuous paths through a mat of tangled fibers. Vapor molecules, bouncing randomly in all directions, eventually make it through. Droplets never do.</div>
+
+    <div class="seg highlight">Here is the key size comparison: a water droplet is about 1 to 2 millimeters in diameter. A water vapor molecule is about 0.0003 micrometers — roughly four million times smaller. Tyvek pores sit in between. That size gap is the entire product. Close the pores and you get a waterproof, vapor-proof barrier (like a plastic bag). Open them wider and rain gets in. The engineering is in landing at exactly the right pore size.</div>
+
+    <div class="sect">Tyvek: Two Products, Same Principle</div>
+
+    <div class="seg"><span class="product">Tyvek® HomeWrap</span> is used in construction. Builders wrap it around the outside of a house's wooden frame before adding the exterior siding. Rain and wind-driven moisture cannot get through. But water vapor from cooking, breathing, and showering can escape outward — which prevents mold from forming inside the walls. Before Tyvek, builders used tar paper, which is waterproof but does not breathe. Walls trapped moisture inside and rotted. Tyvek solved a problem that had plagued wooden construction for a century.</div>
+
+    <div class="seg"><span class="product">Tyvek® Medical Packaging</span> solves the opposite-looking version of the same problem. Medical devices must be sterilized — usually with ethylene oxide gas or hydrogen peroxide vapor — inside their packaging so they arrive at hospitals already sterile. The packaging must let the sterilization gas flow in, kill all the bacteria, and flow back out. Then it must seal tight enough that bacteria cannot re-enter through the air. Bacteria are about 1–10 micrometers. Ethylene oxide molecules are about 0.0004 micrometers. Tyvek passes the gas and blocks the bacteria — exactly the same pore-size logic, applied to a medical problem instead of a construction problem.</div>
+
+    <div class="seg highlight gold">Both products — the housewrap and the medical pouch — work on the same principle: there is a size difference between what you want to stop and what you want to let through, and Tyvek's pore size sits precisely in between. DuPont did not invent two products. It invented one phenomenon and then found the customers who needed it.</div>
+
+    <div class="seg">The hydrophobic surface chemistry matters just as much as the pore size. If Tyvek were hydrophilic — if water molecules were attracted to its fibers — then vapor would condense inside the material and liquid water would be drawn through by capillary action, the same force that pulls water up through a paper towel. Polyethylene is naturally hydrophobic, which is part of why it was chosen. Surface energy, measured in millinewtons per meter, determines whether liquids spread across a surface or bead up and leave. DuPont engineers choose polymers in part by their surface energy numbers, because those numbers predict whether rain rolls off or soaks in.</div>
+
+    <div class="experiment">
+      <div class="experiment-title">&#9878; Kitchen Experiment: Surface Tension and Its Defeat</div>
+      <p><strong>What you need:</strong> A bowl of water, ground black pepper, and a drop of dish soap.</p>
+      <p><strong>What to do:</strong> Sprinkle pepper across the surface of the water until it covers most of it. Now touch one drop of dish soap to the very center of the surface.</p>
+      <p><strong>What happens:</strong> The pepper explodes outward to the edges of the bowl in less than a second.</p>
+      <p><strong>Why it works:</strong> Pepper floats because surface tension supports it — the skin of the water holds it up. Dish soap is a surfactant: it has one end that loves water and one end that hates it, which means it breaks up the organized hydrogen bonds between water molecules and dramatically lowers surface tension. Where you added the soap, surface tension drops instantly. The surrounding water, still at high tension, pulls the pepper outward like a taut rubber sheet snapping back. This is why soaps are called "surfactants" — they act at the surface. DuPont's materials science involves managing and exploiting surface energy in exactly this way.</p>
+    </div>
+
+    <div class="audit-box">
+      <div class="audit-box-title">&#9775; Audit Angle: Bill-and-Hold and Tyvek Medical</div>
+      <p>Tyvek medical packaging is often manufactured to a medical device maker's specification and then held in DuPont's (or the customer's) warehouse until the device maker needs it for a production run — which could be months later. If DuPont bills the customer before physical delivery, this is a <em>bill-and-hold</em> arrangement.</p>
+      <p>ASC 606 allows bill-and-hold revenue recognition only if four criteria are all met: (1) the reason for the arrangement is substantive (the customer asked for it, not DuPont); (2) the product is identified separately as belonging to the customer; (3) the product is ready for transfer; and (4) DuPont cannot use the product or redirect it to another customer.</p>
+      <p>The auditor testing Tyvek medical packaging revenues should look for evidence that all four criteria are genuinely satisfied — not just asserted. Mis-applied bill-and-hold recognition is a classic form of premature revenue booking. The stakes are elevated because medical packaging contracts tend to be large and lumpy.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CHAPTER 3 -->
+<div class="chapter-section" id="ch2">
+  <div class="content">
+    <div class="ch-eyebrow">Chapter 3 of 9</div>
+    <h1 class="ch-title">Osmosis, Run Backwards</h1>
+    <div class="ch-subtitle">How pressure makes pure water from seawater: Filmtec membranes</div>
+
+    <div class="seg">There is a jar of seawater on one side of a membrane and a jar of fresh water on the other. Left alone, water will move — and it will always move in the same direction. It flows from the fresh side toward the salty side, not the other way. That seems backwards at first. But the reason makes sense once you understand what molecules are doing: they are always trying to spread out. Where water is most concentrated — the fresh side, where salt isn't taking up any space — molecules migrate toward the side where they are less concentrated. This is <span class="def" title="The movement of water molecules across a semi-permeable membrane from a region of low solute concentration to a region of high solute concentration.">osmosis</span>, and it is one of the most fundamental drives in all of chemistry.</div>
+
+    <div class="seg">Now imagine pushing down on the seawater side with enormous pressure — about 800 pounds per square inch, roughly 55 times atmospheric pressure. You are forcing water molecules back through the membrane against their natural inclination. The membrane stops the salt ions because they are too large to fit through the pores, but water molecules are small enough to squeeze through. Water comes out the other side pure. This is <span class="def" title="A water-purification process that uses pressure to force water through a semi-permeable membrane, leaving contaminants behind.">reverse osmosis</span>, and it is why a city in the middle of a desert can turn ocean water into drinking water.</div>
+
+    <div class="seg highlight">The membrane pore size is everything. Reverse osmosis membranes have pores of about 0.0001 micrometers — small enough to block dissolved salts (sodium and chloride ions), bacteria, viruses, and most organic molecules. Nanofiltration membranes are slightly larger — about 0.001 micrometers — letting some minerals through while blocking larger molecules. Choose the wrong pore size and you either get dirty water out or you clog the membrane with things that were never supposed to be there.</div>
+
+    <div class="sect">Filmtec: The Membrane DuPont Sells to the World</div>
+
+    <div class="seg"><span class="product">Filmtec™</span> membranes are DuPont's reverse osmosis and nanofiltration products. They are thin-film composite membranes — meaning they are actually three layers laminated together. The top layer is ultra-thin polyamide, only about 0.2 micrometers thick, which does the actual separation work. Beneath it is a polysulfone support layer, about 40 micrometers thick, that gives the membrane mechanical strength without adding resistance to water flow. Beneath that is a polyester fabric backing that lets you handle the membrane without tearing it. The whole sandwich is about 150 micrometers thick — roughly the thickness of two human hairs.</div>
+
+    <div class="seg">Filmtec membranes are sold rolled up in spiral-wound modules that look like carpet rolls. Water enters one end under pressure, spirals through the module, and exits in two streams: <em>permeate</em> (pure water that made it through) and <em>concentrate</em> (everything rejected, now more concentrated). A single module might be four inches in diameter and forty inches long. A large municipal desalination plant will stack thousands of them in parallel and series to process tens of millions of gallons per day.</div>
+
+    <div class="seg">Where are Filmtec membranes used? Municipal water systems in water-scarce regions like the Middle East, North Africa, and coastal California. Industrial process water — power plants need ultra-pure boiler feed water to prevent scaling. Food and beverage production — juice concentration, dairy processing, whey protein extraction. And the fastest-growing market: semiconductor fabrication plants, which need water so pure that its electrical conductivity is near zero. A single contaminating ion in ultrapure water can destroy a batch of microchips worth millions of dollars. Filmtec provides the membranes that produce that water.</div>
+
+    <div class="seg highlight gold">DuPont management highlighted in the Q2 2026 earnings call that ultrapure water demand from semiconductor fabs was growing more than 20% year over year. Every new chip factory — and dozens are being built across the United States, Taiwan, South Korea, and Japan — needs Filmtec membranes before it can make a single chip.</div>
+
+    <div class="sect">Nanofiltration: The Middle Option</div>
+
+    <div class="seg">Between reverse osmosis (blocks nearly everything) and ultrafiltration (blocks bacteria and large molecules but passes most dissolved salts) sits <span class="def" title="A membrane filtration process that removes particles between 0.001 and 0.01 micrometers, including hardness-causing divalent ions while passing monovalent ions.">nanofiltration</span>. Nanofiltration membranes block large organic molecules, pesticides, and hardness-causing divalent ions (calcium and magnesium) while letting smaller monovalent ions (sodium, chloride) pass through. This is useful when you want to soften water or remove micropollutants without removing all dissolved minerals — drinking water often tastes better with some mineral content left in. Filmtec nanofiltration membranes are sold into municipal water softening, food processing, and pharmaceutical applications.</div>
+
+    <div class="experiment">
+      <div class="experiment-title">&#9878; Kitchen Experiment: Egg in Salt Water vs. Fresh Water</div>
+      <p><strong>What you need:</strong> Two raw eggs still in their shells, two glasses, water, and several tablespoons of salt.</p>
+      <p><strong>What to do:</strong> Fill one glass with plain fresh water. Fill the other with very salty water (at least 4 tablespoons of salt per cup). Put one egg in each glass and leave them for 24 hours.</p>
+      <p><strong>What happens:</strong> The egg in fresh water gains weight slightly and may look slightly larger. The egg in salt water loses weight slightly and may look shrunken.</p>
+      <p><strong>Why it works:</strong> An eggshell is a semi-permeable membrane — it has tiny pores that let water pass but block larger molecules. The fluid inside the egg has a particular salt concentration. In fresh water (less salt outside), osmosis drives water into the egg. In very salty water (more salt outside), osmosis drives water out of the egg. The egg shell demonstrates exactly the same principle as a Filmtec membrane — but in the natural direction. Reverse osmosis is just this experiment, with pressure applied to force water the other way.</p>
+    </div>
+
+    <div class="audit-box">
+      <div class="audit-box-title">&#9775; Audit Angle: Multi-Year Infrastructure Contracts</div>
+      <p>Filmtec membranes for municipal water systems are often sold under multi-year supply agreements with cities, water authorities, and engineering contractors. These contracts may include pricing escalators tied to energy costs, volume commitments with take-or-pay provisions, and performance guarantees (the membranes must maintain a certain flux rate and salt rejection percentage).</p>
+      <p>When a municipality renegotiates an existing contract — extending term, changing volumes, or adding new modules — ASC 606 requires analyzing whether this is a contract <em>modification</em>. If the modification adds distinct goods at their standalone selling price, it is treated as a separate contract. If it does not, the remaining performance obligation must be re-measured and revenue recognized prospectively or cumulatively, depending on the facts.</p>
+      <p>Semiconductor fab ultrapure water contracts present different risks: the customer qualifies specific DuPont membrane grades, and switching to a competitor's membrane requires months of re-qualification. This creates pricing power — but also concentration risk. If a major fab pauses construction or changes technology, DuPont's pipeline can soften quickly. The auditor should assess whether backlog disclosures fairly represent demand.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CHAPTER 4 -->
+<div class="chapter-section" id="ch3">
+  <div class="content">
+    <div class="ch-eyebrow">Chapter 4 of 9</div>
+    <h1 class="ch-title">Opposites Attract</h1>
+    <div class="ch-subtitle">Ions, charges, and Amberlite ion exchange resins</div>
+
+    <div class="seg">When a sodium atom loses one of its electrons, it becomes a <span class="def" title="An atom or molecule that has gained or lost one or more electrons, giving it a net electrical charge.">ion</span> — specifically a positively charged ion called a <span class="def" title="A positively charged ion, attracted to negative (cathodic) surfaces. The name comes from Greek: kata = down, as cations move toward the cathode in electrolysis.">cation</span>. When a chlorine atom gains an electron, it becomes a negatively charged ion called an <span class="def" title="A negatively charged ion, attracted to positive (anodic) surfaces.">anion</span>. Dissolved together in water, these two ions form salt — the same salt you put on food. But in water meant for drinking, medicines, or semiconductor manufacturing, even tiny amounts of sodium or chloride ions are a problem. The question is: how do you grab a specific ion out of water without boiling the whole thing or using huge amounts of energy?</div>
+
+    <div class="seg">The answer is <span class="def" title="A process that uses a charged resin material to swap unwanted ions in a solution for different, acceptable ions.">ion exchange</span>. Imagine tiny beads — about the size of fine grains of sand — each one a polymer sphere covered on its surface with thousands of charged chemical sites. A <em>cation exchange resin</em> has negatively charged sites, which attract and hold positively charged cations (like calcium, magnesium, lead, or ammonium). When water flows through a column packed with these beads, the bad cations in the water swap places with harmless hydrogen ions that were sitting on the resin. The water that comes out no longer has the bad cations. The resin now holds them.</div>
+
+    <div class="seg">Anion exchange resins work the same way in reverse: positively charged sites on the resin grab negatively charged anions (like nitrate, sulfate, arsenic, or chloride) from the water, releasing harmless hydroxide ions instead. Run water through a cation column and then an anion column, and you can remove virtually all dissolved ions — producing deionized water that conducts almost no electricity. This is exactly the kind of water that semiconductor fabs and pharmaceutical manufacturers need.</div>
+
+    <div class="sect">Amberlite: The Workhorse Resin</div>
+
+    <div class="seg"><span class="product">Amberlite™</span> ion exchange resins are DuPont's flagship product line in this space. They are sold in dozens of grades — some optimized for pharmaceutical water purification, some for food-grade applications (like making corn syrup or decaffeinating coffee), some for biotech processes (like purifying antibodies), and some for industrial use (like treating cooling tower water or softening boiler feed water). Each grade is a different polymer backbone with different functional groups attached, designed to select specific ions over others.</div>
+
+    <div class="seg">The polymer backbone of most Amberlite resins is a cross-linked polystyrene or polyacrylate — remember cross-linking from Chapter 1? This is why cross-linking matters here: an ion exchange resin must be rigid enough to maintain its structure as water flows through at high pressure, but porous enough to let water and ions reach the exchange sites inside the bead. Cross-link too little and the beads swell and deform. Cross-link too much and the pores close up, blocking access to exchange sites and slashing the resin's capacity. The precise degree of cross-linking is a key trade secret for each Amberlite grade.</div>
+
+    <div class="seg highlight">Regeneration is what makes ion exchange economical. Once a resin is fully loaded with bad ions, you can flush it with a concentrated salt solution — brine for cation resins, sodium hydroxide for anion resins. The high concentration of the flushing solution drives the exchange reaction backwards, releasing the captured ions and restoring the resin's charged sites. The resin is then ready to run again. A single cubic foot of resin can be regenerated and reused thousands of times over a 10–15 year lifespan.</div>
+
+    <div class="sect">Ion Exchange in Everyday Life</div>
+
+    <div class="seg">The most familiar ion exchange application is the home water softener. Hard water contains calcium and magnesium ions that leave white scale deposits on pipes, water heaters, and dishwashers — and that react with soap to form a gray scum instead of lather. A household water softener contains cation exchange resin charged with sodium ions. As hard water flows through, calcium and magnesium ions swap places with sodium ions on the resin. The water that comes out has the same total dissolved solids — but the scale-forming, soap-blocking calcium and magnesium are gone, replaced with sodium, which causes neither problem. Every few days, the homeowner pours salt pellets into the softener tank, regenerating the resin.</div>
+
+    <div class="seg">In pharmaceutical manufacturing, the stakes are much higher. Medicines for injection must be made in water that contains no ions, no bacteria, no endotoxins (bacterial debris that causes fever). Amberlite resins are part of a multi-stage water purification train — alongside reverse osmosis membranes and ultraviolet sterilization — that produces <span class="def" title="Water for Injection — the highest purity grade of pharmaceutical water, specified in the US Pharmacopeia for making injectable drugs.">WFI</span> (Water for Injection). The FDA audits pharmaceutical water systems because contamination in WFI can kill patients. The resins used must be validated, documented, and tested on every lot.</div>
+
+    <div class="experiment">
+      <div class="experiment-title">&#9878; Kitchen Experiment: Hard Water and Soft Water</div>
+      <p><strong>What you need:</strong> Two glasses of water — one tap water and one water that has been run through a home water softener (or bottled distilled water). A small amount of bar soap or hand soap.</p>
+      <p><strong>What to do:</strong> Add the same small amount of soap to each glass and shake or stir vigorously for 30 seconds. Compare the lather in each glass.</p>
+      <p><strong>What happens:</strong> Hard tap water produces little or no lather and may show a gray, curd-like residue. Softened or distilled water produces abundant white bubbles and no residue.</p>
+      <p><strong>Why it works:</strong> Soap molecules work by surrounding grease with their water-loving ends pointing out. But calcium and magnesium ions react with soap molecules chemically to form calcium stearate — an insoluble gray curd that cannot form bubbles and cannot clean anything. Remove the calcium and magnesium with ion exchange, and soap works as intended. This is exactly what Amberlite resins do in home water softeners, scaled up by a factor of millions in industrial applications.</p>
+    </div>
+
+    <div class="audit-box">
+      <div class="audit-box-title">&#9775; Audit Angle: Customer Acceptance in Pharma Contracts</div>
+      <p>Pharmaceutical customers purchasing Amberlite resins must perform extensive lot qualification before using the resin in drug manufacturing. This process can take weeks to months and involves testing the resin's physical and chemical properties against a validated specification. Revenue is recognized only after the customer formally accepts the lot — not when DuPont ships it.</p>
+      <p>ASC 606 customer acceptance clauses create a timing difference between shipment and revenue recognition. The auditor must determine whether the acceptance clause is a <em>substantive</em> acceptance right (the customer can reject based on genuine performance testing) or a <em>formal</em> right (essentially a notification formality after a product that always passes). Only substantive acceptance rights delay revenue recognition.</p>
+      <p>The practical risk: Amberlite lots shipped near a quarter-end may be in the qualification pipeline when the period closes. If DuPont recognizes revenue before customer acceptance results come back — and a lot occasionally fails — this understates returns and overstates revenue in the period.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CHAPTER 5 -->
+<div class="chapter-section" id="ch4">
+  <div class="content">
+    <div class="ch-eyebrow">Chapter 5 of 9</div>
+    <h1 class="ch-title">Heat Is Just Jiggling</h1>
+    <div class="ch-subtitle">Insulation, thermal resistance, and Styrofoam</div>
+
+    <div class="seg">Hold your hand over a hot stove and you feel heat. That heat is energy moving from the stove to your hand. But what is actually moving? Not the stove. Not the air (not at first). What is moving is a disturbance — a vibration. The metal in the stove is hot because its atoms are vibrating wildly. When those atoms bump into neighboring air molecules, they share some of that vibration. The air molecules bump into other molecules, which bump into more, until eventually the vibration reaches your skin and you feel it as warmth. Temperature is simply the average speed of molecular vibration. Heat transfer is vibrations spreading from fast molecules to slower ones.</div>
+
+    <div class="seg">This is why materials matter so much for insulation. In a solid metal — like a copper pan — atoms are packed tightly and rigidly. A vibration started at one end travels almost instantly to the other. Metals are excellent thermal <em>conductors</em>. In a gas — like air — molecules are far apart and mostly not touching. A vibration started in one gas molecule rarely finds another molecule nearby to pass it to. Air is a terrible thermal conductor, which makes it an excellent insulator. The challenge in building an insulator is to trap as much air as possible while still having a solid material that you can actually build with.</div>
+
+    <div class="seg highlight gold">Styrofoam is the answer DuPont came to. <span class="product">Styrofoam™</span> brand insulation is extruded polystyrene foam — a plastic riddled with billions of tiny closed gas bubbles. About 98% of Styrofoam's volume is gas. The polystyrene walls between the bubbles conduct heat, but they are thin and the path through them is long and winding. Most of the heat has to cross countless gas-filled gaps where it cannot move efficiently. The result is a rigid, lightweight board that slows heat movement dramatically.</div>
+
+    <div class="sect">Radiant vs. Conductive Heat</div>
+
+    <div class="seg">Heat travels in three ways: <span class="def" title="Transfer of heat through direct contact between materials; atoms passing vibrations to neighbors.">conduction</span> (vibrations passing through matter), <span class="def" title="Transfer of heat through the movement of fluids (liquids or gases); warm fluid rises and carries heat with it.">convection</span> (warm fluid rising and carrying heat), and <span class="def" title="Transfer of heat as electromagnetic radiation (infrared light); does not need any matter to travel through.">radiation</span> (infrared light traveling through space). Styrofoam handles conduction well by trapping air. But radiant heat — infrared light — passes through air without losing energy. This is how the sun heats Earth across 93 million miles of vacuum.</div>
+
+    <div class="seg">Tyvek housewrap addresses radiant heat differently. Some Tyvek products include a reflective metallic layer — a <em>radiant barrier</em> — that bounces infrared radiation back rather than absorbing it. An attic in summer absorbs enormous amounts of radiant heat from the roof. A reflective barrier on the underside of the roof deck reflects that heat back upward before it can drive up the temperature of the living space below. This is the same reason emergency blankets are made of shiny metallic film: they reflect your body's radiated infrared back at you rather than letting it escape.</div>
+
+    <div class="seg">In practice, a well-insulated house uses both strategies: Styrofoam or fiberglass batt insulation to block conductive and convective heat transfer, plus a radiant barrier layer in the attic and a properly installed vapor-barrier housewrap (Tyvek) to manage moisture and additional thermal performance. DuPont sells products that address both mechanisms — which is why it can offer a building science argument for using multiple products together.</div>
+
+    <div class="sect">Cold Chain: Styrofoam Beyond Construction</div>
+
+    <div class="seg">The same thermal resistance that keeps a house warm in winter keeps a vaccine cold in a delivery box. Cold-chain packaging — the shipping containers used to transport temperature-sensitive pharmaceuticals, fresh produce, and seafood — relies on Styrofoam to maintain low temperatures for days without any active refrigeration. A Styrofoam shipper packed with dry ice or gel packs can keep vaccines between 2°C and 8°C for 96 hours, even in a 40°C summer warehouse. This matters enormously for global health: vaccines that lose temperature integrity during shipping are ineffective but look fine, and that is dangerous.</div>
+
+    <div class="seg highlight">The physics of cold-chain packaging is exactly the same as the physics of house insulation — just reversed. Instead of keeping winter cold from getting in, you are keeping summer heat from getting in. Styrofoam's R-value (a measure of thermal resistance per inch of thickness) does not care which direction the heat is trying to move. The trapped air resists heat transfer either way.</div>
+
+    <div class="experiment">
+      <div class="experiment-title">&#9878; Kitchen Experiment: Which Insulator Wins?</div>
+      <p><strong>What you need:</strong> Three identical cups or mugs, boiling water (ask an adult to help), a wool sock, a sheet of aluminum foil, and a thermometer if you have one.</p>
+      <p><strong>What to do:</strong> Pour the same amount of hot water into each cup. Wrap the first cup tightly in the sock. Wrap the second cup in aluminum foil. Leave the third bare. Wait 10 minutes, then compare how warm each cup feels from the outside.</p>
+      <p><strong>What happens:</strong> The sock-wrapped cup stays warmest. The foil cup may actually cool faster than bare — because foil conducts heat away efficiently. The sock wins because it traps air.</p>
+      <p><strong>Why it works:</strong> Wool fibers trap tiny pockets of air between them. That air cannot vibrate heat away quickly — remember, air molecules are far apart. Aluminum foil has no trapped air at all — it is a solid metal conductor, which is great at moving heat but terrible at stopping it. This shows exactly why Styrofoam (trapped air) insulates while metals conduct. The same principle keeps your Styrofoam coffee cup warm and your aluminum can cool quickly once it's out of the fridge.</p>
+    </div>
+
+    <div class="audit-box">
+      <div class="audit-box-title">&#9775; Audit Angle: Construction Cycles and Inventory NRV</div>
+      <p>Styrofoam insulation demand tracks housing starts and commercial construction activity very closely. When construction slows — as it did in 2023-2024 due to high interest rates — DuPont's insulation business accumulates finished goods inventory. The auditor's concern is whether that inventory is carried at the right value.</p>
+      <p>ASC 330 requires inventory to be written down to <em>net realizable value</em> (NRV) when NRV falls below cost. NRV is estimated selling price minus costs to complete and sell. If housing starts are soft and competitive pricing pressure is forcing prices down, DuPont may not be able to recover full standard cost when it eventually sells the inventory. Management must estimate NRV using forward-looking market data — which requires auditor scrutiny of the assumptions used.</p>
+      <p>In Q2 2026, DuPont noted that residential construction remained soft while multi-family housing was growing. The product mix matters for NRV: insulation boards used in multi-family construction may carry different margin profiles than products designed for single-family residential. Segment-level inventory analysis is warranted.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CHAPTER 6 -->
+<div class="chapter-section" id="ch5">
+  <div class="content">
+    <div class="ch-eyebrow">Chapter 6 of 9</div>
+    <h1 class="ch-title">Mixtures, and the Trick of the Composite</h1>
+    <div class="ch-subtitle">Composites, interfaces, Corian, and Vespel</div>
+
+    <div class="seg">A stick of chalk and a piece of glass are both brittle — drop either one and it shatters. Steel is strong but it corrodes. Aluminum is light but it dents easily. Every pure material has its own stubborn set of properties, and no single material is perfect for everything. Engineers figured out a long time ago that you can sometimes get properties that neither material has by mixing two of them together in just the right way. The result is called a <span class="def" title="A material made from two or more components with significantly different physical or chemical properties that, when combined, produce a material with characteristics different from the individual components.">composite</span>.</div>
+
+    <div class="seg">The classic example is concrete. Gravel alone is hard but crumbles under tension. Cement paste alone is strong in compression but weak in tension and has no structural strength by itself without aggregate. Mix them together and you get concrete — something neither component could be. The gravel provides resistance to compression and gives the matrix something to grip. The cement paste bonds everything together and fills the gaps. Their combined strength exceeds either ingredient alone. Add steel rebar to concrete and you get reinforced concrete — which can handle tension forces that plain concrete cannot.</div>
+
+    <div class="seg">The secret ingredient in every composite is the <span class="def" title="The boundary between the two materials in a composite; how well the materials bond at this surface determines whether the composite gains the strength of both or fails at the seam.">interface</span> — the boundary where the two materials meet. If the interface is strong, stress applied to the composite is shared between both materials and distributed widely. If the interface is weak — if the materials don't bond well — stress concentrates at the seam and the composite fails there, often more suddenly than either pure material would. Good composite design is largely good interface design.</div>
+
+    <div class="sect">Corian: Hard, Smooth, and Fixable</div>
+
+    <div class="seg"><span class="product">Corian®</span> solid surface material is a composite of two components: an acrylic polymer matrix and aluminum trihydrate filler particles. The acrylic (poly-methyl methacrylate, also known as PMMA) provides the binding matrix — it is the cement of this composite. The aluminum trihydrate is a white mineral filler that makes up about two-thirds of Corian's mass. It is what gives Corian its stone-like hardness, opacity, and weight.</div>
+
+    <div class="seg">Why aluminum trihydrate specifically? First, it is white and disperses uniformly, so Corian can be colored by adding pigments evenly throughout the slab — unlike natural stone, where the color pattern is fixed by geology. Second, aluminum trihydrate is a <em>fire retardant</em>: when it heats up, it releases water molecules locked in its crystal structure, which cools the surface and slows combustion. Third, it is harder than the acrylic alone, which is why Corian resists scratches and stands up to kitchen use.</div>
+
+    <div class="seg highlight green">The remarkable property of Corian — the one that differentiates it from granite or quartz — is that it is <em>repairable</em>. Because Corian is a solid uniform composite (same material all the way through, not a thin surface veneer over a different substrate), a deep scratch or burn can be sanded out. The surface 50 micrometers of material are identical to the material 5 millimeters deeper. Sand it down, polish it back, and the damage is gone. This is a consequence of the composite being uniform — a design choice, not an accident.</div>
+
+    <div class="seg">Corian is used in kitchen and bathroom countertops, hospital surfaces (the non-porosity and repairability are especially valuable in healthcare settings where bacteria cannot be allowed to hide in surface cracks), retail display fixtures, and commercial building interiors. The non-porous surface cannot absorb bacteria, mold, or mildew — which is why architects specify it for hospital nurse stations and food-preparation counters.</div>
+
+    <div class="sect">Vespel: The Polymer That Survives 300°C</div>
+
+    <div class="seg"><span class="product">Vespel®</span> is a different kind of composite entirely. The base material is polyimide — a polymer made of rigid, flat, ring-shaped monomers called imide groups. These rings stack on each other like plates in a cupboard, creating a polymer that is inherently stiff and resistant to heat in a way that most flexible-chain polymers are not. Polyimide can survive continuous use at 300°C (572°F) — above the melting point of many other engineering plastics — without softening or losing dimensional accuracy.</div>
+
+    <div class="seg">Vespel parts are made by adding solid lubricant fillers to the polyimide matrix. The most common are molybdenum disulfide (MoS₂) and graphite. These fillers are flat crystalline materials that slide in layers — they are solid-state lubricants, meaning they reduce friction between surfaces without requiring liquid oil. In an aircraft engine bearing or a semiconductor wafer-handling ring, you cannot use liquid oil (it would evaporate, contaminate, or carbonize). Vespel provides a structural polymer part that lubricates itself.</div>
+
+    <div class="seg highlight">Vespel is extraordinarily expensive — a small machined part might cost hundreds to thousands of dollars. But the customers who buy it have no alternative: they need something that holds precise dimensions at high temperature, does not outgas (release vapors that would contaminate a vacuum environment), does not require lubrication, and does not corrode. Aircraft engine thrust reverser bushings, semiconductor wafer-carrier rings, and spacecraft components all use Vespel for exactly these reasons. The price is high because the performance is irreplaceable.</div>
+
+    <div class="experiment">
+      <div class="experiment-title">&#9878; Kitchen Experiment: Building a Composite</div>
+      <p><strong>What you need:</strong> Old newspaper, flour, water, a balloon, and tape.</p>
+      <p><strong>What to do:</strong> Make a paste from flour and water (about 1 part flour to 2 parts water). Tear newspaper into strips about 1 inch wide. Dip each strip in the paste, squeegee off the excess with your fingers, and layer it over an inflated balloon. Do at least four layers. Let it dry completely (overnight).</p>
+      <p><strong>What happens:</strong> Once dry, you have a rigid shell — papier-mâché — that holds its shape even after you pop and remove the balloon inside.</p>
+      <p><strong>Why it works:</strong> Newspaper strips alone are floppy and weak. Flour paste alone is fragile and brittle when dry. But combined, the paper fibers reinforce the paste matrix the same way rebar reinforces concrete. The paste holds the fibers together and transfers stress between them. The fibers give the matrix something to grip and distribute loads over a large area. This is the same physics as Corian (filler reinforcing polymer matrix) and as carbon-fiber reinforced composites used in aircraft. You just built a composite material with kitchen ingredients.</p>
+    </div>
+
+    <div class="audit-box">
+      <div class="audit-box-title">&#9775; Audit Angle: Vespel and the Performance Obligation Question</div>
+      <p>Vespel parts are not catalog items — they are engineered to customer drawings. A customer specifies the geometry, the filler formulation, and the dimensional tolerances. DuPont machines the polyimide to those exact specifications. The question for revenue recognition under ASC 606 is: what is the performance obligation?</p>
+      <p>Option A: The performance obligation is delivering the finished part. Revenue is recognized at point of delivery. This is straightforward but may not reflect economic reality if months of engineering work have already been performed.</p>
+      <p>Option B: The performance obligation is the combined engineering design and manufacturing service. Because Vespel parts have no alternative use (they are made to one customer's drawing) and DuPont has an enforceable right to payment for work completed, revenue should be recognized over time as work progresses.</p>
+      <p>The auditor must evaluate whether the "alternative use" test is truly met (could DuPont sell this exact part to another buyer without modification?) and whether the payment terms give DuPont genuine protection if the customer cancels. High-value, low-volume engineered parts like Vespel create this tension between point-in-time and over-time recognition in every period.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CHAPTER 7 -->
+<div class="chapter-section" id="ch6">
+  <div class="content">
+    <div class="ch-eyebrow">Chapter 7 of 9</div>
+    <h1 class="ch-title">Some Things Eat Pollution</h1>
+    <div class="ch-subtitle">Membrane bioreactors and ultrafiltration</div>
+
+    <div class="seg">The wastewater leaving a city is not simply dirty water. It contains dissolved organic compounds — pieces of food, soap, pharmaceuticals, industrial chemicals — along with ammonia from urine, phosphorus from detergents, and sometimes heavy metals from manufacturing runoff. Before this water can return to a river, lake, or ocean, something must remove those contaminants. The classical approach was to use enormous settling tanks where solids sank to the bottom, followed by biological treatment tanks where bacteria were allowed to eat the dissolved organics. This worked — but it required huge amounts of land and produced large volumes of sludge.</div>
+
+    <div class="seg">The modern approach — and the one where DuPont's products fit — combines those bacteria with a membrane. The idea is elegant: put the bacteria in a tank and let them eat the dissolved organics, converting them to carbon dioxide and water. But instead of waiting for the bacteria to settle out (which takes hours in a traditional system), run the water through an <span class="def" title="A type of membrane filter with pore sizes between 0.01 and 0.1 micrometers — large enough to pass water and small dissolved molecules, but small enough to hold back bacteria, viruses, and suspended particles.">ultrafiltration</span> membrane while the bacteria are working. The membrane pores are small enough to hold all the bacteria inside the tank. Clean water passes through. The bacteria stay in and keep working. No sludge. Dramatically smaller footprint. Much cleaner effluent.</div>
+
+    <div class="seg">This combination is called a <span class="def" title="A system that combines biological treatment (bacteria eating pollutants) with membrane filtration in a single process, producing cleaner output than either alone.">membrane bioreactor</span>, or MBR. It is one of the fastest-growing technologies in water treatment, precisely because it lets engineers build treatment plants in cities where land is expensive, treat harder wastewater streams that conventional systems cannot handle, and produce effluent clean enough to reuse — for irrigation, for industrial cooling water, or in some cases for indirect potable reuse.</div>
+
+    <div class="sect">What Ultrafiltration Membranes Actually Do</div>
+
+    <div class="seg">Ultrafiltration membranes have pore sizes between 0.01 and 0.1 micrometers. Compare that to bacteria (1–10 micrometers) and viruses (0.02–0.3 micrometers): most UF membranes hold back virtually all bacteria and most larger viruses. They pass water, dissolved salts, and small organic molecules. They do not remove dissolved salts the way reverse osmosis does — that is a different application requiring much higher pressure. UF is used as a primary clarification step: remove suspended solids, bacteria, and large particles so that downstream processes (RO, ion exchange, UV disinfection) face a cleaner feed and have longer useful lives.</div>
+
+    <div class="seg"><span class="product">Inge™</span> ultrafiltration modules are DuPont's primary UF product for drinking water and wastewater applications. They use hollow-fiber membranes — think of thousands of tiny plastic straws bundled together in a housing. Contaminated water flows in from the outside of the hollow fibers. Pressure pushes clean water through the fiber walls (the membrane) and out through the hollow center of each fiber. The fibers are periodically backwashed — clean water is forced backwards through them — to dislodge accumulated solids and restore flux. The membrane itself is made of polyethersulfone (PES), a polymer chosen for its mechanical strength, chemical resistance to cleaning agents, and resistance to degradation by chlorine used in disinfection.</div>
+
+    <div class="seg highlight green">In a well-designed MBR system, the bacteria do the hard biochemical work of converting dissolved organic pollution into harmless gases and biomass — work that no membrane alone could do, because dissolved molecules pass through any membrane pore that is not an RO membrane. The membrane does the work of holding the bacteria in and producing clarified water continuously. Neither component is sufficient alone. This is a system-level innovation, not just a materials innovation.</div>
+
+    <div class="sect">Food, Beverage, and Industrial Applications</div>
+
+    <div class="seg">Ultrafiltration is not just for wastewater. In dairy processing, UF membranes concentrate milk proteins to make cheese and whey protein powder — the same protein in your gym supplement. The membrane passes water and small molecules (lactose, salts) while retaining the large protein molecules, concentrating them to whatever level the process requires. In beverage production, UF is used to clarify apple juice, wine, and beer without heat pasteurization — heat would destroy flavor compounds that careful fermentation built up. The membrane removes yeast, bacteria, and suspended solids while the flavor stays in.</div>
+
+    <div class="seg">Industrial process water treatment is another major market. Automotive paint shops generate wastewater containing oils, surfactants, and paint pigments that cannot go down the drain. Food processing plants generate high-organic-strength wastewater from vegetable washing, meat processing, and cooking operations. Pharmaceutical plants generate contaminated rinse water that contains residues of active pharmaceutical ingredients. UF membranes are part of the treatment train for all of these streams, removing solids and concentrating waste streams before further treatment or disposal.</div>
+
+    <div class="experiment">
+      <div class="experiment-title">&#9878; Kitchen Experiment: Watching Biology Eat</div>
+      <p><strong>What you need:</strong> A piece of bread, a zip-lock bag, and a little bit of water.</p>
+      <p><strong>What to do:</strong> Dampen the bread slightly. Seal it in the bag. Set it somewhere warm (not cold) and leave it for one week. Check it every day without opening the bag.</p>
+      <p><strong>What happens:</strong> Within a few days, mold colonies appear — first as small dots, then spreading into fuzzy circles of green, white, or black. By a week, the bread may be heavily colonized.</p>
+      <p><strong>Why it works:</strong> Mold spores are everywhere in the air. Once they land on a moist, starch-rich surface, they germinate and begin consuming the starch and proteins in the bread as food. They are doing exactly what MBR bacteria do — consuming organic compounds — just much more slowly. In an MBR, bacteria live in turbulent water and consume dissolved organics in hours. The key difference between your bag and an MBR is the membrane: in the MBR, nothing biological can escape through the membrane, and the treated water that does pass through is biologically clean.</p>
+    </div>
+
+    <div class="audit-box">
+      <div class="audit-box-title">&#9775; Audit Angle: Long-Term Service Obligations and Geopolitical Risk</div>
+      <p>Ultrafiltration module sales frequently come with implicit or explicit long-term service relationships. Hollow-fiber UF membranes degrade over 7–10 years of operation and must be replaced — creating recurring revenue for DuPont from customers who already have the housing and piping infrastructure designed around specific module dimensions and performance specs. Switching costs are high.</p>
+      <p>ASC 606 requires allocating the transaction price between the membrane sale and any implied ongoing service obligation. If DuPont's contract commits to replacement membranes at a specified price, or if the business relationship creates a material right, the accounting must reflect that over the service period — not fully at initial shipment.</p>
+      <p>Geopolitical risk is also relevant: DuPont management noted in Q2 2026 that Middle East conflict was suppressing some desalination project volumes, affecting roughly 10% of the Water Solutions segment revenue. The auditor should assess whether this is a temporary deferral (projects delayed, not cancelled) or a permanent loss, and whether project-level impairment or contract loss provisions are warranted under ASC 450.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CHAPTER 8 -->
+<div class="chapter-section" id="ch7">
+  <div class="content">
+    <div class="ch-eyebrow">Chapter 8 of 9</div>
+    <h1 class="ch-title">Straight Beats Tangled</h1>
+    <div class="ch-subtitle">Aligned chains, Vespel, and Molykote lubricants</div>
+
+    <div class="seg">Go back to the bowl of cooked spaghetti. The noodles are tangled — pointing in random directions, looping over and under each other. Now imagine you could reach into the bowl and pull every single noodle until they all pointed straight up, perfectly parallel. The same mass of pasta now has completely different mechanical properties: pull on it along the direction the noodles are pointing and you are pulling on all of them at once. Every noodle shares the load. Pull on it perpendicular to the noodles and they slide apart easily. The property of the bundle is <em>directional</em> — strong one way, weak the other. This is the fundamental physics of aligned materials.</div>
+
+    <div class="seg">Most polymers are amorphous — their chains are tangled like cooked spaghetti. When you apply stress, the chains slide past each other and the material deforms or breaks. But if you can align the chains so they all run parallel — either by drawing the fiber out as it forms, or by building a polymer whose molecular structure naturally forces alignment — then applying stress along the chain direction means every chain is in tension at once. The material becomes dramatically stronger, often approaching the theoretical strength limit set by the chemical bonds themselves.</div>
+
+    <div class="seg highlight">Polyimide — the material in Vespel — achieves alignment differently. Its monomers are large, rigid, flat ring-shaped molecules called imide groups. These rings cannot flex or fold around each other easily. They stack in ordered layers like plates in a cupboard, which creates a naturally semi-crystalline structure without needing to draw the fiber out. This stacking is what gives polyimide its extraordinary stiffness and heat resistance: the ordered layers resist the thermal motion that would disorder a flexible-chain polymer. At 300°C, flexible polymer chains have enough thermal energy to move freely — polyimide rings are too rigid to do so.</div>
+
+    <div class="sect">Molybdenum Disulfide: The Flat Crystal That Slides</div>
+
+    <div class="seg">Molybdenum disulfide (MoS₂) is a mineral that looks like graphite — dark gray, slightly greasy to the touch. Under a microscope it has a layered crystal structure: sheets of molybdenum atoms sandwiched between sheets of sulfur atoms, stacked on top of each other. The bonds within each sheet are strong. The bonds <em>between</em> sheets are very weak. Apply any shearing force — a sideways sliding motion — and the sheets slide across each other effortlessly, like shuffling a deck of cards. This makes MoS₂ a superb dry lubricant.</div>
+
+    <div class="seg"><span class="product">Molykote®</span> is DuPont's specialty lubricant brand, and MoS₂ is one of its core active ingredients. But Molykote products are not simply ground-up mineral mixed with grease. They are carefully formulated combinations of lubricant solids (MoS₂, PTFE, graphite), carrier fluids (oils, greases, pastes), and additive packages engineered for specific operating environments. Molykote greases for electric vehicle gearboxes must be stable across a wide temperature range, compatible with copper and aluminum alloys (which older gearbox greases attacked), and electrically non-conductive so they do not create short circuits in the motor windings.</div>
+
+    <div class="seg">Molykote products for food processing equipment must be safe for incidental contact with food — certified to NSF H1 standards, meaning they can be used in equipment where accidental contact with food might occur. Aircraft landing gear lubricants must survive -65°C at altitude and 200°C during braking without dripping, seizing, or evaporating. Semiconductor wafer-handling equipment needs lubricants that produce essentially zero particulate contamination — a single particle of grease on a wafer surface during lithography destroys the chip being patterned. Each application is a different formulation, and the Molykote catalog runs to hundreds of products.</div>
+
+    <div class="sect">Kevlar and Nomex: A Notable Absence</div>
+
+    <div class="seg">The most famous aligned-chain polymers ever invented — <span class="def" title="An aramid fiber five times stronger than steel by weight, used in bulletproof vests and cut-resistant gloves.">Kevlar®</span> and <span class="def" title="A flame-resistant aramid fiber used in firefighter gear and racing suits.">Nomex®</span> — were originally DuPont products. Kevlar is an aramid fiber: the monomers are linked in a way that creates a rigid, straight rod-like chain that aligns naturally into an ordered crystal structure during fiber spinning. The result is a fiber five times stronger than steel by weight — which is why it stops bullets, reinforces aircraft panels, and protects the hands of people who cut food for a living. Nomex is a related aramid that is flame-resistant rather than primarily high-strength — used in firefighter protective gear, racing driver suits, and aircraft interior panels.</div>
+
+    <div class="seg highlight gold">In April 2026, DuPont completed the sale of the Kevlar and Nomex businesses — along with other performance materials — to Arclin. This was a deliberate strategic choice: DuPont is repositioning as a water and electronics materials company. Kevlar and Nomex are remarkable materials with fascinating physics, but they are no longer in DuPont's portfolio. The company that remains after these divestitures is focused on water purification (Filmtec, Inge, Amberlite), electronics materials (semiconductor wafer-handling, ultrapure water), and shelter solutions (Tyvek, Styrofoam). The chain-alignment physics still matters — in Vespel and Molykote — but the most famous aligned-chain products now belong elsewhere.</div>
+
+    <div class="experiment">
+      <div class="experiment-title">&#9878; Kitchen Experiment: Aligned vs. Tangled Fibers</div>
+      <p><strong>What you need:</strong> A cotton ball and a piece of sewing thread cut from a spool.</p>
+      <p><strong>What to do:</strong> Pull the cotton ball apart gently by grabbing opposite sides and slowly stretching. Note how much force it takes. Now take the thread and try to pull it apart by holding the two ends and pulling hard along its length.</p>
+      <p><strong>What happens:</strong> The cotton ball tears apart very easily. The thread, which is also cotton, is essentially impossible to break with your hands pulling lengthwise.</p>
+      <p><strong>Why it works:</strong> The cotton ball contains loose, randomly tangled fibers — same material as the thread. The thread is made of those same fibers twisted together so they all run roughly parallel along the thread's length. When you pull along the thread's length, you are pulling on every fiber at once, and they resist together. When you pull the cotton ball, the tangled fibers slide past each other because they are not aligned to resist the force you are applying. This is the same principle that makes aligned-chain polymers like Kevlar and Vespel so much stronger than their tangled-chain equivalents.</p>
+    </div>
+
+    <div class="audit-box">
+      <div class="audit-box-title">&#9775; Audit Angle: Long-Term Supply Agreements and Pricing Power</div>
+      <p>Vespel and Molykote are sold under multi-year supply agreements to OEM customers — aircraft engine manufacturers, semiconductor equipment makers, electric vehicle drivetrain manufacturers. Once a specific Vespel grade or Molykote formulation is qualified for use in a specific application (a process that takes months and costs the customer significant engineering time), switching to a competitor's product requires complete re-qualification. The customer is effectively captive for the duration of that product's production run.</p>
+      <p>This creates genuine pricing power, and DuPont's gross margins on these products are commensurately high. But it also creates an auditor's question: is that gross margin <em>sustainable</em>? The risks are: (1) the customer's product reaches end-of-life and the production run ends; (2) a competitor develops a qualified alternative and undergoes the qualification process at a new customer program; (3) the customer verticalizes and makes the component themselves.</p>
+      <p>The auditor probing gross margin quality on high-value engineered products like Vespel should review the concentration of revenue by customer, the age of existing supply agreements, and any disclosure about competing qualification efforts. Margin that looks stable in historical financials can compress rapidly when a single large OEM customer re-qualifies an alternative supplier — which may have already begun without public disclosure.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CHAPTER 9 -->
+<div class="chapter-section" id="ch8">
+  <div class="content">
+    <div class="ch-eyebrow">Chapter 9 of 9</div>
+    <h1 class="ch-title">So What Does This Company Actually Sell?</h1>
+    <div class="ch-subtitle">The synthesis: phenomena, specifications, and audit risk</div>
+
+    <div class="seg">Eight chapters in, and the pattern is unmistakable. DuPont is not a chemical company that sells bags of powder or drums of liquid. It is a company that sells specific physical phenomena, delivered at a precise, repeatable, tested level of performance. The phenomenon is never the point in itself — water purification, insulation, lubrication. The point is that DuPont can hit a specification that nature cannot provide and that competitors cannot reliably match.</div>
+
+    <div class="seg">Let us name what each product actually is, in the language of physics rather than marketing:</div>
+
+    <div class="seg highlight gold">
+      <strong>Filmtec™</strong> — The right pore size, maintained under high pressure, to pass water molecules while blocking dissolved salts, bacteria, and organics. Semiconductor grade: resistance to organic contamination measured in parts per trillion.<br><br>
+      <strong>Inge™ / Integratec™</strong> — The right pore size for biological separation: pass water, hold bacteria. In an MBR, this is what converts a batch biological process into a continuous one.<br><br>
+      <strong>Tyvek®</strong> — The right surface chemistry (hydrophobic) plus the right pore size (blocks droplets, passes vapor molecules) to manage water and vapor simultaneously without active energy input.<br><br>
+      <strong>Amberlite™</strong> — The right charged surface chemistry on a porous polymer bead to capture a specific ion out of a flowing water stream, regenerable thousands of times over its life.<br><br>
+      <strong>Styrofoam™</strong> — The right ratio of trapped air to structural polymer to slow heat transfer by conduction and convection to a specified R-value per inch, in a rigid, lightweight board.<br><br>
+      <strong>Corian®</strong> — The right combination of polymer matrix and mineral filler to create a non-porous, uniform, repairable hard surface with dimensional stability and fire retardance.<br><br>
+      <strong>Vespel®</strong> — The right polymer backbone (polyimide) plus the right solid lubricant fillers to survive high temperature without softening, without outgassing, without liquid lubrication, at dimensional tolerances measured in micrometers.<br><br>
+      <strong>Molykote®</strong> — The right layered-crystal solid lubricant in the right carrier for a specific temperature range, chemical environment, and contamination requirement.
+    </div>
+
+    <div class="seg">Every one of these products exists because someone needed a material to perform in an environment that would destroy anything ordinary. Hospital surfaces need to be non-porous — bacteria hiding in microscopic cracks kill patients. Chip fabrication needs water with zero ions — any contamination destroys the batch. Aircraft engines need bearing materials that work at temperatures and pressures that would liquify conventional lubricants. Water utilities need membranes that last a decade under continuous high-pressure operation without failing. DuPont sells the answer to each of those sentences.</div>
+
+    <div class="sect">Why Customers Keep Coming Back</div>
+
+    <div class="seg">The business logic follows directly from the science. When a semiconductor fab qualifies Filmtec membranes for its ultrapure water system, that qualification takes months of testing and process validation. The fab engineer does not want to repeat that work for another vendor's membrane unless there is a compelling reason — a major price difference, a supply disruption, or a new performance requirement. The switching cost is not money alone; it is time, validation risk, and the possibility of introducing a new variable into a process where any new variable is a potential yield killer.</div>
+
+    <div class="seg">The same dynamic applies everywhere in DuPont's portfolio. Amberlite resin used in pharmaceutical water purification is validated as part of the drug manufacturing process filing with the FDA. Changing the resin grade may require filing a supplement to the drug application — a regulatory event that takes months. Vespel parts in an aircraft engine component are flight-certified to specific drawings. Substituting a different material requires re-certification. Molykote in an automotive gearbox is specified in the assembly process instructions and validated against the OEM's gear geometry and operating cycle.</div>
+
+    <div class="seg highlight">The cumulative effect of these switching costs is that DuPont has a customer base that is, in practice, quite sticky. Not because the customers are locked in contractually (though long-term agreements help) but because the cost of validation and re-qualification creates a rational economic reason to stay. This is what analysts call a <em>moat</em> — a structural barrier to competition. DuPont's moat is specification compliance, proven track record, and the high cost of switching to an unproven alternative.</div>
+
+    <div class="sect">What Could Go Wrong</div>
+
+    <div class="seg">Understanding the physics also clarifies where the business risks live. DuPont does not primarily face the risk that its products will fail in the field — its quality systems are extensive and its products are over-engineered relative to minimum requirements. The real risks are structural and strategic.</div>
+
+    <div class="seg"><strong>Specification change:</strong> If a customer's requirements shift — a new chip generation needs tighter ultrapure water specs than existing Filmtec membranes meet — DuPont must develop the next generation or lose the qualification. The window for development is not infinite. Competitors who innovate faster can establish the new specification.</div>
+
+    <div class="seg"><strong>Alternative qualification:</strong> A competitor begins the qualification process quietly at a major customer. By the time DuPont detects the threat, the competitor may be 80% through a 12-month qualification cycle. Revenue at that account may be safe for now, but in 18 months it disappears. This is the hardest competitive threat to see coming in publicly disclosed financials.</div>
+
+    <div class="seg"><strong>Technology discontinuity:</strong> A new purification approach renders the specification irrelevant. If someone develops a photonic water purification system that does not use membranes at all, Filmtec's precise pore engineering becomes irrelevant. This is unlikely in the near term — membrane technology has been winning market share for 40 years — but it is the long-term existential risk for any materials-defined business.</div>
+
+    <div class="seg highlight gold">The honest answer to "what does DuPont actually sell?" is this: it sells the ability to make something work — reproducibly, at scale, to a published specification — in an environment that would destroy anything ordinary. The premium price reflects that no one else can reliably do the same thing at the same performance level. The audit risk is not in the products. It is in whether the specifications stay relevant, whether the customers stay captive, and whether DuPont's next product generation is ready before the current one becomes ordinary.</div>
+
+    <div class="sect">The View From the Audit Table</div>
+
+    <div class="seg">After eight chapters of science, the financial audit view can be summarized with precision. DuPont's revenue is a collection of long-duration, specification-dependent customer relationships — not a commodity flow. Revenue recognition complexity (ASC 606) is real but manageable: the main risks are premature recognition on bill-and-hold arrangements, over-time vs. point-in-time judgment on custom engineered products, and variable consideration for returns and acceptance clauses.</div>
+
+    <div class="seg">The balance sheet risks are less dramatic than they might appear: inventory valuation (NRV) is the main concern in construction-exposed product lines. Goodwill and intangibles from acquisitions (Filtration Group, Inge) require annual impairment testing that is sensitive to long-term growth rate and discount rate assumptions — both of which are harder to audit in a water infrastructure business with 30-year asset lives.</div>
+
+    <div class="seg">The disclosure quality question is whether DuPont's segment reporting gives investors enough visibility into the sub-businesses — ultrapure water (fast growing), desalination (geopolitically exposed), industrial water (stable), building products (cyclical) — to assess risk and opportunity independently. Aggregating these into a single "Water Solutions" number obscures the underlying dynamics. An auditor who does not understand the physics of what each product does cannot effectively challenge the reasonableness of management's long-term growth assumptions in each sub-market.</div>
+
+    <div class="audit-box">
+      <div class="audit-box-title">&#9775; Final Audit Synthesis: Top Three Risks Across All Products</div>
+      <p><strong>1. Revenue Recognition Timing (ASC 606)</strong> — Custom engineered products (Vespel, Filmtec semiconductor grade, Amberlite pharma lots) all have facts that push toward over-time or deferred recognition. The risk is that DuPont defaults to point-of-delivery recognition for simplicity, understating the complexity of its performance obligations. Test: examine contracts for no-alternative-use provisions, enforceable payment rights, and customer acceptance clauses. Sample shipments in the final two weeks of each quarter for proper period-end cutoff.</p>
+      <p><strong>2. Impairment of Acquired Intangibles (ASC 350)</strong> — DuPont has made multiple water technology acquisitions (Inge, Integratec, Filmtec through the broader Dow/DuPont lineage). Each acquisition was priced at a premium reflecting expected long-term growth. If ultrapure water demand slows (chip industry cycles), if desalination projects continue to be deferred (Middle East geopolitics), or if competitive membrane technologies reduce DuPont's share, the carrying value of acquired technology intangibles may exceed recoverable value. The impairment test's sensitivity to discount rate (a 50 bps increase can flip a passing test to a failing one at moderate headroom levels) is the auditor's key analytical focus.</p>
+      <p><strong>3. Contingent Liabilities from Product Performance Guarantees (ASC 450)</strong> — DuPont's products are sold against specifications. When a Filmtec membrane fails to meet its guaranteed rejection rate, or a Vespel part fails dimensional tolerance after machining, the customer has a claim. Warranty reserves and litigation reserves for product performance claims are management estimates. The auditor should test whether historical loss rates on warranty claims are a reasonable basis for the reserve, and whether any current-period product issues (known to the quality assurance function but not yet in the legal department's claim log) have been captured in the reserve. The science-to-audit translation: understand what "failure" means for each product type, because the financial consequences depend entirely on what was specified.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const CHAPTERS = [
+  { title: "Everything Is a Chain", subtitle: "Polymers: the building block of everything DuPont makes" },
+  { title: "Why Rain Beads Up But Air Gets Through", subtitle: "Surface tension, porosity, and the magic of Tyvek" },
+  { title: "Osmosis, Run Backwards", subtitle: "How pressure makes pure water from seawater: Filmtec membranes" },
+  { title: "Opposites Attract", subtitle: "Ions, charges, and Amberlite ion exchange resins" },
+  { title: "Heat Is Just Jiggling", subtitle: "Insulation, thermal resistance, and Styrofoam" },
+  { title: "Mixtures, and the Trick of the Composite", subtitle: "Composites, interfaces, and Vespel" },
+  { title: "Some Things Eat Pollution", subtitle: "Membrane bioreactors and ultrafiltration" },
+  { title: "Straight Beats Tangled", subtitle: "Aligned chains, Vespel, and Molykote" },
+  { title: "So What Does This Company Actually Sell?", subtitle: "The synthesis: phenomena, specifications, and audit risk" }
+];
+
+let currentChapter = 0;
+let segments = [];
+let currentSeg = -1;
+let isPlaying = false;
+let synth = window.speechSynthesis;
+let watchdog = null;
+
+function buildNav() {
+  const sel = document.getElementById('chapterSelect');
+  CHAPTERS.forEach((ch, i) => {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = 'Ch ' + (i + 1) + ': ' + ch.title;
+    sel.appendChild(opt);
+  });
+  updateProgress();
+}
+
+function showChapter(idx) {
+  document.querySelectorAll('.chapter-section').forEach(el => el.classList.remove('active'));
+  const el = document.getElementById('ch' + idx);
+  if (el) el.classList.add('active');
+  currentChapter = idx;
+  document.getElementById('chapterSelect').value = idx;
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateProgress() {
+  document.getElementById('progressLbl').textContent = 'Chapter ' + (currentChapter + 1) + ' of ' + CHAPTERS.length;
+}
+
+function prevChapter() {
+  if (currentChapter > 0) showChapter(currentChapter - 1);
+}
+
+function nextChapter() {
+  if (currentChapter < CHAPTERS.length - 1) showChapter(currentChapter + 1);
+}
+
+function goToChapter(val) {
+  showChapter(parseInt(val, 10));
+}
+
+// Build flat segment list across all chapters
+function buildSegments() {
+  segments = [];
+  document.querySelectorAll('.chapter-section').forEach((ch, chIdx) => {
+    ch.querySelectorAll('.seg, .experiment p, .audit-box p').forEach(el => {
+      segments.push({ el: el, chIdx: chIdx });
+    });
+  });
+}
+
+function clearActiveSeg() {
+  document.querySelectorAll('.active-seg').forEach(el => el.classList.remove('active-seg'));
+}
+
+function activateSeg(idx) {
+  clearActiveSeg();
+  if (idx < 0 || idx >= segments.length) return;
+  const { el, chIdx } = segments[idx];
+  if (chIdx !== currentChapter) showChapter(chIdx);
+  el.classList.add('active-seg');
+  setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'center' }), 200);
+}
+
+function speakSeg(idx) {
+  if (idx < 0 || idx >= segments.length) {
+    stopAudio();
+    return;
+  }
+  currentSeg = idx;
+  activateSeg(idx);
+  const text = segments[idx].el.textContent.trim().replace(/\s+/g, ' ');
+  if (!text) { speakSeg(idx + 1); return; }
+  synth.cancel();
+  const utt = new SpeechSynthesisUtterance(text);
+  utt.rate = 0.92;
+  utt.pitch = 1.0;
+  utt.onend = () => { if (isPlaying) speakSeg(currentSeg + 1); };
+  utt.onerror = (e) => { if (isPlaying && e.error !== 'canceled') speakSeg(currentSeg + 1); };
+  synth.speak(utt);
+  document.getElementById('audioLbl').textContent = 'Segment ' + (idx + 1) + ' of ' + segments.length;
+  resetWatchdog();
+}
+
+function resetWatchdog() {
+  if (watchdog) clearInterval(watchdog);
+  watchdog = setInterval(() => {
+    if (isPlaying && !synth.speaking && !synth.pending) {
+      speakSeg(currentSeg + 1);
+    }
+  }, 9000);
+}
+
+function togglePlay() {
+  if (isPlaying) {
+    pauseAudio();
+  } else {
+    startAudio();
+  }
+}
+
+function startAudio() {
+  if (segments.length === 0) buildSegments();
+  isPlaying = true;
+  document.getElementById('playBtn').textContent = '⏸ Pause';
+  const startIdx = (currentSeg >= 0 && currentSeg < segments.length) ? currentSeg : 0;
+  speakSeg(startIdx);
+}
+
+function pauseAudio() {
+  isPlaying = false;
+  synth.cancel();
+  if (watchdog) clearInterval(watchdog);
+  document.getElementById('playBtn').textContent = '▶ Read Aloud';
+  document.getElementById('audioLbl').textContent = 'Paused — press play to resume';
+}
+
+function stopAudio() {
+  isPlaying = false;
+  synth.cancel();
+  if (watchdog) clearInterval(watchdog);
+  clearActiveSeg();
+  currentSeg = -1;
+  document.getElementById('playBtn').textContent = '▶ Read Aloud';
+  document.getElementById('audioLbl').textContent = 'Press play to listen';
+}
+
+function prevSeg() {
+  if (segments.length === 0) buildSegments();
+  const target = Math.max(0, currentSeg > 0 ? currentSeg - 1 : 0);
+  if (isPlaying) {
+    speakSeg(target);
+  } else {
+    currentSeg = target;
+    activateSeg(target);
+    document.getElementById('audioLbl').textContent = 'Segment ' + (target + 1) + ' of ' + segments.length + ' (paused)';
+  }
+}
+
+function nextSeg() {
+  if (segments.length === 0) buildSegments();
+  const target = Math.min(segments.length - 1, currentSeg + 1);
+  if (isPlaying) {
+    speakSeg(target);
+  } else {
+    currentSeg = target;
+    activateSeg(target);
+    document.getElementById('audioLbl').textContent = 'Segment ' + (target + 1) + ' of ' + segments.length + ' (paused)';
+  }
+}
+
+window.addEventListener('beforeunload', () => synth.cancel());
+
+// Init
+buildNav();
+showChapter(0);
+buildSegments();
+</script>
+</body>
+</html>
