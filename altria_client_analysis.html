@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Altria Group — Client Analysis | PwC</title>
+<style>
+:root{--ink:#2D2D2D;--bg:#F5F1EE;--surface:#fff;--border:#E4DDD7;--muted:#F0EAE5;
+--blue:#D04A02;--blue-bg:#FCEDE4;--amber:#EB8C00;--amber-bg:#FDF0DC;
+--red:#E0301E;--red-bg:#FCEAE7;--green:#175D5D;--green-bg:#E3EFEF}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.5;min-height:100vh;padding-bottom:2rem}
+.top-bar{background:var(--ink);color:#fff;padding:.625rem 1rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;position:sticky;top:0;z-index:100;font-size:13px}
+@media(min-width:480px){.top-bar{padding:.75rem 1.25rem}}
+.top-bar-logo{font-weight:700;font-size:13px;letter-spacing:.01em}
+.top-bar-sub{font-size:11px;opacity:.7}
+.co-panel{display:none}.co-panel.active{display:block}
+.panel-inner{max-width:900px;margin:0 auto;padding:.875rem}
+@media(min-width:480px){.panel-inner{padding:1rem 1.25rem}}
+@media(min-width:900px){.panel-inner{padding:1.25rem 2rem}}
+.panel-hero{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.125rem;margin-bottom:.875rem}
+@media(min-width:480px){.panel-hero{padding:1.375rem}}
+.hero-eyebrow{font-size:11px;color:var(--blue);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.375rem}
+.hero-name{font-size:20px;font-weight:800;letter-spacing:-.01em;margin-bottom:.5rem;line-height:1.2}
+@media(min-width:480px){.hero-name{font-size:24px}}
+.hero-desc{font-size:13px;color:#555;line-height:1.65;margin-bottom:.75rem}
+.hero-meta{display:flex;flex-wrap:wrap;gap:.375rem}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 8px;border-radius:5px;font-weight:600;border:1px solid transparent}
+.badge-green{background:var(--green-bg);color:var(--green);border-color:var(--green)}
+.badge-blue{background:var(--blue-bg);color:var(--blue);border-color:var(--blue)}
+.badge-gray{background:var(--muted);color:#666;border-color:var(--border)}
+.tab-row{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:.875rem;padding:.5rem;background:var(--muted);border-radius:8px}
+.tab-btn{font-size:11px;font-weight:600;padding:.375rem .625rem;border:none;background:transparent;color:#666;border-radius:5px;cursor:pointer;white-space:nowrap;transition:background .15s,color .15s}
+.tab-btn:hover{background:var(--surface);color:var(--ink)}
+.tab-btn.active{background:var(--ink);color:#fff}
+.tab-content{display:none}.tab-content.active{display:block}
+.metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:.5rem;margin-bottom:.875rem}
+@media(min-width:480px){.metrics{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:700px){.metrics{grid-template-columns:repeat(auto-fit,minmax(120px,1fr))}}
+.metric{background:var(--muted);border-radius:8px;padding:.75rem}
+@media(min-width:480px){.metric{padding:.875rem}}
+.metric-label{font-size:11px;color:#666;margin-bottom:3px}
+.metric-value{font-size:16px;font-weight:700}
+@media(min-width:480px){.metric-value{font-size:18px}}
+.metric-sub{font-size:11px;color:#888;margin-top:2px}
+.metric-up{font-size:11px;color:var(--green);margin-top:2px;font-weight:500}
+.metric-down{font-size:11px;color:var(--red);margin-top:2px;font-weight:500}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem;margin-bottom:.875rem}
+@media(min-width:480px){.card{padding:1.125rem}}
+.card-title{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.04em}
+@media(min-width:480px){.card-title{font-size:13px}}
+.card-body{font-size:13px;color:#555;line-height:1.65}
+.card-body p{margin-bottom:.5rem}.card-body p:last-child{margin-bottom:0}
+.card-body ul{margin:.25rem 0 .25rem 1.1rem}
+.card-body li{margin-bottom:.25rem}
+.two-col{display:grid;grid-template-columns:1fr;gap:.875rem;margin-bottom:.875rem}
+@media(min-width:600px){.two-col{grid-template-columns:1fr 1fr}}
+.sh{font-size:12px;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:.04em;margin:1.25rem 0 .5rem}
+@media(min-width:480px){.sh{font-size:13px;margin:.875rem 0 .5rem}}
+.hl{border-left:3px solid;padding:.75rem 1rem;margin-bottom:.875rem;font-size:13px;line-height:1.6;border-radius:0 6px 6px 0}
+.hl-info{border-color:var(--blue);background:var(--blue-bg);color:var(--blue)}
+.hl-warn{border-color:var(--amber);background:var(--amber-bg);color:var(--amber)}
+.hl-success{border-color:var(--green);background:var(--green-bg);color:var(--green)}
+.hl-danger{border-color:var(--red);background:var(--red-bg);color:var(--red)}
+.tag{display:inline-block;font-size:11px;padding:2px 7px;border-radius:4px;margin:2px;font-weight:500}
+.t-high{background:var(--red-bg);color:var(--red)}
+.t-med{background:var(--amber-bg);color:var(--amber)}
+.t-info{background:var(--blue-bg);color:var(--blue)}
+.t-ok{background:var(--green-bg);color:var(--green)}
+.t-warn{background:var(--amber-bg);color:var(--amber)}
+.t-danger{background:var(--red-bg);color:var(--red)}
+.seg-bar{margin-bottom:.6rem}
+.seg-lbl{display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;color:#555;gap:8px;flex-wrap:wrap}
+@media(min-width:480px){.seg-lbl{flex-wrap:nowrap}}
+.seg-track{height:6px;background:#e8e6de;border-radius:4px;overflow:hidden}
+.seg-fill{height:100%;border-radius:4px}
+.risk-row{display:flex;gap:10px;padding:.75rem 0;border-bottom:1px solid #e8e6de;align-items:flex-start}
+.risk-row:last-child{border-bottom:none}
+.risk-ic{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px}
+.ri-h{background:var(--red-bg);color:var(--red)}
+.ri-m{background:var(--amber-bg);color:var(--amber)}
+.risk-n{font-size:13px;font-weight:700;margin-bottom:2px}
+.risk-d{font-size:12px;color:#555;line-height:1.5}
+.pwc{display:inline-flex;align-items:center;gap:4px;font-size:11px;background:#f1efe8;border:1px solid var(--border);border-radius:4px;padding:2px 7px;color:#666;margin-top:6px;font-style:italic}
+.tbl{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:.875rem}
+.tbl th{text-align:left;font-size:11px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.04em;padding:.5rem .625rem;border-bottom:2px solid var(--border);background:var(--muted)}
+.tbl td{padding:.5rem .625rem;border-bottom:1px solid #e8e6de;vertical-align:top}
+.tbl tr:last-child td{border-bottom:none}
+.tbl-num{text-align:right;font-variant-numeric:tabular-nums;font-size:12px}
+.svg-wrap{overflow-x:auto;margin-bottom:.875rem}
+.timeline-item{display:flex;gap:12px;padding:.625rem 0;border-bottom:1px solid #e8e6de;align-items:flex-start}
+.timeline-item:last-child{border-bottom:none}
+.tl-year{font-size:11px;font-weight:700;color:var(--blue);min-width:42px;padding-top:2px;flex-shrink:0}
+.tl-body{font-size:13px;color:#555;line-height:1.5}
+.tl-title{font-weight:700;color:var(--ink);font-size:13px;margin-bottom:2px}
+.chart-title{font-size:11px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.25rem}
+.chart-labels{display:flex;justify-content:space-between;padding:0 20px;font-size:10px;color:#888;margin-top:2px}
+.verify{background:#fff3cd;color:#856404;font-size:10px;padding:1px 5px;border-radius:3px;font-weight:600;margin-left:4px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <div>
+    <div class="top-bar-logo">&#9658; Altria Group &#8212; Client Analysis</div>
+    <div class="top-bar-sub">PwC Lead Engagement Partner Preparation &middot; September 2026</div>
+  </div>
+</div>
+
+<div class="co-panel active" id="co-mo">
+  <div class="panel-inner">
+
+    <div class="panel-hero">
+      <div class="hero-eyebrow">Consumer Staples &mdash; Tobacco Products &middot; NYSE: MO</div>
+      <div class="hero-name">Altria Group, Inc.</div>
+      <div class="hero-desc">Altria Group is the largest U.S. tobacco company by domestic market share, operating through wholly-owned subsidiaries Philip Morris USA (Marlboro, Basic), John Middleton (Black &amp; Mild cigars), USSTC (Copenhagen, Skoal), and Helix Innovations (on! nicotine pouches). The company is executing a &#8220;Moving Beyond Smoking&#174;&#8221; transformation strategy while defending Marlboro&#8217;s 59.6% premium cigarette share and investing in smoke-free oral nicotine products. As of Q2 2026, adjusted EPS grew 4.9% H1 and the company returned ~$3.9B to shareholders in six months.</div>
+      <div class="hero-meta">
+        <span class="badge badge-green">&#10003; Q2 2026 Results Loaded</span>
+        <span class="badge badge-blue">NYSE: MO</span>
+        <span class="badge badge-gray">Auditor: PwC <span class="verify">VERIFY</span></span>
+        <span class="badge badge-gray">Market Cap ~$113.8B</span>
+      </div>
+    </div>
+
+    <div class="tab-row">
+      <button class="tab-btn active" data-tab="overview" onclick="selectTab('overview',this)">Overview</button>
+      <button class="tab-btn" data-tab="investor" onclick="selectTab('investor',this)">Investor Perspective</button>
+      <button class="tab-btn" data-tab="cfo" onclick="selectTab('cfo',this)">CFO Agenda</button>
+      <button class="tab-btn" data-tab="risks" onclick="selectTab('risks',this)">Risks &amp; Controls</button>
+      <button class="tab-btn" data-tab="valuation" onclick="selectTab('valuation',this)">Valuation</button>
+      <button class="tab-btn" data-tab="shareholder" onclick="selectTab('shareholder',this)">Shareholder Allocation</button>
+      <button class="tab-btn" data-tab="products" onclick="selectTab('products',this)">Products &amp; Brands</button>
+      <button class="tab-btn" data-tab="ma" onclick="selectTab('ma',this)">M&amp;A History</button>
+      <button class="tab-btn" data-tab="ai" onclick="selectTab('ai',this)">AI Transformation</button>
+      <button class="tab-btn" data-tab="activist" onclick="selectTab('activist',this)">Activist Lens</button>
+      <button class="tab-btn" data-tab="journey" onclick="selectTab('journey',this)">Purchase Journey</button>
+      <button class="tab-btn" data-tab="sotp" onclick="selectTab('sotp',this)">Sum of Parts</button>
+      <button class="tab-btn" data-tab="earnings" onclick="selectTab('earnings',this)">Earnings Call</button>
+    </div>
+
+    <div id="overview" class="tab-content active"></div>
+    <div id="investor" class="tab-content"></div>
+    <div id="cfo" class="tab-content"></div>
+    <div id="risks" class="tab-content"></div>
+    <div id="valuation" class="tab-content"></div>
+    <div id="shareholder" class="tab-content"></div>
+    <div id="products" class="tab-content"></div>
+    <div id="ma" class="tab-content"></div>
+    <div id="ai" class="tab-content"></div>
+    <div id="activist" class="tab-content"></div>
+    <div id="journey" class="tab-content"></div>
+    <div id="sotp" class="tab-content"></div>
+    <div id="earnings" class="tab-content"></div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ TEMPLATES -->
+
+<template id="tmpl-overview">
+<div class="metrics">
+  <div class="metric"><div class="metric-label">Market Cap</div><div class="metric-value">$113.8B</div><div class="metric-sub">~$67.89/sh, Sep 9 2026</div></div>
+  <div class="metric"><div class="metric-label">Q2 2026 Net Rev</div><div class="metric-value">$5.4B</div><div class="metric-up">+1.2% YoY</div></div>
+  <div class="metric"><div class="metric-label">Adj EPS Q2</div><div class="metric-value">$1.48</div><div class="metric-up">+2.8% YoY</div></div>
+  <div class="metric"><div class="metric-label">Dividend Yield</div><div class="metric-value">~6.5%</div><div class="metric-sub">$4.44 annualized at $68</div></div>
+  <div class="metric"><div class="metric-label">Net Debt</div><div class="metric-value">$22.2B</div><div class="metric-sub">Total debt $24.6B</div></div>
+</div>
+
+<div class="two-col">
+  <div class="card">
+    <div class="card-title">Smokeable Products Segment</div>
+    <div class="card-body">
+      <p><strong>Philip Morris USA</strong> &#8212; Marlboro (59.6% premium cigarette share), Basic (discount), L&amp;M; revenue ~$17.2B net FY2025. Domestic cigarette volumes -3.2% Q2 / -2.8% H1 2026 (adjusted -4.5% / -4.0%).</p>
+      <p><strong>John Middleton Co.</strong> &#8212; Black &amp; Mild cigars; volume +5% Q2 vs industry -6.4%; outperforming on category mix.</p>
+      <p>Smokeable adjusted OCI margin 64.8% Q2 / 64.9% H1 2026. Pricing realization +4.5% offsetting volume decline.</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Oral Tobacco &amp; E-Vapor Segments</div>
+    <div class="card-body">
+      <p><strong>USSTC</strong> &#8212; Copenhagen, Skoal (moist smokeless tobacco &#8212; MST); category mature and declining. Revenue ~$2.8B FY2025.</p>
+      <p><strong>Helix Innovations</strong> &#8212; on! nicotine pouches (8.6% share, +0.3 pts YoY); on! PLUS nationally expanded to 120,000 stores with NICOSILK pouch technology.</p>
+      <p><strong>NJOY</strong> &#8212; Authorized e-vapor products (NJOY DAILY); FDA PMTA-authorized SKUs <span class="verify">VERIFY current SKU list</span>. Acquired June 2023 for ~$2.75B.</p>
+    </div>
+  </div>
+</div>
+
+<div class="sh">Segment Revenue Mix (FY 2025 Net Revenues)</div>
+<div class="seg-bar">
+  <div class="seg-lbl"><span>Smokeable Products (PM USA + John Middleton)</span><span>~85% &mdash; ~$17.2B net</span></div>
+  <div class="seg-track"><div class="seg-fill" style="width:85%;background:var(--blue)"></div></div>
+</div>
+<div class="seg-bar">
+  <div class="seg-lbl"><span>Oral Tobacco Products (USSTC + Helix)</span><span>~14% &mdash; ~$2.8B</span></div>
+  <div class="seg-track"><div class="seg-fill" style="width:14%;background:var(--green)"></div></div>
+</div>
+<div class="seg-bar">
+  <div class="seg-lbl"><span>Other / Eliminations (incl. NJOY)</span><span>~1%</span></div>
+  <div class="seg-track"><div class="seg-fill" style="width:1%;background:#bbb"></div></div>
+</div>
+
+<div class="hl hl-warn">
+  <strong>&#9888; Central Audit Tension:</strong> Secular cigarette volume decline (-4&#8211;5% adjusted per year industry-wide) vs. pricing power (+4.5% price realization Q2 2026) and smoke-free transition momentum. The race between combustible volume erosion and smoke-free ARPU growth (on!, on! PLUS, NJOY) is the defining strategic and financial audit tension. Volume decline eventually outpaces pricing — the question is timing, and what terminal value assumptions are embedded in goodwill and intangible asset tests.
+</div>
+
+<div class="card">
+  <div class="card-title">Key Corporate Facts</div>
+  <div class="card-body">
+    <table class="tbl">
+      <tr><td><strong>HQ</strong></td><td>Richmond, Virginia</td><td><strong>Sector</strong></td><td>Consumer Staples &#8212; Tobacco</td></tr>
+      <tr><td><strong>CEO</strong></td><td>Sal Mancuso <span class="verify">VERIFY tenure start</span></td><td><strong>CFO</strong></td><td>Heather Newman (new 2026)</td></tr>
+      <tr><td><strong>VP IR</strong></td><td>Mac Livingston</td><td><strong>Diluted Shares</strong></td><td>~1,670M</td></tr>
+      <tr><td><strong>Auditor</strong></td><td>PricewaterhouseCoopers LLP <span class="verify">VERIFY</span></td><td><strong>Exchange</strong></td><td>NYSE: MO</td></tr>
+      <tr><td><strong>Strategy</strong></td><td colspan="3">&#8220;Moving Beyond Smoking&#174;&#8221; &#8212; smoke-free transformation while monetizing combustible cash flow</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="hl hl-info">
+  <strong>Audit Engagement Context:</strong> PwC <span class="verify">VERIFY auditor</span> leads the consolidated audit. Key ASC areas include <strong>ASC 450</strong> (tobacco litigation reserves &#8212; among the largest contingent liability pools in U.S. corporate history), <strong>ASC 606</strong> (promotional allowance netting in net revenues), <strong>ASC 350</strong> (NJOY goodwill/intangible impairment testing post-acquisition), and <strong>ASC 740</strong> (deferred tax on JUUL-era impairment losses). The NJOY acquisition adds <strong>ASC 805</strong> purchase price allocation complexity, and Cronos/ABI stakes require <strong>ASC 323</strong> equity method accounting.
+</div>
+</template>
+
+<template id="tmpl-investor">
+<div class="metrics">
+  <div class="metric"><div class="metric-label">Revenue Growth FY2025</div><div class="metric-value">-1.5%</div><div class="metric-sub">$20,139M vs $20,444M</div></div>
+  <div class="metric"><div class="metric-label">Smokeable OCI Margin</div><div class="metric-value">64.9%</div><div class="metric-sub">H1 2026 adjusted</div></div>
+  <div class="metric"><div class="metric-label">FY2026 EPS Consensus</div><div class="metric-value">$5.68</div><div class="metric-sub">12 analysts; guidance narrowed <span class="verify">VERIFY range</span></div></div>
+  <div class="metric"><div class="metric-label">Capital Return H1 2026</div><div class="metric-value">~$3.9B</div><div class="metric-sub">Dividends + buybacks combined</div></div>
+  <div class="metric"><div class="metric-label">Market Cap</div><div class="metric-value">$113.8B</div><div class="metric-sub">Sep 9, 2026</div></div>
+</div>
+
+<div class="card">
+  <div class="card-title">Investment Thesis &#8212; Bull Sub-Theses</div>
+  <div class="card-body">
+    <p><strong>1. Pricing Power Offsets Volume Declines:</strong> +4.5% price realization vs. -4&#8211;5% cigarette volume = near-flat revenue in smokes. Altria has demonstrated this offset consistently over multi-year cycles. The smokeable segment still generates ~64.9% OCI margin &#8212; one of the highest operating margins in U.S. consumer staples. This cash machine funds the smoke-free transition.</p>
+    <p><strong>2. on! PLUS + NJOY Create Credible Smoke-Free Optionality:</strong> Nicotine pouch category now represents ~60% of oral tobacco and grew 8.1 share points. on! at 8.6% pouch share (behind Zyn). on! PLUS nationally expanded with NICOSILK pouches. NJOY provides an FDA-authorized e-vapor platform. First mover in authorized products while illicit market faces enforcement pressure.</p>
+    <p><strong>3. 6.5% Dividend Yield + Buybacks = 10%+ Total Return:</strong> Even in a no-growth base case, the 6.5% yield plus ~1.5&#8211;2.0% EPS accretion from share count reduction exceeds most risk-free hurdle rates. Dividend King status (55+ consecutive years of increases) <span class="verify">VERIFY streak count</span> signals capital discipline.</p>
+  </div>
+</div>
+
+<div class="two-col">
+  <div class="card">
+    <div class="card-title">Capital Allocation (FY2025 Base)</div>
+    <div class="card-body">
+      <p><strong>FCF $9.1B</strong> &#8212; enormous free cash flow relative to market cap; P/FCF of 12.44x</p>
+      <p><strong>Dividends ~$7.4B/yr</strong> &#8212; $4.44 annualized &times; ~1,670M shares; dominant use of cash</p>
+      <p><strong>Buybacks ~$500M+</strong> &#8212; share count declining ~0.83%/yr <span class="verify">VERIFY 2026 authorization</span></p>
+      <p><strong>Debt service</strong> &#8212; $24.6B total debt; disciplined maturity management; ASC 470 fair value disclosures</p>
+      <p><strong>on! PLUS investment</strong> &#8212; OCI margin compression in Oral segment for long-term share gains</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Investor Risk Watch</div>
+    <div class="card-body">
+      <ul>
+        <li><strong>Marlboro share erosion to Basic discount</strong> &#8212; discount segment grew 2.6 pts H1 2026; internal cannibalization risk</li>
+        <li><strong>Illicit e-vapor market distortion</strong> &#8212; unauthorized disposables still prevalent, distorting NJOY addressable market</li>
+        <li><strong>Menthol ban regulatory tail risk</strong> &#8212; FDA menthol cigarette ban proposal remains live; could impact ~25&#8211;30% of cigarette volume</li>
+        <li><strong>NJOY impairment</strong> &#8212; $2.75B acquisition; JUUL precedent ($12.8B &#8594; ~$0) is the cautionary tale</li>
+        <li><strong>MST secular decline</strong> &#8212; Copenhagen/Skoal volumes under structural pressure from pouch migration</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="hl hl-success">
+  <strong>&#10003; Dividend King:</strong> Altria has raised its dividend for 55+ consecutive years <span class="verify">VERIFY exact streak count</span>, qualifying as a Dividend King. Current $1.11/quarter ($4.44 annualized) represents a ~6.5% yield at $68/share. H1 2026 shareholder returns of ~$3.9B demonstrate continued capital return commitment even while funding the smoke-free transition.
+</div>
+
+<div class="card">
+  <div class="card-title">Annual Financial Highlights</div>
+  <div class="card-body">
+    <table class="tbl">
+      <thead><tr><th>Year</th><th class="tbl-num">Net Revenue</th><th class="tbl-num">Net Income</th><th class="tbl-num">FCF</th><th class="tbl-num">Dividend/Sh</th></tr></thead>
+      <tbody>
+        <tr><td>FY2021</td><td class="tbl-num">$21,111M</td><td class="tbl-num">$2,464M</td><td class="tbl-num">$8,236M</td><td class="tbl-num">$3.52</td></tr>
+        <tr><td>FY2022</td><td class="tbl-num">$20,688M</td><td class="tbl-num">$5,751M</td><td class="tbl-num">$8,051M</td><td class="tbl-num">$3.68</td></tr>
+        <tr><td>FY2023</td><td class="tbl-num">$20,502M</td><td class="tbl-num">$8,113M</td><td class="tbl-num">$9,091M</td><td class="tbl-num">$3.84</td></tr>
+        <tr><td>FY2024</td><td class="tbl-num">$20,444M</td><td class="tbl-num">$11,236M</td><td class="tbl-num">$8,611M</td><td class="tbl-num">$4.00</td></tr>
+        <tr style="background:var(--muted)"><td><strong>FY2025</strong></td><td class="tbl-num"><strong>$20,139M</strong></td><td class="tbl-num"><strong>$6,927M</strong></td><td class="tbl-num"><strong>$9,074M</strong></td><td class="tbl-num"><strong>$4.16</strong></td></tr>
+        <tr><td>FY2026E</td><td class="tbl-num">$20,580M est.</td><td class="tbl-num">&#8212;</td><td class="tbl-num">&#8212;</td><td class="tbl-num">$4.44 annlzd</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</template>
+
+<template id="tmpl-cfo">
+<div class="metrics">
+  <div class="metric"><div class="metric-label">FCF FY2025</div><div class="metric-value">$9,074M</div><div class="metric-sub">Robust cash engine</div></div>
+  <div class="metric"><div class="metric-label">Net Debt</div><div class="metric-value">$22,210M</div><div class="metric-sub">Total debt $24,577M</div></div>
+  <div class="metric"><div class="metric-label">Smokeable OCI Margin</div><div class="metric-value">64.9%</div><div class="metric-sub">H1 2026 adjusted</div></div>
+  <div class="metric"><div class="metric-label">Q4 2025 GAAP EPS</div><div class="metric-value">$0.66</div><div class="metric-sub">Impacted by special items</div></div>
+  <div class="metric"><div class="metric-label">H1 2026 Returns</div><div class="metric-value">~$3.9B</div><div class="metric-sub">Dividends + buybacks</div></div>
+</div>
+
+<div class="card">
+  <div class="card-title">CFO Heather Newman &#8212; Priority Agenda</div>
+  <div class="card-body">
+    <p><strong>1. Debt Management (ASC 470):</strong> $24.6B total debt requires disciplined maturity management. ASC 470 fair value disclosure on long-term fixed-rate notes; interest rate environment affects mark vs. carry. Debt is sustainably serviced by ~$9B FCF but constrains flexibility for transformative smoke-free investment. Heather Newman joined in 2026 as new CFO &#8212; early days in role.</p>
+    <p><strong>2. Tax Planning (ASC 740):</strong> Complexity from JUUL impairment deferred tax assets (DTA); Pillar Two global minimum tax monitoring; Cronos Group equity method income/loss (Canadian cannabis &#8212; cross-border tax treatment); state and local tobacco excise tax compliance across all subsidiaries.</p>
+    <p><strong>3. on! PLUS Investment Calibration:</strong> Oral segment OCI margin compression from on! PLUS national expansion investment (120,000 store launch, trial pricing, fixture programs). The CFO must balance near-term margin drag against long-term pouch share gains. When does investment drag flip to profitability?</p>
+    <p><strong>4. Litigation Reserve Estimation (ASC 450):</strong> Tobacco litigation reserves are among the most material estimation judgments in the U.S. market. Individual cases (Engle progeny numbering in thousands), class actions, and international cases require probability assessment and accrual. Judgment-intensive; PwC engagement risk.</p>
+  </div>
+</div>
+
+<div class="hl hl-info">
+  <strong>PwC Accounting Standards Focus:</strong>
+  <span class="pwc">ASC 450: Litigation reserves</span>
+  <span class="pwc">ASC 606: Revenue &amp; promotional allowances</span>
+  <span class="pwc">ASC 350: NJOY goodwill impairment</span>
+  <span class="pwc">ASC 740: JUUL DTA, Pillar Two</span>
+  <span class="pwc">ASC 805: NJOY PPA</span>
+  <span class="pwc">ASC 323: ABI &amp; Cronos equity method</span>
+  <span class="pwc">ASC 718: Stock comp</span>
+</div>
+
+<div class="hl hl-warn">
+  <strong>&#9888; Partner Talking Points for CFO Meeting:</strong>
+  <ol style="margin:.5rem 0 0 1.2rem">
+    <li style="margin-bottom:.3rem"><strong>Tobacco litigation reserves</strong> &#8212; ask for current accrual methodology, any Q3 2026 developments since Q2 close, and Engle progeny case update. How are new individual verdicts being integrated into the reserve model?</li>
+    <li style="margin-bottom:.3rem"><strong>NJOY impairment testing</strong> &#8212; $2.75B acquisition price; what is the headroom on the CGU (cash-generating unit) in the ASC 350 annual test? JUUL precedent makes this a first-priority KAM candidate.</li>
+    <li style="margin-bottom:.3rem"><strong>on! PLUS OCI margin trajectory</strong> &#8212; when does investment drag flip to profitability? What share targets underpin management&#8217;s carrying value assumptions for Helix intangibles?</li>
+    <li style="margin-bottom:.3rem"><strong>ABI/Cronos equity income</strong> &#8212; confirm ASC 323 marks, OTT impairment indicators for Cronos (cannabis market remains volatile), and ABI stake current book value <span class="verify">VERIFY ABI book value</span>.</li>
+    <li><strong>MST (Copenhagen/Skoal) volume decline</strong> &#8212; how is USSTC thinking about indefinite-lived intangible carrying value as MST volumes trend down structurally? Any triggering events for interim impairment test?</li>
+  </ol>
+</div>
+
+<div class="card">
+  <div class="card-title">Quarterly Financial Summary</div>
+  <div class="card-body">
+    <table class="tbl">
+      <thead><tr><th>Period</th><th class="tbl-num">Net Revenue</th><th class="tbl-num">Net Income</th><th class="tbl-num">GAAP EPS</th><th class="tbl-num">Adj EPS</th></tr></thead>
+      <tbody>
+        <tr><td>Q2 2026</td><td class="tbl-num">$5,356M</td><td class="tbl-num">$2,292M</td><td class="tbl-num">$1.37</td><td class="tbl-num">$1.48</td></tr>
+        <tr><td>Q1 2026</td><td class="tbl-num">$4,758M</td><td class="tbl-num">&#8212;</td><td class="tbl-num">$1.30</td><td class="tbl-num">~$1.32 <span class="verify">VERIFY</span></td></tr>
+        <tr><td>Q4 2025</td><td class="tbl-num">$5,079M</td><td class="tbl-num">&#8212;</td><td class="tbl-num">$0.66</td><td class="tbl-num"><span class="verify">VERIFY</span></td></tr>
+        <tr><td>Q3 2025</td><td class="tbl-num">$5,251M</td><td class="tbl-num">&#8212;</td><td class="tbl-num">$1.41</td><td class="tbl-num"><span class="verify">VERIFY</span></td></tr>
+        <tr><td>Q2 2025</td><td class="tbl-num">$5,290M</td><td class="tbl-num">&#8212;</td><td class="tbl-num">$1.41</td><td class="tbl-num"><span class="verify">VERIFY</span></td></tr>
+        <tr style="background:var(--muted)"><td><strong>FY2025</strong></td><td class="tbl-num"><strong>$20,139M</strong></td><td class="tbl-num"><strong>$6,927M</strong></td><td class="tbl-num">&#8212;</td><td class="tbl-num">&#8212;</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</template>
+
+<template id="tmpl-risks">
+<div class="card">
+  <div class="card-title">Risk Assessment Summary</div>
+  <div class="card-body">
+    <div class="risk-row">
+      <div class="risk-ic ri-h">&#9888;</div>
+      <div>
+        <div class="risk-n">Tobacco Litigation (ASC 450) <span class="tag t-high">HIGH</span></div>
+        <div class="risk-d">Individual cases, Engle progeny (thousands of cases in Florida), class actions, and international cases. Reserve estimation is among the most judgment-intensive in U.S. corporate history. Engle progeny cases alone number in the thousands; ongoing verdicts require continuous probability reassessment. Punitive damages risk creates non-linear exposure. ASC 450 accrual requires probable and estimable thresholds.</div>
+        <div><span class="tag t-info">ASC 450</span><span class="tag t-high">Engle Progeny</span><span class="tag t-warn">Punitive Damages Risk</span></div>
+      </div>
+    </div>
+    <div class="risk-row">
+      <div class="risk-ic ri-h">&#9888;</div>
+      <div>
+        <div class="risk-n">Regulatory / FDA Risk <span class="tag t-high">HIGH</span></div>
+        <div class="risk-d">Menthol cigarette ban proposal from FDA remains a significant tail risk; menthol represents ~25&#8211;30% of cigarette category volume. FDA enforcement inconsistency on illicit e-vapor distorts the authorized market and NJOY&#8217;s addressable opportunity. PMTAs for on! PLUS line extensions require ongoing FDA interaction. Regulatory shifts could trigger ASC 350 impairment testing or ASC 450 accrual events.</div>
+        <div><span class="tag t-high">FDA Menthol Risk</span><span class="tag t-info">ASC 450</span><span class="tag t-info">ASC 350</span></div>
+      </div>
+    </div>
+    <div class="risk-row">
+      <div class="risk-ic ri-m">&#9888;</div>
+      <div>
+        <div class="risk-n">NJOY Goodwill Impairment (ASC 350) <span class="tag t-med">MEDIUM</span></div>
+        <div class="risk-d">$2.75B acquisition (June 2023) with limited PMTA-authorized SKUs. JUUL precedent &#8212; written down from ~$12.8B to near zero &#8212; creates a credible impairment scenario if e-vapor market share disappoints. Illicit market competition distorts NJOY&#8217;s commercial trajectory. Annual CGU impairment test requires supportable DCF assumptions given limited authorized e-vapor revenue history.</div>
+        <div><span class="tag t-med">ASC 350</span><span class="tag t-warn">JUUL Precedent</span><span class="tag t-info">ASC 805 PPA</span></div>
+      </div>
+    </div>
+    <div class="risk-row">
+      <div class="risk-ic ri-m">&#9888;</div>
+      <div>
+        <div class="risk-n">Marlboro Share Erosion (ASC 606) <span class="tag t-med">MEDIUM</span></div>
+        <div class="risk-d">Discount segment share grew 2.6 points in H1 2026; Basic (Altria&#8217;s own discount brand) rollout to 35,000 stores accelerated the internal mix shift. If Basic cannibalization accelerates, net revenue recognition mix shifts unfavorably &#8212; discount brands carry lower net prices per stick after promotional allowances. Pricing power assumptions in goodwill tests may tighten.</div>
+        <div><span class="tag t-med">ASC 606</span><span class="tag t-warn">Mix Shift Risk</span></div>
+      </div>
+    </div>
+    <div class="risk-row">
+      <div class="risk-ic ri-m">&#9888;</div>
+      <div>
+        <div class="risk-n">Equity Investment Marks (ASC 323) <span class="tag t-med">MEDIUM</span></div>
+        <div class="risk-d">ABI (Anheuser-Busch InBev SA/NV) is a significant equity method investment inherited via the SABMiller deal; book value <span class="verify">VERIFY ABI book value</span>. Cronos Group (cannabis) equity method investment; cannabis market remains volatile with uncertain regulatory trajectory in Canada and U.S. OTT (other-than-temporary) impairment assessment required annually. Cross-border equity income creates ASC 740 complexity.</div>
+        <div><span class="tag t-med">ASC 323</span><span class="tag t-info">ASC 740</span><span class="tag t-warn">Cronos Cannabis Exposure</span></div>
+      </div>
+    </div>
+    <div class="risk-row">
+      <div class="risk-ic ri-m">&#9888;</div>
+      <div>
+        <div class="risk-n">ITGC / Controls <span class="tag t-med">MEDIUM</span></div>
+        <div class="risk-d">Consumer pricing systems (promotional allowances, trade buy-downs) are highly complex and judgment-intensive. Basic rollout to 35,000 stores in 2026 added new trade investment data flows. on! PLUS introductory pricing programs created new variable consideration estimation inputs. RGM (revenue growth management) platform enhancements may trigger ASC 350-40 capitalization assessments. SOX ICFR controls over promotional allowance calculations are a key test area.</div>
+        <div><span class="tag t-med">ITGC</span><span class="tag t-info">ASC 350-40</span><span class="tag t-info">ASC 606</span><span class="tag t-warn">RGM Systems</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sh">Risk Radar &#8212; Audit Priority Map</div>
+<div style="text-align:center;margin-bottom:.875rem">
+<svg viewBox="0 0 300 285" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:300px;display:inline-block">
+<polygon points="150.0,121.0 164.9,128.2 168.5,144.2 158.2,157.1 141.8,157.1 131.5,144.2 135.1,128.2" fill="none" stroke="#e2e0d8" stroke-width="1"/>
+<polygon points="150.0,102.0 179.7,116.3 187.0,148.5 166.5,174.2 133.5,174.2 113.0,148.5 120.3,116.3" fill="none" stroke="#e2e0d8" stroke-width="1"/>
+<polygon points="150.0,83.0 194.6,104.5 205.6,152.7 174.7,191.4 125.3,191.4 94.4,152.7 105.4,104.5" fill="none" stroke="#e2e0d8" stroke-width="1"/>
+<polygon points="150.0,64.0 209.4,92.6 224.1,156.9 183.0,208.5 117.0,208.5 75.9,156.9 90.6,92.6" fill="none" stroke="#e2e0d8" stroke-width="1"/>
+<polygon points="150.0,45.0 224.3,80.8 242.6,161.1 191.2,225.6 108.8,225.6 57.4,161.1 75.7,80.8" fill="none" stroke="#e2e0d8" stroke-width="1"/>
+<line x1="150" y1="140" x2="150.0" y2="45.0" stroke="#e2e0d8" stroke-width="1"/>
+<line x1="150" y1="140" x2="224.3" y2="80.8" stroke="#e2e0d8" stroke-width="1"/>
+<line x1="150" y1="140" x2="242.6" y2="161.1" stroke="#e2e0d8" stroke-width="1"/>
+<line x1="150" y1="140" x2="191.2" y2="225.6" stroke="#e2e0d8" stroke-width="1"/>
+<line x1="150" y1="140" x2="108.8" y2="225.6" stroke="#e2e0d8" stroke-width="1"/>
+<line x1="150" y1="140" x2="57.4" y2="161.1" stroke="#e2e0d8" stroke-width="1"/>
+<line x1="150" y1="140" x2="75.7" y2="80.8" stroke="#e2e0d8" stroke-width="1"/>
+<polygon points="150.0,45.0 179.7,116.3 242.6,161.1 174.7,191.4 133.5,174.2 113.0,148.5 105.4,104.5" fill="#D04A02" fill-opacity="0.18" stroke="#D04A02" stroke-width="2"/>
+<circle cx="150.0" cy="45.0" r="3" fill="#D04A02" opacity="0.8"/>
+<circle cx="179.7" cy="116.3" r="3" fill="#D04A02" opacity="0.8"/>
+<circle cx="242.6" cy="161.1" r="3" fill="#D04A02" opacity="0.8"/>
+<circle cx="174.7" cy="191.4" r="3" fill="#D04A02" opacity="0.8"/>
+<circle cx="133.5" cy="174.2" r="3" fill="#D04A02" opacity="0.8"/>
+<circle cx="113.0" cy="148.5" r="3" fill="#D04A02" opacity="0.8"/>
+<circle cx="105.4" cy="104.5" r="3" fill="#D04A02" opacity="0.8"/>
+<text x="150.0" y="27.0" text-anchor="middle" font-size="9" fill="#666"><tspan x="150.0" dy="-6">Litigation/</tspan><tspan x="150.0" dy="6">Contingency</tspan></text>
+<text x="238.3" y="69.5" text-anchor="middle" font-size="9" fill="#666"><tspan x="238.3" dy="-6">Revenue</tspan><tspan x="238.3" dy="6">Recognition</tspan></text>
+<text x="260.2" y="165.1" text-anchor="start" font-size="9" fill="#666"><tspan x="260.2" dy="-6">Regulatory</tspan><tspan x="260.2" dy="6">Risk</tspan></text>
+<text x="199.0" y="241.8" text-anchor="start" font-size="9" fill="#666"><tspan x="199.0" dy="-6">Goodwill/</tspan><tspan x="199.0" dy="6">Impairment</tspan></text>
+<text x="101.0" y="241.8" text-anchor="end" font-size="9" fill="#666"><tspan x="101.0" dy="-6">ITGC/</tspan><tspan x="101.0" dy="6">Controls</tspan></text>
+<text x="39.8" y="165.1" text-anchor="end" font-size="9" fill="#666"><tspan x="39.8" dy="-6">Activist</tspan><tspan x="39.8" dy="6">Vulnerability</tspan></text>
+<text x="61.7" y="69.5" text-anchor="middle" font-size="9" fill="#666"><tspan x="61.7" dy="-6">Valuation</tspan><tspan x="61.7" dy="6">Pressure</tspan></text>
+</svg>
+</div>
+
+<div class="hl hl-info">
+  <strong>Audit Planning Priority:</strong> Tobacco litigation reserves (ASC 450) and NJOY impairment testing (ASC 350) are likely to be the highest-judgment areas. Recommend early alignment with management on reserve methodology and CGU definition before fieldwork begins. Also prioritize: promotional allowance waterfall (ASC 606), JUUL DTA recoverability (ASC 740), and Cronos/ABI OTT impairment indicators (ASC 323).
+</div>
+</template>
+
+<template id="tmpl-valuation">
+<div class="metrics">
+  <div class="metric"><div class="metric-label">Stock Price</div><div class="metric-value">$67.89</div><div class="metric-sub">Sep 9, 2026</div></div>
+  <div class="metric"><div class="metric-label">PE (TTM GAAP)</div><div class="metric-value">12.28x</div><div class="metric-sub">Sep 8, 2026</div></div>
+  <div class="metric"><div class="metric-label">Forward PE</div><div class="metric-value">11.78x</div><div class="metric-sub">Consensus $5.68 EPS</div></div>
+  <div class="metric"><div class="metric-label">P/FCF</div><div class="metric-value">12.44x</div><div class="metric-sub">FY2025 FCF $9.1B</div></div>
+  <div class="metric"><div class="metric-label">P/S</div><div class="metric-value">5.54x</div><div class="metric-sub">TTM net revenue</div></div>
+</div>
+
+<div class="card">
+  <div class="card-title">Historical PE Range (3&#8211;5 Year)</div>
+  <div class="card-body">
+    <table class="tbl">
+      <thead><tr><th>Reference Point</th><th class="tbl-num">PE Multiple</th><th>Context</th></tr></thead>
+      <tbody>
+        <tr><td>5-Year Low</td><td class="tbl-num">6.83x</td><td>June 2024 &#8212; regulatory overhang trough</td></tr>
+        <tr style="background:var(--blue-bg)"><td><strong>Current (Sep 8, 2026)</strong></td><td class="tbl-num"><strong>12.28x</strong></td><td>Recovery; dividend yield compresses forward PE</td></tr>
+        <tr><td>3-Year High</td><td class="tbl-num">15.15x</td><td>June 2026 &#8212; smoke-free transition optimism peak</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:11px;color:#888">Note: Negative book equity from accumulated tobacco litigation charges and JUUL-era impairments makes EV/EBITDA and P/B metrics less meaningful. P/FCF and P/E are primary valuation anchors.</p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Peer Multiple Comparison (Tobacco Sector)</div>
+  <div class="card-body">
+    <table class="tbl">
+      <thead><tr><th>Company</th><th class="tbl-num">TTM PE</th><th class="tbl-num">Market Cap</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr style="background:var(--blue-bg)"><td><strong>Altria (MO)</strong></td><td class="tbl-num"><strong>12.28x</strong></td><td class="tbl-num"><strong>$113.8B</strong></td><td>U.S. only; high yield; smoke-free transition</td></tr>
+        <tr><td>Philip Morris Int&#8217;l (PM)</td><td class="tbl-num">22.81x</td><td class="tbl-num">$287.9B</td><td>Global; IQOS heat-not-burn premium</td></tr>
+        <tr><td>British American Tobacco (BTI)</td><td class="tbl-num"><span class="verify">VERIFY BTI PE</span></td><td class="tbl-num">$112.0B</td><td>Global; Velo pouches, Vuse e-vapor</td></tr>
+        <tr><td>Japan Tobacco (JAPAY)</td><td class="tbl-num">~23.7x</td><td class="tbl-num">$76.6B</td><td>Japan-centric; Ploom heat-not-burn</td></tr>
+        <tr><td>Imperial Brands (IMBBY)</td><td class="tbl-num"><span class="verify">VERIFY IMBBY PE</span></td><td class="tbl-num">$25.8B</td><td>UK-listed; smaller smoke-free platform</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:11px;color:#888">MO trades at a significant discount to global peers (PM at 22.81x vs MO 12.28x), reflecting U.S.-only focus, regulatory risk, and negative equity book value. Some discount is arguably structural.</p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Analyst Price Targets &#8212; Bull / Base / Bear</div>
+  <div class="card-body">
+    <table class="tbl">
+      <thead><tr><th>Firm / Analyst</th><th>Rating</th><th class="tbl-num">Target</th><th>Key Thesis</th></tr></thead>
+      <tbody>
+        <tr><td>BofA / Lisa Lewandowski</td><td><span class="tag t-ok">Buy</span></td><td class="tbl-num"><strong>$82</strong></td><td>Bull: on! PLUS ramp + pricing power sustains</td></tr>
+        <tr><td>Goldman Sachs / Bonnie Herzog</td><td><span class="tag t-ok">Buy</span></td><td class="tbl-num">$77</td><td>Smoke-free optionality undervalued; dividend floor</td></tr>
+        <tr><td>Stifel / Matthew Smith CFA</td><td><span class="tag t-ok">Buy</span></td><td class="tbl-num">$77</td><td>Capital return yield; Marlboro share resilient</td></tr>
+        <tr style="background:var(--blue-bg)"><td><strong>Consensus (14 analysts)</strong></td><td><span class="tag t-warn">Hold</span></td><td class="tbl-num"><strong>$70</strong></td><td>Base: modest upside; stable yield + dividends</td></tr>
+        <tr><td>BTIG / Owen Bennett</td><td><span class="tag t-warn">Neutral</span></td><td class="tbl-num">No PT</td><td>Balanced; watch menthol regulatory development</td></tr>
+        <tr><td>Argus / Christine Dooley</td><td><span class="tag t-warn">Hold</span></td><td class="tbl-num">No PT</td><td>Cautious on volume decline trajectory</td></tr>
+        <tr><td>Barclays / Pallav Mittal</td><td><span class="tag t-danger">Sell</span></td><td class="tbl-num"><strong>$58</strong></td><td>Bear: volume decline outpaces pricing; NJOY impairment; menthol</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="hl hl-warn">
+  <strong>&#9888; Audit Valuation Note:</strong> EV-based metrics are complicated by negative book equity from accumulated tobacco litigation charges and JUUL-era impairments. Auditor should confirm impairment model assumptions are consistent with external valuation signals. MO&#8217;s current stock price of ~$68 sits well below the SOTP base case (~$94/sh), suggesting the market is discounting significant secular risk and/or litigation tail &#8212; a signal the auditor should probe in CGU assumptions for NJOY and MST intangible assets.
+</div>
+</template>
+
+<template id="tmpl-shareholder">
+<div class="metrics">
+  <div class="metric"><div class="metric-label">Quarterly Dividend</div><div class="metric-value">$1.11</div><div class="metric-sub">$4.44 annualized</div></div>
+  <div class="metric"><div class="metric-label">Dividend Yield</div><div class="metric-value">~6.5%</div><div class="metric-sub">At $68/sh</div></div>
+  <div class="metric"><div class="metric-label">FCF Yield</div><div class="metric-value">~8.0%</div><div class="metric-sub">FY2025 FCF / mkt cap</div></div>
+  <div class="metric"><div class="metric-label">Share Count Decline</div><div class="metric-value">~-0.83%/yr</div><div class="metric-sub">Via buyback program</div></div>
+  <div class="metric"><div class="metric-label">Consecutive Div. Increases</div><div class="metric-value">55+</div><div class="metric-sub">Dividend King <span class="verify">VERIFY count</span></div></div>
+</div>
+
+<div class="card">
+  <div class="card-title">Dividend History &#8212; Annual per Share</div>
+  <div class="card-body">
+    <table class="tbl">
+      <thead><tr><th>Year</th><th class="tbl-num">Annual DPS</th><th class="tbl-num">YoY Growth</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>FY2021</td><td class="tbl-num">$3.52</td><td class="tbl-num">&#8212;</td><td>Baseline</td></tr>
+        <tr><td>FY2022</td><td class="tbl-num">$3.68</td><td class="tbl-num">+4.5%</td><td></td></tr>
+        <tr><td>FY2023</td><td class="tbl-num">$3.84</td><td class="tbl-num">+4.3%</td><td></td></tr>
+        <tr><td>FY2024</td><td class="tbl-num">$4.00</td><td class="tbl-num">+4.2%</td><td></td></tr>
+        <tr><td>FY2025</td><td class="tbl-num">$4.16</td><td class="tbl-num">+4.0%</td><td></td></tr>
+        <tr style="background:var(--muted)"><td><strong>FY2026 (current annlzd)</strong></td><td class="tbl-num"><strong>$4.44</strong></td><td class="tbl-num"><strong>+6.7%</strong></td><td>$1.11/qtr; increased in 2026</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="hl hl-success">
+  <strong>&#10003; Dividend King Status:</strong> Altria has raised its dividend for 55+ consecutive years <span class="verify">VERIFY exact count</span>, qualifying as a Dividend King. This is one of the longest streaks of any U.S. company. The $4.44 annualized rate at $1.11/quarter represents a ~6.5% yield at current prices. FCF of $9.1B (FY2025) covers dividends (~$7.4B) with substantial margin.
+</div>
+
+<div class="two-col">
+  <div class="card">
+    <div class="card-title">Share Repurchase Program</div>
+    <div class="card-body">
+      <p>Diluted shares ~1,670M declining at ~0.83%/yr; H1 2026 combined shareholder returns (dividends + buybacks) ~$3.9B.</p>
+      <p>Buyback authorization and remaining capacity: <span class="verify">VERIFY exact 2026 buyback authorization and remaining capacity</span></p>
+      <p>Buyback pace is disciplined but secondary to dividend. Share count reduction of ~14M/yr at current pace; EPS accretive at current multiples.</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Institutional Holders</div>
+    <div class="card-body">
+      <ul>
+        <li><strong>Vanguard Group</strong> &#8212; est. largest holder <span class="verify">VERIFY %</span></li>
+        <li><strong>BlackRock</strong> &#8212; est. second largest <span class="verify">VERIFY %</span></li>
+        <li><strong>State Street</strong> &#8212; est. major holder <span class="verify">VERIFY %</span></li>
+      </ul>
+      <p>Standard large-cap passive index holders dominate. No confirmed activists identified in live research. <span class="verify">VERIFY via SEC 13D/13G filings for MO</span></p>
+    </div>
+  </div>
+</div>
+
+<div class="hl hl-info">
+  <strong>Audit Note:</strong> ASC 505 equity roll-forward &#8212; confirm share repurchase constructive retirement treatment and par value adjustment. Dividend accrual timing (ASC 230 cash flow classification). Confirm buyback activity in the period between dividend record and payment dates. Treasury stock vs. constructive retirement method consistency with prior periods.
+</div>
+</template>
+
+<template id="tmpl-products">
+<div class="card">
+  <div class="card-title">Smokeable Products Portfolio</div>
+  <div class="card-body">
+    <table class="tbl">
+      <thead><tr><th>Brand / Product</th><th>Segment</th><th>Key Metrics</th><th>Audit Angle</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Marlboro</strong></td><td>Premium Cigarette</td><td>59.6% premium segment share; #1 U.S. cigarette brand; overall PM USA retail share +0.3 pts YoY</td><td>Pricing power supports smokeable carrying values; promotional allowance complexity</td></tr>
+        <tr><td><strong>Basic</strong></td><td>Discount Cigarette</td><td>Expanding to 35,000 stores; +2.3 pts YoY share gain; growing faster than Marlboro</td><td>New trade investment data flows; ASC 606 variable consideration on rollout promotions</td></tr>
+        <tr><td><strong>L&amp;M</strong></td><td>Mid-tier Cigarette</td><td>Smaller brand; limited mentions in Q2 transcript</td><td>Standard rev rec; part of PM USA blended pricing</td></tr>
+        <tr><td><strong>Black &amp; Mild</strong></td><td>Cigars (John Middleton)</td><td>Volume +5% Q2 vs industry -6.4%; outperforming; premium cigar category resilience</td><td>Separate subsidiary; stand-alone revenue recognition</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Oral Tobacco &amp; Nicotine Pouch Portfolio</div>
+  <div class="card-body">
+    <table class="tbl">
+      <thead><tr><th>Brand / Product</th><th>Type</th><th>Key Metrics</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Copenhagen</strong></td><td>MST (moist smokeless)</td><td>USSTC&#8217;s flagship MST brand; declining category</td><td>Indefinite-lived intangible &#8212; annual impairment test as MST declines</td></tr>
+        <tr><td><strong>Skoal</strong></td><td>MST</td><td>Second MST brand; similar trajectory to Copenhagen</td><td>Carrying value watch; volume decline triggers assessment</td></tr>
+        <tr><td><strong>on!</strong></td><td>Nicotine Pouches</td><td>8.6% pouch share (+0.3 pts YoY, +0.8 pts sequential); #2 brand awareness behind Zyn</td><td>Growing; PMTA-related regulatory pathway progressing</td></tr>
+        <tr><td><strong>on! PLUS</strong></td><td>Nicotine Pouches (premium)</td><td>Nationally expanded to 120,000 stores; NICOSILK pouch technology; early repeat rates positive; introductory pricing in market</td><td>New in 2026; ASC 606 introductory price variable consideration; supplemental PMTA</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">E-Vapor: NJOY</div>
+  <div class="card-body">
+    <p><strong>NJOY Holdings</strong> acquired June 2023 for ~$2.75B. Products include NJOY DAILY authorized products with FDA PMTA authorization &#8212; among the few authorized e-vapor devices in the U.S. market. <span class="verify">VERIFY current NJOY authorized SKU list and market share</span></p>
+    <p>NJOY faces a massive illicit disposable market that distorts its commercial performance. FDA enforcement against illicit products has been inconsistent but improving in 2026 per Altria management commentary. The authorized market eventually benefits from enforcement, but timing is uncertain.</p>
+    <p>Revenue contribution: <span class="verify">VERIFY NJOY current revenue contribution</span> &#8212; may be reported within Other segment or separately in future filings.</p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">TAM &amp; Competitive Positioning</div>
+  <div class="card-body">
+    <p><strong>U.S. nicotine category:</strong> ~35M+ adult nicotine users (est.); cigarettes remain dominant but structurally declining; nicotine pouch TAM growing rapidly; e-vapor TAM ~20M adult vapers (per Altria mgmt Q2 2026 call).</p>
+    <p><strong>Nicotine pouch category:</strong> ~60% of oral tobacco and growing 8.1 share points; Zyn (PM International) leads with ~75%+ pouch share; on! is #2 in brand awareness. Altria has stated on! PLUS targeted to gain meaningful share by 2028.</p>
+    <p><strong>Industry cigarette volume:</strong> -5% adjusted YoY in recent quarters; 4 consecutive quarters of moderated decline. PM USA domestic volume -3.2% Q2 / -2.8% H1 (adjusted -4.5% / -4.0%).</p>
+  </div>
+</div>
+
+<div class="hl hl-info">
+  <strong>ASC 606 Audit Note:</strong> Promotional allowances (coupons, buy-downs, trade programs) are netted against gross revenue at time of sale as variable consideration. Packaging/SKU proliferation with on! PLUS line extensions creates new revenue recognition judgment points. Basic rollout to 35,000 stores added new trade investment estimation inputs. Walk the gross-to-net waterfall with the revenue team.
+</div>
+</template>
+
+<template id="tmpl-ma">
+<div class="card">
+  <div class="card-title">M&amp;A &amp; Structural Event Timeline</div>
+  <div class="card-body">
+    <div class="timeline-item">
+      <div class="tl-year">2008</div>
+      <div class="tl-body">
+        <div class="tl-title">Spin-off of Philip Morris International (PM)</div>
+        Altria spun off its international tobacco operations as Philip Morris International, Inc. Altria retained U.S. operations only. ASC 505-60 spin-off accounting. Created two separate publicly traded companies. PM now commands a ~22.81x PE vs Altria at 12.28x &#8212; the international premium is persistent.
+        <div style="margin-top:4px"><span class="tag t-info">ASC 505-60</span></div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-year">2009</div>
+      <div class="tl-body">
+        <div class="tl-title">Acquisition of UST Inc. (~$10.4B)</div>
+        Acquired UST Inc., the maker of Copenhagen and Skoal moist smokeless tobacco (MST), as well as wine brands (Ste. Michelle). Transformative entry into oral tobacco. ASC 805 purchase price allocation created significant indefinite-lived intangible assets for MST brands. These intangibles are now subject to annual impairment testing as MST volumes structurally decline.
+        <div style="margin-top:4px"><span class="tag t-info">ASC 805</span><span class="tag t-info">ASC 350</span></div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-year">&#8764;2016</div>
+      <div class="tl-body">
+        <div class="tl-title">Divestiture of Ste. Michelle Wine Estates <span class="verify">VERIFY exact year and terms</span></div>
+        Sold the wine business acquired with UST. Allowed focus on tobacco and nicotine. Gain/loss on sale; ASC 350 derecognition of wine-related intangibles. <span class="verify">VERIFY exact year and proceeds</span>
+        <div style="margin-top:4px"><span class="tag t-info">ASC 360</span></div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-year">2018</div>
+      <div class="tl-body">
+        <div class="tl-title">$1.8B Stake in Cronos Group &amp; $12.8B Investment in JUUL Labs</div>
+        Two major alternative nicotine investments: (1) $1.8B for ~45% of Cronos Group (Canadian cannabis company); (2) $12.8B for 35% stake in JUUL Labs (e-vapor). Both equity method investments (ASC 323). JUUL would prove to be among the worst capital allocation decisions in U.S. consumer history.
+        <div style="margin-top:4px"><span class="tag t-info">ASC 323</span><span class="tag t-info">ASC 805</span></div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-year">2019&#8211;2022</div>
+      <div class="tl-body">
+        <div class="tl-title">JUUL Impairments &#8212; $12.8B Written to Near Zero</div>
+        Series of impairment charges over 2019&#8211;2022 as JUUL faced FDA enforcement, state litigation, marketing bans, and regulatory restrictions. Investment written down from $12.8B to near zero. Created massive deferred tax assets (DTAs) under ASC 740. Also: 2021 FTC settlement regarding JUUL anti-competitive distribution practices <span class="verify">VERIFY FTC settlement terms</span>.
+        <div style="margin-top:4px"><span class="tag t-high">$12.8B Loss</span><span class="tag t-info">ASC 323</span><span class="tag t-info">ASC 740 DTA</span></div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-year">2023</div>
+      <div class="tl-body">
+        <div class="tl-title">Acquisition of NJOY Holdings (~$2.75B, June 2023)</div>
+        Acquired NJOY Holdings to gain an FDA PMTA-authorized e-vapor platform after the JUUL collapse. NJOY DAILY has authorized device status &#8212; rare in the e-vapor market. ASC 805 purchase price allocation: licensed PMTA authorizations are finite-lived intangible assets; customer relationships; technology. Goodwill allocated to e-vapor segment. Annual CGU impairment testing (ASC 350) critical given JUUL precedent.
+        <div style="margin-top:4px"><span class="tag t-info">ASC 805</span><span class="tag t-info">ASC 350</span><span class="tag t-warn">KAM Candidate</span></div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-year">Ongoing</div>
+      <div class="tl-body">
+        <div class="tl-title">ABI Stake (Anheuser-Busch InBev)</div>
+        Equity method investment in ABI inherited via the SABMiller/InBev consolidation structure. Significant at book value <span class="verify">VERIFY ABI current book value</span>. Quarterly equity income/loss flows through P&amp;L. ASC 323 OTT impairment assessment required. ABI&#8217;s beer volumes and leverage present exposure indicators.
+        <div style="margin-top:4px"><span class="tag t-info">ASC 323</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hl hl-warn">
+  <strong>&#9888; NJOY PPA Audit Note:</strong> The NJOY acquisition creates ASC 805 PPA complexity. Licensed PMTA authorizations are intangible assets with finite regulatory lives; finite-lived intangibles are amortized and tested for impairment per ASC 360. Goodwill is tested annually per ASC 350 CGU approach. JUUL precedent &#8212; $12.8B to near zero &#8212; makes the NJOY CGU one of the highest-judgment areas in the engagement. Confirm: (1) CGU definition, (2) DCF methodology, (3) sensitivity to market share assumptions vs. current authorized market performance, (4) comparability of discount rate to external signals.
+</div>
+</template>
+
+<template id="tmpl-ai">
+<div class="card">
+  <div class="card-title">AI &amp; Data Analytics in Altria Operations</div>
+  <div class="card-body">
+    <p><strong>Revenue Growth Management (RGM) System:</strong> PM USA management described using a &#8220;data-driven total portfolio approach&#8221; and &#8220;RGM-driven precision&#8221; for the Basic rollout to 35,000 stores &#8212; explicitly cited in the Q2 2026 earnings transcript. The system refines investment levels based on &#8220;marketplace learnings&#8221; in real time. This is an active, deployed AI/analytics capability that feeds revenue recognition and promotional allowance calculations.</p>
+    <p><strong>Trade &amp; Retail Analytics for on! PLUS:</strong> Helix retail trade programs for on! PLUS include premium visibility optimization and incremental fixture space placement. Real-time retail share data feeds pricing decisions. on! PLUS&#8217;s national expansion to 120,000 stores required sophisticated store-level demand modeling to size trial offers and initial inventory.</p>
+    <p><strong>Regulatory Analytics &#8212; FDA PMTA Pathway:</strong> Supplemental PMTA pathway for on! PLUS line extensions and NJOY product extensions requires structured data analytics capability &#8212; clinical, behavioral, and market data submissions. Altria&#8217;s ability to pursue PMTA authorizations at scale is a competitive advantage vs. illicit market operators.</p>
+  </div>
+</div>
+
+<div class="two-col">
+  <div class="card">
+    <div class="card-title">Software Capitalization (ASC 350-40)</div>
+    <div class="card-body">
+      <p>Any internally developed RGM or trade management software that meets ASC 350-40 criteria (development phase, probable completion, future economic benefit) must be capitalized.</p>
+      <p>Key question: are RGM platform enhancements being expensed vs. capitalized? If a significant multi-year system, the capitalization judgment could be material.</p>
+      <p>ITGC implications: if the RGM system feeds revenue recognition inputs or promotional allowance calculations, it becomes in-scope for SOX ICFR testing.</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">ITGC &amp; Controls</div>
+    <div class="card-body">
+      <p>Retail data feeds that drive promotional allowance calculations are ASC 606 relevant &#8212; if the data is wrong, the variable consideration estimate is wrong.</p>
+      <p>Distributor/wholesaler data aggregation for volume rebate calculations; tiered rebate structures require accurate volume tracking.</p>
+      <p>on! PLUS introductory pricing data &#8212; new in 2026; ITGC over trial offer redemption tracking and ASC 606 accrual.</p>
+    </div>
+  </div>
+</div>
+
+<div class="hl hl-info">
+  <strong>ASC 350-40 Audit Note:</strong> Confirm capitalization policy for RGM platform enhancements. Determine whether Basic rollout tools and on! PLUS trade management systems are treated as internal-use software (ASC 350-40) or operating expense. ITGC review should include: (1) retail data feeds that drive promotional allowance calculations (ASC 606), (2) change management controls over the RGM system, (3) user access to trade investment configuration settings.
+</div>
+</template>
+
+<template id="tmpl-activist">
+<div class="card">
+  <div class="card-title">Activist Landscape Assessment</div>
+  <div class="card-body">
+    <p><strong>Current Status:</strong> No confirmed named activists from live research. <span class="verify">VERIFY &#8212; search SEC 13D/13G filings for MO for any recent activist positions</span></p>
+    <p><strong>Bear Thesis Proxy:</strong> Barclays (Pallav Mittal), Sell $58 &#8212; likely thesis centers on secular cigarette decline outpacing smoke-free transition, NJOY impairment risk, and menthol regulatory overhang. At $58, the bear case implies near-zero value for NJOY/e-vapor and minimal smoke-free terminal value &#8212; essentially a liquidating combustibles business.</p>
+  </div>
+</div>
+
+<div class="two-col">
+  <div class="card">
+    <div class="card-title">Activist Vulnerability Assessment</div>
+    <div class="card-body">
+      <p><strong>Overall: LOW vulnerability</strong></p>
+      <ul>
+        <li>Marlboro cash generation is defensive &#8212; no obvious undervalued assets to unlock</li>
+        <li>Dividend mandate constrains capital reallocation &#8212; Dividend King status creates shareholder expectation lock-in</li>
+        <li>No obvious undervalued sum-of-parts story vs. current price (~$68 vs. $94 SOTP base)</li>
+        <li>Management is executing the obvious value-creation path (smoke-free transformation)</li>
+        <li>Share count is already declining; buybacks ongoing</li>
+        <li>Tobacco liability insurance and litigation trust structures create high information-cost barrier for activist due diligence</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Structural Defense Factors</div>
+    <div class="card-body">
+      <ul>
+        <li>Decades of settled tobacco case law make new shareholder theories complex to execute</li>
+        <li>MSA (Master Settlement Agreement) obligations and litigation reserves are difficult for outsiders to model</li>
+        <li>No obvious value-creating spin &#8212; separating smokeable from smoke-free doesn&#8217;t obviously unlock value given capital dependency</li>
+        <li>Management tenure and institutional investor base (Vanguard, BlackRock, State Street) are stable; no activist-friendly gaps</li>
+        <li>Regulatory environment (FDA oversight of tobacco) creates unique barriers that deter opportunistic M&amp;A</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="hl hl-info">
+  <strong>Audit Note:</strong> No current activist-driven restructuring events or disclosed proxy fights. Monitor for: (1) any 13D/13G filings disclosing activist positions <span class="verify">VERIFY current SEC filings</span>; (2) any spin-off proposals targeting the oral/smoke-free segment vs. combustibles; (3) any management changes that might destabilize the &#8220;Moving Beyond Smoking&#174;&#8221; strategy. New CFO (Heather Newman, 2026) is an early watch item for strategy continuity.
+</div>
+</template>
+
+<template id="tmpl-journey">
+<div class="card">
+  <div class="card-title">Distribution Channel Map</div>
+  <div class="card-body">
+    <div style="background:var(--muted);border-radius:8px;padding:.875rem;font-size:13px;text-align:center;margin-bottom:.75rem">
+      <strong>Manufacturer</strong> (PM USA / USSTC / Helix / John Middleton)
+      &nbsp;&#8594;&nbsp; <strong>Distributor / Wholesaler</strong>
+      &nbsp;&#8594;&nbsp; <strong>Retailer</strong> (c-store, mass, drug, tobacco specialty)
+      &nbsp;&#8594;&nbsp; <strong>Adult Consumer (21+)</strong>
+    </div>
+    <p>Altria sells to distributors/wholesalers who resell to retailers. PM USA does not sell directly to retailers in most channels. The performance obligation under ASC 606 is product delivery to the distributor/wholesaler &#8212; control transfers at that point.</p>
+    <p><strong>Basic rollout:</strong> 35,000 stores added in 2026 via targeted trade investment. New retailer relationships created new promotional allowance data flows for the RGM system.</p>
+    <p><strong>on! PLUS national expansion:</strong> 120,000 stores; fixture space optimization with retailers. Trade programs (premium shelf positioning, incremental space fees) are additional consideration elements requiring classification under ASC 606.</p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">ASC 606 Revenue Recognition &#8212; Step Model</div>
+  <div class="card-body">
+    <table class="tbl">
+      <thead><tr><th>ASC 606 Step</th><th>Altria Application</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1. Identify contract</strong></td><td>Distribution agreement with wholesaler/distributor; order-level contracts for each shipment</td></tr>
+        <tr><td><strong>2. Identify performance obligations</strong></td><td>Single PO per product line: delivery of tobacco/nicotine product per order specifications</td></tr>
+        <tr><td><strong>3. Determine transaction price</strong></td><td>Gross invoice price <em>less</em> variable consideration: promotional allowances, buy-downs, coupons, volume rebates, introductory pricing offers</td></tr>
+        <tr><td><strong>4. Allocate</strong></td><td>Single PO per delivery; allocation straightforward. Introductory bundle pricing for on! PLUS requires allocation if multiple elements</td></tr>
+        <tr><td><strong>5. Recognize revenue</strong></td><td>At point of transfer of control to distributor; minimal returns in tobacco; excise taxes collected and remitted excluded from revenue</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Key Revenue Recognition Judgments</div>
+  <div class="card-body">
+    <p><strong>1. Promotional Allowance Estimation:</strong> Coupons, retail buy-downs, and trade investment accrued at time of revenue recognition based on expected redemption/utilization rates. Variable consideration constrained to highly probable amount. Basic rollout to 35,000 stores added new, lower-history trade investment categories &#8212; limited prior data for estimation. Requires management judgment; auditor should test methodology and historical accuracy.</p>
+    <p><strong>2. Volume Rebates to Wholesalers:</strong> Tiered structure tied to volume thresholds; estimated at portfolio level. Quarterly true-up required when actual volumes cross tier boundaries. Potential for over- or under-accrual during the year.</p>
+    <p><strong>3. on! PLUS Introductory Trial Pricing:</strong> Introductory price offers described in Q2 2026 transcript. These represent variable consideration under ASC 606 &#8212; the introductory discount must be accrued at time of sale. New in 2026 with limited redemption history. Higher estimation risk than mature product promotional programs.</p>
+  </div>
+</div>
+
+<div class="hl hl-warn">
+  <strong>&#9888; Audit Procedure:</strong> Walk the promotional allowance waterfall from gross revenue to net revenue with the revenue recognition team. Specific focus areas: (1) Basic rollout accruals &#8212; methodology, historical accuracy, and sampling of store-level investment decisions; (2) on! PLUS introductory pricing &#8212; redemption rate assumption, constraint methodology, and true-up timing; (3) Excise tax netting &#8212; confirm excise taxes are properly excluded from revenue and not netting incorrectly against promotional allowances.
+</div>
+</template>
+
+<template id="tmpl-sotp">
+<div class="card">
+  <div class="card-title">Sum-of-the-Parts &#8212; Segment Equity Value Build (Per Share)</div>
+  <div class="card-body">
+    <table class="tbl">
+      <thead><tr><th>Segment</th><th class="tbl-num">Bear</th><th class="tbl-num">Base</th><th class="tbl-num">Bull</th><th>Methodology / Key Assumption</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Smokeable Products</strong> (PM USA + John Middleton)</td><td class="tbl-num">$80</td><td class="tbl-num">$91</td><td class="tbl-num">$100</td><td>DCF on declining volumes with pricing offsets; terminal value is key driver; 8&#8211;10x OCI multiple</td></tr>
+        <tr><td><strong>Oral Tobacco / on! / on! PLUS</strong> (USSTC + Helix)</td><td class="tbl-num">$8</td><td class="tbl-num">$11</td><td class="tbl-num">$14</td><td>MST declining; on! PLUS growth. Pouch share by 2028 drives bear vs. bull spread</td></tr>
+        <tr><td><strong>NJOY (e-vapor)</strong></td><td class="tbl-num">$0</td><td class="tbl-num">$2</td><td class="tbl-num">$5</td><td>JUUL precedent = bear $0; bull = enforcement-driven market growth for authorized products</td></tr>
+        <tr><td><strong>ABI Stake</strong></td><td class="tbl-num">$6</td><td class="tbl-num">$7</td><td class="tbl-num">$9</td><td>Mark-to-market; ABI share price and FX; ASC 323 equity method book value <span class="verify">VERIFY</span></td></tr>
+        <tr><td><strong>Cronos Stake</strong></td><td class="tbl-num">$0</td><td class="tbl-num">$0</td><td class="tbl-num">$1</td><td>Cannabis market; minimal value assigned given market uncertainty</td></tr>
+        <tr><td><strong>Net Debt (deduction)</strong></td><td class="tbl-num">($14)</td><td class="tbl-num">($13)</td><td class="tbl-num">($12)</td><td>$22.2B net debt / ~1,670M shares &#8594; ~$13/sh</td></tr>
+        <tr><td><strong>Corporate / Tax</strong></td><td class="tbl-num">($5)</td><td class="tbl-num">($4)</td><td class="tbl-num">($3)</td><td>Corporate overhead, deferred tax liability</td></tr>
+        <tr style="background:var(--muted)"><td><strong>Implied Equity Value</strong></td><td class="tbl-num"><strong>~$75</strong></td><td class="tbl-num"><strong>~$94</strong></td><td class="tbl-num"><strong>~$114</strong></td><td>vs. current ~$68 &#8212; market prices in secular/regulatory discount</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="sh">Football Field &#8212; Equity Value Per Share</div>
+<div class="svg-wrap">
+<svg viewBox="0 0 590 278" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:590px;display:block;margin:0 auto">
+<text x="142" y="30" text-anchor="end" font-size="11" fill="#444">Smokeable Products</text>
+<line x1="479.5" y1="26" x2="550.0" y2="26" stroke="#ccc" stroke-width="1"/>
+<rect x="479.5" y="20" width="70.5" height="12" fill="#D04A02" opacity="0.22" rx="3"/>
+<line x1="518.3" y1="17" x2="518.3" y2="35" stroke="#D04A02" stroke-width="2.5"/>
+<text x="556.0" y="30" font-size="10" fill="#D04A02" font-weight="600">$+91</text>
+<text x="142" y="64" text-anchor="end" font-size="11" fill="#444">Oral Tobacco / on!</text>
+<line x1="225.6" y1="60" x2="246.7" y2="60" stroke="#ccc" stroke-width="1"/>
+<rect x="225.6" y="54" width="21.2" height="12" fill="#D04A02" opacity="0.22" rx="3"/>
+<line x1="236.2" y1="51" x2="236.2" y2="69" stroke="#D04A02" stroke-width="2.5"/>
+<text x="252.7" y="64" font-size="10" fill="#D04A02" font-weight="600">$+11</text>
+<text x="142" y="98" text-anchor="end" font-size="11" fill="#444">NJOY (e-vapor)</text>
+<line x1="197.4" y1="94" x2="215.0" y2="94" stroke="#ccc" stroke-width="1"/>
+<rect x="197.4" y="88" width="17.6" height="12" fill="#D04A02" opacity="0.22" rx="3"/>
+<line x1="204.4" y1="85" x2="204.4" y2="103" stroke="#D04A02" stroke-width="2.5"/>
+<text x="221.0" y="98" font-size="10" fill="#D04A02" font-weight="600">$+2</text>
+<text x="142" y="132" text-anchor="end" font-size="11" fill="#444">ABI Stake</text>
+<line x1="218.5" y1="128" x2="229.1" y2="128" stroke="#ccc" stroke-width="1"/>
+<rect x="218.5" y="122" width="10.6" height="12" fill="#D04A02" opacity="0.22" rx="3"/>
+<line x1="222.1" y1="119" x2="222.1" y2="137" stroke="#D04A02" stroke-width="2.5"/>
+<text x="235.1" y="132" font-size="10" fill="#D04A02" font-weight="600">$+7</text>
+<text x="142" y="166" text-anchor="end" font-size="11" fill="#444">Cronos Stake</text>
+<line x1="197.4" y1="162" x2="200.9" y2="162" stroke="#ccc" stroke-width="1"/>
+<rect x="197.4" y="156" width="3.5" height="12" fill="#D04A02" opacity="0.22" rx="3"/>
+<line x1="197.4" y1="153" x2="197.4" y2="171" stroke="#D04A02" stroke-width="2.5"/>
+<text x="206.9" y="166" font-size="10" fill="#D04A02" font-weight="600">$+0</text>
+<text x="142" y="200" text-anchor="end" font-size="11" fill="#444">Net Debt (deduction)</text>
+<line x1="148.0" y1="196" x2="155.1" y2="196" stroke="#ccc" stroke-width="1"/>
+<rect x="148.0" y="190" width="7.1" height="12" fill="#666" opacity="0.22" rx="3"/>
+<line x1="151.5" y1="187" x2="151.5" y2="205" stroke="#666" stroke-width="2.5"/>
+<text x="161.1" y="200" font-size="10" fill="#666" font-weight="600">$-13</text>
+<text x="142" y="234" text-anchor="end" font-size="11" fill="#444">Corporate / Tax</text>
+<line x1="179.7" y1="230" x2="186.8" y2="230" stroke="#ccc" stroke-width="1"/>
+<rect x="179.7" y="224" width="7.1" height="12" fill="#666" opacity="0.22" rx="3"/>
+<line x1="183.3" y1="221" x2="183.3" y2="239" stroke="#666" stroke-width="2.5"/>
+<text x="192.8" y="234" font-size="10" fill="#666" font-weight="600">$-4</text>
+<line x1="148" y1="10" x2="148" y2="268" stroke="#e2e0d8" stroke-width="1" stroke-dasharray="3,3"/>
+</svg>
+</div>
+
+<div class="card">
+  <div class="card-title">Analyst Thesis on SOTP vs. Market Price</div>
+  <div class="card-body">
+    <p>Current market price ~$68 sits materially below the SOTP base case of ~$94/sh. The ~$26 discount reflects: (1) secular volume risk haircut on Smokeable terminal value; (2) NJOY impairment overhang; (3) menthol regulatory tail risk priced in; (4) negative book equity complicates standard valuation approaches.</p>
+    <p><strong>Bull case ($82&#8211;$94):</strong> Requires on! PLUS gaining 15%+ pouch share by 2028 and FDA enforcement clearing the illicit e-vapor market. BofA Lisa Lewandowski $82 target reflects this scenario with some probability weighting.</p>
+    <p><strong>Bear case ($58&#8211;$68):</strong> Implies permanent discount for menthol/regulatory risk, NJOY impairment, and minimal smoke-free terminal value. Barclays Pallav Mittal $58 reflects near-zero credit for NJOY and accelerated Marlboro erosion from discount mix shift.</p>
+  </div>
+</div>
+
+<div class="hl hl-info">
+  <strong>Audit Note:</strong> SOTP is consistent with PwC&#8217;s engagement-level assessment that goodwill impairment testing is a likely key audit matter. Smokeable segment terminal value assumptions drive most of the equity value (~$91/sh base). If management&#8217;s impairment test DCF assumes a higher terminal value than what the current stock price implies, the auditor must interrogate the difference. NJOY CGU headroom is the most sensitive near-term item given the acquisition price, limited performance history, and JUUL precedent.
+</div>
+</template>
+
+<template id="tmpl-earnings">
+<div class="metrics">
+  <div class="metric"><div class="metric-label">Q2 2026 Adj EPS</div><div class="metric-value">$1.48</div><div class="metric-up">+2.8% YoY</div></div>
+  <div class="metric"><div class="metric-label">H1 2026 Adj EPS</div><div class="metric-value">$2.80</div><div class="metric-up">+4.9% YoY</div></div>
+  <div class="metric"><div class="metric-label">Smokeable OCI Q2</div><div class="metric-value">$3.0B</div><div class="metric-up">+2.4% YoY; 64.8% margin</div></div>
+  <div class="metric"><div class="metric-label">Q2 Net Revenue</div><div class="metric-value">$5,356M</div><div class="metric-up">+1.2% YoY</div></div>
+  <div class="metric"><div class="metric-label">on! Pouch Share</div><div class="metric-value">8.6%</div><div class="metric-up">+0.3 pts YoY; +0.8 sequential</div></div>
+</div>
+
+<div class="card">
+  <div class="card-title">Q2 2026 Earnings Call &#8212; Key Takeaways (July 30, 2026)</div>
+  <div class="card-body">
+    <p><strong>1. Adj EPS $1.48 (+2.8%), H1 $2.80 (+4.9%)</strong> &#8212; on track for full year guidance narrowing. FY2026 guidance range: <span class="verify">VERIFY exact FY2026 guidance range from press release</span>. Consensus $5.68 (12 analysts, stockanalysis.com).</p>
+    <p><strong>2. Smokeable OCI Margin 64.8% Q2 / 64.9% H1</strong> &#8212; pricing +4.5% offsetting volume -3.2%. Industry volumes moderated to -5% adjusted &#8212; 4 consecutive quarters of moderated decline, better than the prior -8% trajectory.</p>
+    <p><strong>3. on! PLUS National Expansion Complete</strong> &#8212; 120,000 stores. 8.6% pouch share; early repeat rates described as positive by management. Introductory pricing in market; category growing rapidly (8.1 share pts). NICOSILK pouch technology cited as product differentiator.</p>
+    <p><strong>4. Discount Pressure &#8212; Basic Growing</strong> &#8212; Basic gaining +2.3 pts YoY; Marlboro overall share -1.5 pts YoY. Altria describes Basic as &#8220;RGM-driven precision&#8221; execution &#8212; a controlled internal mix shift rather than uncontrolled share loss. Still a risk if pricing premium erodes.</p>
+    <p><strong>5. Illicit E-Vapor Headwinds Moderating</strong> &#8212; Adult vaper count flat at ~20M; illicit disposable growth slowing. FDA enforcement described as improving. NJOY commercial trajectory improving in absolute terms though market conditions remain challenging.</p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Management Tone &amp; Guidance</div>
+  <div class="card-body">
+    <p><strong>CEO Sal Mancuso:</strong> Confident, disciplined tone throughout. Emphasized &#8220;steady, disciplined execution&#8221; as the Altria hallmark. Highlighted pricing power sustainability, on! PLUS momentum, and Black &amp; Mild outperformance. No significant changes to strategy signaled.</p>
+    <p><strong>CFO Heather Newman (new):</strong> Focused on OCI margins, shareholder returns, and debt management. First major earnings call in new role; tone consistent with predecessor. Described guidance narrowing as reflecting H1 performance confidence.</p>
+    <p><strong>Guidance:</strong> FY2026 adjusted EPS guidance &#8220;narrowed&#8221; during Q2 2026 call &#8212; specific range not captured in research transcript. <span class="verify">VERIFY from press release / 8-K filed July 30, 2026</span></p>
+  </div>
+</div>
+
+<div class="two-col">
+  <div class="card">
+    <div class="card-title">Smokeable Adj OCI ($B) &#8212; 5 Quarters</div>
+    <div class="chart-title" style="margin-top:.25rem">Quarterly Trend</div>
+    <svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:280px">
+<path d="M20,20.4 L80,14.4 L140,27.6 L200,48.0 L260,12.0 L260,48 L20,48 Z" fill="#D04A02" fill-opacity="0.10"/>
+<polyline points="20,20.4 80,14.4 140,27.6 200,48.0 260,12.0" fill="none" stroke="#D04A02" stroke-width="2"/>
+<circle cx="20" cy="20.4" r="2.5" fill="#D04A02"/>
+<circle cx="80" cy="14.4" r="2.5" fill="#D04A02"/>
+<circle cx="140" cy="27.6" r="2.5" fill="#D04A02"/>
+<circle cx="200" cy="48.0" r="2.5" fill="#D04A02"/>
+<circle cx="260" cy="12.0" r="2.5" fill="#D04A02"/>
+<text x="20" y="58" text-anchor="middle" font-size="8" fill="#999">Q2'25</text>
+<text x="80" y="58" text-anchor="middle" font-size="8" fill="#999">Q3'25</text>
+<text x="140" y="58" text-anchor="middle" font-size="8" fill="#999">Q4'25</text>
+<text x="200" y="58" text-anchor="middle" font-size="8" fill="#999">Q1'26</text>
+<text x="260" y="58" text-anchor="middle" font-size="8" fill="#999">Q2'26</text>
+<text x="20" y="15.4" text-anchor="start" font-size="9" font-weight="700" fill="#D04A02">$2.93B</text>
+<text x="260" y="7.0" text-anchor="end" font-size="9" font-weight="700" fill="#D04A02">$3.00B</text>
+</svg>
+    <div style="font-size:10px;color:#888;margin-top:2px">Q4&#39;25 and Q1&#39;26 OCI estimates <span class="verify">VERIFY</span></div>
+  </div>
+  <div class="card">
+    <div class="card-title">GAAP Diluted EPS &#8212; 5 Quarters</div>
+    <div class="chart-title" style="margin-top:.25rem">Quarterly Trend</div>
+    <svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:280px">
+<path d="M20,12.0 L80,12.0 L140,48.0 L200,17.3 L260,13.9 L260,48 L20,48 Z" fill="#D04A02" fill-opacity="0.10"/>
+<polyline points="20,12.0 80,12.0 140,48.0 200,17.3 260,13.9" fill="none" stroke="#D04A02" stroke-width="2"/>
+<circle cx="20" cy="12.0" r="2.5" fill="#D04A02"/>
+<circle cx="80" cy="12.0" r="2.5" fill="#D04A02"/>
+<circle cx="140" cy="48.0" r="2.5" fill="#D04A02"/>
+<circle cx="200" cy="17.3" r="2.5" fill="#D04A02"/>
+<circle cx="260" cy="13.9" r="2.5" fill="#D04A02"/>
+<text x="20" y="58" text-anchor="middle" font-size="8" fill="#999">Q2'25</text>
+<text x="80" y="58" text-anchor="middle" font-size="8" fill="#999">Q3'25</text>
+<text x="140" y="58" text-anchor="middle" font-size="8" fill="#999">Q4'25</text>
+<text x="200" y="58" text-anchor="middle" font-size="8" fill="#999">Q1'26</text>
+<text x="260" y="58" text-anchor="middle" font-size="8" fill="#999">Q2'26</text>
+<text x="20" y="7.0" text-anchor="start" font-size="9" font-weight="700" fill="#D04A02">$1.41</text>
+<text x="260" y="8.9" text-anchor="end" font-size="9" font-weight="700" fill="#D04A02">$1.37</text>
+</svg>
+    <div style="font-size:10px;color:#888;margin-top:2px">Q4&#39;25 $0.66 &#8212; impacted by special items</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Net Revenue ($B) &#8212; 5 Quarters</div>
+  <div class="chart-title" style="margin-top:.25rem">Quarterly Trend</div>
+  <svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:280px">
+<path d="M20,16.2 L80,18.6 L140,28.8 L200,48.0 L260,12.0 L260,48 L20,48 Z" fill="#D04A02" fill-opacity="0.10"/>
+<polyline points="20,16.2 80,18.6 140,28.8 200,48.0 260,12.0" fill="none" stroke="#D04A02" stroke-width="2"/>
+<circle cx="20" cy="16.2" r="2.5" fill="#D04A02"/>
+<circle cx="80" cy="18.6" r="2.5" fill="#D04A02"/>
+<circle cx="140" cy="28.8" r="2.5" fill="#D04A02"/>
+<circle cx="200" cy="48.0" r="2.5" fill="#D04A02"/>
+<circle cx="260" cy="12.0" r="2.5" fill="#D04A02"/>
+<text x="20" y="58" text-anchor="middle" font-size="8" fill="#999">Q2'25</text>
+<text x="80" y="58" text-anchor="middle" font-size="8" fill="#999">Q3'25</text>
+<text x="140" y="58" text-anchor="middle" font-size="8" fill="#999">Q4'25</text>
+<text x="200" y="58" text-anchor="middle" font-size="8" fill="#999">Q1'26</text>
+<text x="260" y="58" text-anchor="middle" font-size="8" fill="#999">Q2'26</text>
+<text x="20" y="11.2" text-anchor="start" font-size="9" font-weight="700" fill="#D04A02">$5.29B</text>
+<text x="260" y="7.0" text-anchor="end" font-size="9" font-weight="700" fill="#D04A02">$5.36B</text>
+</svg>
+  <div style="font-size:10px;color:#888;margin-top:2px">Q1&#39;26 seasonal dip then recovery to Q2&#39;26 high on 5-quarter basis</div>
+</div>
+
+<div class="card">
+  <div class="card-title">5-Quarter Trend Data Summary</div>
+  <div class="card-body">
+    <table class="tbl">
+      <thead><tr><th>Quarter</th><th class="tbl-num">Net Rev ($B)</th><th class="tbl-num">GAAP EPS</th><th class="tbl-num">Smokeable Adj OCI</th></tr></thead>
+      <tbody>
+        <tr><td>Q2 2025</td><td class="tbl-num">$5.29</td><td class="tbl-num">$1.41</td><td class="tbl-num">~$2.93B</td></tr>
+        <tr><td>Q3 2025</td><td class="tbl-num">$5.25</td><td class="tbl-num">$1.41</td><td class="tbl-num">~$2.98B</td></tr>
+        <tr><td>Q4 2025</td><td class="tbl-num">$5.08</td><td class="tbl-num">$0.66</td><td class="tbl-num">~$2.87B <span class="verify">VERIFY</span></td></tr>
+        <tr><td>Q1 2026</td><td class="tbl-num">$4.76</td><td class="tbl-num">$1.30</td><td class="tbl-num">~$2.70B <span class="verify">VERIFY</span></td></tr>
+        <tr style="background:var(--muted)"><td><strong>Q2 2026</strong></td><td class="tbl-num"><strong>$5.36</strong></td><td class="tbl-num"><strong>$1.37</strong></td><td class="tbl-num"><strong>$3.00B</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="hl hl-success">
+  <strong>&#10003; Trend Reading:</strong> Revenue dipped in Q1&#39;26 (seasonal) then recovered strongly to $5.36B in Q2&#39;26 &#8212; highest on the 5-quarter basis. Smokeable OCI recovered to $3.0B in Q2&#39;26 after a soft Q1&#39;26, confirming pricing power. GAAP EPS distortion in Q4&#39;25 ($0.66) reflects special items &#8212; adjusted EPS trajectory is smoother and growing +4.9% H1. Q2&#39;26 execution supports guidance narrowing.
+</div>
+</template>
+
+<!-- END TEMPLATES -->
+
+<script>
+var state = {tab: 'overview', rendered: {}};
+function getTemplate(tab) {
+  var tmpl = document.getElementById('tmpl-' + tab);
+  return tmpl ? tmpl.innerHTML : null;
+}
+function renderTab(tab) {
+  if (state.rendered[tab]) return;
+  var placeholder = document.getElementById(tab);
+  if (!placeholder) return;
+  var html = getTemplate(tab);
+  if (html) { placeholder.innerHTML = html; state.rendered[tab] = true; }
+}
+function selectTab(tab, btn) {
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.tab-content').forEach(function(t) { t.classList.remove('active'); });
+  renderTab(tab);
+  var el = document.getElementById(tab);
+  if (el) el.classList.add('active');
+  if (btn) btn.classList.add('active');
+  state.tab = tab;
+}
+document.addEventListener('DOMContentLoaded', function() { renderTab('overview'); });
+</script>
+</body>
+</html>

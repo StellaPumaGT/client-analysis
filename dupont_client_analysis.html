@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>DuPont de Nemours — Client Analysis | PwC</title>
+<style>
+:root{--ink:#2D2D2D;--bg:#F5F1EE;--surface:#fff;--border:#E4DDD7;--muted:#F0EAE5;
+--blue:#D04A02;--blue-bg:#FCEDE4;--amber:#EB8C00;--amber-bg:#FDF0DC;
+--red:#E0301E;--red-bg:#FCEAE7;--green:#175D5D;--green-bg:#E3EFEF}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.5;min-height:100vh;padding-bottom:2rem}
+.top-bar{background:var(--ink);color:#fff;padding:.625rem 1rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;position:sticky;top:0;z-index:100;font-size:13px}
+@media(min-width:480px){.top-bar{padding:.75rem 1.25rem}}
+.top-bar-logo{font-weight:700;font-size:13px;letter-spacing:.01em}
+.top-bar-sub{font-size:11px;opacity:.7}
+.co-panel{display:none}.co-panel.active{display:block}
+.panel-inner{max-width:900px;margin:0 auto;padding:.875rem}
+@media(min-width:480px){.panel-inner{padding:1rem 1.25rem}}
+@media(min-width:900px){.panel-inner{padding:1.25rem 2rem}}
+.panel-hero{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.125rem;margin-bottom:.875rem}
+@media(min-width:480px){.panel-hero{padding:1.375rem}}
+.hero-eyebrow{font-size:11px;color:var(--blue);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.375rem}
+.hero-name{font-size:20px;font-weight:800;letter-spacing:-.01em;margin-bottom:.5rem;line-height:1.2}
+@media(min-width:480px){.hero-name{font-size:24px}}
+.hero-desc{font-size:13px;color:#555;line-height:1.65;margin-bottom:.75rem}
+.hero-meta{display:flex;flex-wrap:wrap;gap:.375rem}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 8px;border-radius:5px;font-weight:600;border:1px solid transparent}
+.badge-green{background:var(--green-bg);color:var(--green);border-color:var(--green)}
+.badge-blue{background:var(--blue-bg);color:var(--blue);border-color:var(--blue)}
+.badge-gray{background:var(--muted);color:#666;border-color:var(--border)}
+.tab-row{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:.875rem;padding:.5rem;background:var(--muted);border-radius:8px}
+.tab-btn{font-size:11px;font-weight:600;padding:.375rem .625rem;border:none;background:transparent;color:#666;border-radius:5px;cursor:pointer;white-space:nowrap;transition:background .15s,color .15s}
+.tab-btn:hover{background:var(--surface);color:var(--ink)}
+.tab-btn.active{background:var(--ink);color:#fff}
+.tab-content{display:none}.tab-content.active{display:block}
+.metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:.5rem;margin-bottom:.875rem}
+@media(min-width:480px){.metrics{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:700px){.metrics{grid-template-columns:repeat(auto-fit,minmax(120px,1fr))}}
+.metric{background:var(--muted);border-radius:8px;padding:.75rem}
+@media(min-width:480px){.metric{padding:.875rem}}
+.metric-label{font-size:11px;color:#666;margin-bottom:3px}
+.metric-value{font-size:16px;font-weight:700}
+@media(min-width:480px){.metric-value{font-size:18px}}
+.metric-sub{font-size:11px;color:#888;margin-top:2px}
+.metric-up{font-size:11px;color:var(--green);margin-top:2px;font-weight:500}
+.metric-down{font-size:11px;color:var(--red);margin-top:2px;font-weight:500}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem;margin-bottom:.875rem}
+@media(min-width:480px){.card{padding:1.125rem}}
+.card-title{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.04em}
+@media(min-width:480px){.card-title{font-size:13px}}
+.card-body{font-size:13px;color:#555;line-height:1.65}
+.card-body p{margin-bottom:.5rem}.card-body p:last-child{margin-bottom:0}
+.card-body ul{margin:.25rem 0 .25rem 1.1rem}
+.card-body li{margin-bottom:.25rem}
+.two-col{display:grid;grid-template-columns:1fr;gap:.875rem;margin-bottom:.875rem}
+@media(min-width:600px){.two-col{grid-template-columns:1fr 1fr}}
+.sh{font-size:12px;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:.04em;margin:1.25rem 0 .5rem}
+@media(min-width:480px){.sh{font-size:13px;margin:.875rem 0 .5rem}}
+.hl{border-left:3px solid;padding:.75rem 1rem;margin-bottom:.875rem;font-size:13px;line-height:1.6;border-radius:0 6px 6px 0}
+.hl-info{border-color:var(--blue);background:var(--blue-bg);color:var(--blue)}
+.hl-warn{border-color:var(--amber);background:var(--amber-bg);color:var(--amber)}
+.hl-success{border-color:var(--green);background:var(--green-bg);color:var(--green)}
+.hl-danger{border-color:var(--red);background:var(--red-bg);color:var(--red)}
+.tag{display:inline-block;font-size:11px;padding:2px 7px;border-radius:4px;margin:2px;font-weight:500}
+.t-high{background:var(--red-bg);color:var(--red)}
+.t-med{background:var(--amber-bg);color:var(--amber)}
+.t-info{background:var(--blue-bg);color:var(--blue)}
+.t-ok{background:var(--green-bg);color:var(--green)}
+.t-warn{background:var(--amber-bg);color:var(--amber)}
+.t-danger{background:var(--red-bg);color:var(--red)}
+.seg-bar{margin-bottom:.6rem}
+.seg-lbl{display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;color:#555;gap:8px;flex-wrap:wrap}
+@media(min-width:480px){.seg-lbl{flex-wrap:nowrap}}
+.seg-track{height:6px;background:#e8e6de;border-radius:4px;overflow:hidden}
+.seg-fill{height:100%;border-radius:4px}
+.risk-row{display:flex;gap:10px;padding:.75rem 0;border-bottom:1px solid #e8e6de;align-items:flex-start}
+.risk-row:last-child{border-bottom:none}
+.risk-ic{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px}
+.ri-h{background:var(--red-bg);color:var(--red)}
+.ri-m{background:var(--amber-bg);color:var(--amber)}
+.risk-n{font-size:13px;font-weight:700;margin-bottom:2px}
+.risk-d{font-size:12px;color:#555;line-height:1.5}
+.pwc{display:inline-flex;align-items:center;gap:4px;font-size:11px;background:#f1efe8;border:1px solid var(--border);border-radius:4px;padding:2px 7px;color:#666;margin-top:6px;font-style:italic}
+.tbl{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:.875rem}
+.tbl th{text-align:left;font-size:11px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.04em;padding:.5rem .625rem;border-bottom:2px solid var(--border);background:var(--muted)}
+.tbl td{padding:.5rem .625rem;border-bottom:1px solid #e8e6de;vertical-align:top}
+.tbl tr:last-child td{border-bottom:none}
+.tbl-num{text-align:right;font-variant-numeric:tabular-nums;font-size:12px}
+.svg-wrap{overflow-x:auto;margin-bottom:.875rem}
+.timeline-item{display:flex;gap:12px;padding:.625rem 0;border-bottom:1px solid #e8e6de;align-items:flex-start}
+.timeline-item:last-child{border-bottom:none}
+.tl-year{font-size:11px;font-weight:700;color:var(--blue);min-width:42px;padding-top:2px;flex-shrink:0}
+.tl-body{font-size:13px;color:#555;line-height:1.5}
+.tl-title{font-weight:700;color:var(--ink);font-size:13px;margin-bottom:2px}
+.chart-title{font-size:11px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.25rem}
+.chart-labels{display:flex;justify-content:space-between;padding:0 20px;font-size:10px;color:#888;margin-top:2px}
+.verify{background:#fff3cd;color:#856404;font-size:10px;padding:1px 5px;border-radius:3px;font-weight:600;margin-left:4px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <div>
+    <div class="top-bar-logo">&#9658; DuPont de Nemours &#8212; Client Analysis</div>
+    <div class="top-bar-sub">PwC Lead Engagement Partner Preparation &middot; September 2026</div>
+  </div>
+</div>
+
+<div class="co-panel active" id="co-dd">
+  <div class="panel-inner">
+
+    <div class="panel-hero">
+      <div class="hero-eyebrow">Specialty Materials &amp; Industrials &middot; NYSE: DD</div>
+      <div class="hero-name">DuPont de Nemours, Inc.</div>
+      <div class="hero-desc">A 224-year-old science-driven materials company completing its most dramatic restructuring in a century. The Nov&nbsp;2025 spin-off of Qnity Electronics and the Apr&nbsp;2026 sale of Kevlar/Nomex to Arclin stripped away ~$6B in legacy revenue, leaving a focused two-segment industrial business&#8212;Healthcare &amp; Water Technologies and Diversified Industrials&#8212;targeting $7.2B in 2026 revenue with industry-leading free cash flow conversion and a fresh GICS reclassification to Industrials.</div>
+      <div class="hero-meta">
+        <span class="badge badge-green">&#10003; Q2 2026 results loaded</span>
+        <span class="badge badge-blue">NYSE: DD</span>
+        <span class="badge badge-gray">Auditor: PricewaterhouseCoopers LLP</span>
+      </div>
+    </div>
+
+    <div class="tab-row">
+      <button class="tab-btn active" data-tab="overview" onclick="selectTab('overview',this)">Overview</button>
+      <button class="tab-btn" data-tab="investor" onclick="selectTab('investor',this)">Investor Perspective</button>
+      <button class="tab-btn" data-tab="cfo" onclick="selectTab('cfo',this)">CFO Agenda</button>
+      <button class="tab-btn" data-tab="risks" onclick="selectTab('risks',this)">Risks &amp; Controls</button>
+      <button class="tab-btn" data-tab="valuation" onclick="selectTab('valuation',this)">Valuation</button>
+      <button class="tab-btn" data-tab="shareholder" onclick="selectTab('shareholder',this)">Shareholder Allocation</button>
+      <button class="tab-btn" data-tab="products" onclick="selectTab('products',this)">Products &amp; Brands</button>
+      <button class="tab-btn" data-tab="ma" onclick="selectTab('ma',this)">M&amp;A History</button>
+      <button class="tab-btn" data-tab="ai" onclick="selectTab('ai',this)">AI Transformation</button>
+      <button class="tab-btn" data-tab="activist" onclick="selectTab('activist',this)">Activist Lens</button>
+      <button class="tab-btn" data-tab="journey" onclick="selectTab('journey',this)">Purchase Journey</button>
+      <button class="tab-btn" data-tab="sotp" onclick="selectTab('sotp',this)">Sum of Parts</button>
+      <button class="tab-btn" data-tab="earnings" onclick="selectTab('earnings',this)">Earnings Call</button>
+    </div>
+
+    <div id="overview" class="tab-content active"></div>
+    <div id="investor" class="tab-content"></div>
+    <div id="cfo" class="tab-content"></div>
+    <div id="risks" class="tab-content"></div>
+    <div id="valuation" class="tab-content"></div>
+    <div id="shareholder" class="tab-content"></div>
+    <div id="products" class="tab-content"></div>
+    <div id="ma" class="tab-content"></div>
+    <div id="ai" class="tab-content"></div>
+    <div id="activist" class="tab-content"></div>
+    <div id="journey" class="tab-content"></div>
+    <div id="sotp" class="tab-content"></div>
+    <div id="earnings" class="tab-content"></div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ TEMPLATES -->
+
+<template id="tmpl-overview">
+<div class="metrics">
+  <div class="metric"><div class="metric-label">Revenue TTM</div><div class="metric-value">$7.0B</div><div class="metric-sub">Continuing ops basis</div></div>
+  <div class="metric"><div class="metric-label">Adj EBITDA</div><div class="metric-value">$1.76B</div><div class="metric-sub">FY 2026 guidance mid</div></div>
+  <div class="metric"><div class="metric-label">EBITDA Margin</div><div class="metric-value">24.6%</div><div class="metric-up">Q2 2026, +40bps YoY</div></div>
+  <div class="metric"><div class="metric-label">Net Debt</div><div class="metric-value">$1.4B</div><div class="metric-sub">Jun 2026 (vs $2.7B Dec '25)</div></div>
+  <div class="metric"><div class="metric-label">Shares Out.</div><div class="metric-value">~139M</div><div class="metric-sub">Post 1-for-3 reverse split</div></div>
+</div>
+
+<div class="two-col">
+  <div class="card">
+    <div class="card-title">Segment Overview</div>
+    <div class="card-body">
+      <p><strong>Healthcare &amp; Water Technologies</strong> (47% of revenue, $3,233M FY 2025): sterile packaging, biopharma-grade materials, ion exchange resins, reverse osmosis &amp; ultrafiltration membranes. Higher-margin; 30.1% Q2 EBITDA margin.</p>
+      <p><strong>Diversified Industrials</strong> (53% of revenue, $3,616M FY 2025): building envelope, high-performance polymer parts, specialty lubricants, structural adhesives. Aerospace and EV materials are growth vectors; 22.1% Q2 EBITDA margin.</p>
+      <p>Combined Q2 2026 EBITDA: $448M at 24.6% margin. FY 2026 guidance $1.75&#8211;$1.77B EBITDA.</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Product Portfolio Anchors</div>
+    <div class="card-body">
+      <ul>
+        <li><strong>Tyvek</strong> &#8212; dual use (medical sterile wrap + housewrap)</li>
+        <li><strong>Filmtec</strong> &#8212; RO/NF membranes (~40% global share <span class="verify">VERIFY</span>)</li>
+        <li><strong>Liveo</strong> &#8212; pharma-grade silicones &amp; biopharma tubing</li>
+        <li><strong>Vespel</strong> &#8212; high-temp polymer parts; aerospace &amp; semiconductor</li>
+        <li><strong>Molykote</strong> &#8212; specialty lubricants; industrial &amp; EV</li>
+        <li><strong>Betaforce/Betaseal</strong> &#8212; EV battery structural adhesives</li>
+        <li><strong>Corian / Styrofoam</strong> &#8212; building &amp; surfaces</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="sh">Segment Revenue Mix (FY 2025 Continuing Ops)</div>
+<div class="seg-bar">
+  <div class="seg-lbl"><span>Healthcare &amp; Water Technologies</span><span>47% &mdash; $3,233M</span></div>
+  <div class="seg-track"><div class="seg-fill" style="width:47%;background:var(--blue)"></div></div>
+</div>
+<div class="seg-bar">
+  <div class="seg-lbl"><span>Diversified Industrials</span><span>53% &mdash; $3,616M</span></div>
+  <div class="seg-track"><div class="seg-fill" style="width:53%;background:var(--green)"></div></div>
+</div>
+
+<div class="hl hl-warn">
+  <strong>&#9888; Post-transformation Identity:</strong> DuPont has shed ~$6B in revenue over 18 months via the Qnity spin (Nov 2025) and Aramids sale (Apr 2026). The remaining portfolio is higher-margin and more defensible but substantially smaller, and the market is still pricing in a &#8220;show-me&#8221; story on sustained organic growth before awarding a full industrial-comps multiple.
+</div>
+
+<div class="card">
+  <div class="card-title">Key Corporate Facts</div>
+  <div class="card-body">
+    <table class="tbl">
+      <tr><td><strong>HQ</strong></td><td>Wilmington, Delaware</td><td><strong>Founded</strong></td><td>1802</td></tr>
+      <tr><td><strong>CEO</strong></td><td>Lori Koch</td><td><strong>CFO</strong></td><td>Antonella Franzen</td></tr>
+      <tr><td><strong>Exec Chairman</strong></td><td>Edward D. Breen</td><td><strong>Employees</strong></td><td>~15,000</td></tr>
+      <tr><td><strong>Sector</strong></td><td>Industrials (GICS, eff. Jul 31 2026)</td><td><strong>Prior Sector</strong></td><td>Materials / Specialty Chemicals</td></tr>
+      <tr><td><strong>Auditor</strong></td><td>PricewaterhouseCoopers LLP, Philadelphia</td><td><strong>Audit Opinion</strong></td><td>Feb 17, 2026 (FY 2025 10-K)</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="hl hl-info">
+  <strong>PwC Engagement Context:</strong> PricewaterhouseCoopers LLP (Philadelphia office) serves as DuPont&#39;s PCAOB-registered independent auditor. The FY 2025 audit opinion was signed Feb 17, 2026. The engagement spans two recently separated entities (Qnity Electronics and Aramids/Arclin) requiring discontinued operations carve-outs, plus ongoing PFAS contingency assessment and pension/OPEB review. Complexity is materially elevated relative to FY 2023.
+</div>
+</template>
+
+<template id="tmpl-investor">
+<div class="metrics">
+  <div class="metric"><div class="metric-label">Organic Growth</div><div class="metric-value">+4%</div><div class="metric-sub">Q2 2026 YoY</div></div>
+  <div class="metric"><div class="metric-label">Adj EPS (Q2)</div><div class="metric-value">$1.88</div><div class="metric-up">+48% vs Q2 2025 $1.27</div></div>
+  <div class="metric"><div class="metric-label">FY&#39;26E EPS</div><div class="metric-value">$7.24</div><div class="metric-sub">Guidance midpoint</div></div>
+  <div class="metric"><div class="metric-label">Dividend Yield</div><div class="metric-value">1.89%</div><div class="metric-sub">$2.40 annualized</div></div>
+  <div class="metric"><div class="metric-label">Market Cap</div><div class="metric-value">$17.7B</div><div class="metric-sub">At $127.11/sh, ~139M shares</div></div>
+</div>
+
+<div class="card">
+  <div class="card-title">Investment Thesis &#8212; Three Sub-Theses</div>
+  <div class="card-body">
+    <p><strong>1. Portfolio Simplification Unlocks Margin:</strong> Post-transformation, DuPont operates at 24.6% EBITDA margins (Q2 2026) versus ~20% blended pre-Qnity/Aramids. The residual portfolio&#8212;healthcare materials, water technology, building products, and high-performance industrials&#8212;carries structurally higher margins with less commodity exposure.</p>
+    <p><strong>2. Healthcare and Water Are Secular Growth Vectors:</strong> Biopharma packaging demand tracks biologics approval pipelines. Semiconductor water treatment (ultrapure water) is driven by fab expansion. Direct lithium extraction and industrial water filtration address long-dated global infrastructure needs. Both subsegments carry premium multiple potential (Pall/Danaher comps).</p>
+    <p><strong>3. Capital Return Acceleration:</strong> The $2B buyback authorization (Nov 2025) and $250M Q3 2026 intent, alongside a $0.60/quarter dividend, all at &lt;18x forward earnings, represent meaningful capital returns per share at a compressed share count (~139M post-split). FCF conversion of 127% in H1 2026 provides the cash engine.</p>
+  </div>
+</div>
+
+<div class="two-col">
+  <div class="card">
+    <div class="card-title">Capital Allocation Priorities</div>
+    <div class="card-body">
+      <p><strong>1. Share Buyback (primary)</strong> &#8212; $2B authorization; $250M in Q3 2026 alone. At 139M shares and ~$127 stock price, buybacks are accretive to EPS at current multiples.</p>
+      <p><strong>2. Dividend</strong> &#8212; $0.60/quarter ($2.40 annualized). Post-split equivalent; yield ~1.89%. Sustainable at ~33% adj EPS payout ratio.</p>
+      <p><strong>3. Debt Reduction</strong> &#8212; Net debt fell from $2.7B (Dec 2025) to $1.4B (Jun 2026) on Aramids divestiture proceeds. Target leverage &lt;1.5x Net Debt/EBITDA.</p>
+      <p><strong>4. M&amp;A</strong> &#8212; Small bolt-on tuck-ins most likely; no large transformational deal expected near-term. Rogers Corp ($5.2B, blocked) established discipline on acquisition discipline.</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Investor Risk Watch</div>
+    <div class="card-body">
+      <ul>
+        <li><strong>PFAS overhang</strong> &#8212; perennial bear thesis; tri-party indemnification with Chemours/Corteva; natural resource damages unresolved</li>
+        <li><strong>TSA drag</strong> &#8212; transition service agreements for Qnity (~2027) and Arclin (~2028) create cost and distraction</li>
+        <li><strong>GICS reclassification</strong> &#8212; index-driven selling; materials ETF outflows, industrials ETF inflows; dislocation may persist 2&#8211;3 quarters</li>
+        <li><strong>China exposure</strong> &#8212; semiconductor water markets; export control risk; IEEPA tariff uncertainty flagged in 10-K</li>
+        <li><strong>Show-me story</strong> &#8212; market wants 2&#8211;3 more quarters of organic growth execution before re-rating</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="hl hl-success">
+  <strong>&#10003; Analyst Consensus: Buy</strong> &#8212; 17 analysts; average target $170 (+34% from $127.11); range $156&#8211;$186. Bullish drivers: margin expansion, capital returns, healthcare/water premium potential. Key bear: Morgan Stanley (Hold, $156) on TSA drag and PFAS uncertainty. BMO Capital highest at $186.
+</div>
+</template>
+
+<template id="tmpl-cfo">
+<div class="metrics">
+  <div class="metric"><div class="metric-label">Op Cash Flow FY&#39;25</div><div class="metric-value">$1,412M</div><div class="metric-sub">Continuing ops</div></div>
+  <div class="metric"><div class="metric-label">FCF FY&#39;25</div><div class="metric-value">$1,079M</div><div class="metric-sub">After capex ~$333M</div></div>
+  <div class="metric"><div class="metric-label">FCF Conversion</div><div class="metric-value">127%</div><div class="metric-sub">H1 2026, transaction-adj.</div></div>
+  <div class="metric"><div class="metric-label">Net Debt/EBITDA</div><div class="metric-value">~1.6x</div><div class="metric-sub">Dec 2025; ~0.8x Jun&#39;26 est.</div></div>
+  <div class="metric"><div class="metric-label">CapEx/Sales</div><div class="metric-value">~4.8%</div><div class="metric-sub">FY 2025 estimate</div></div>
+</div>
+
+<div class="card">
+  <div class="card-title">CFO Antonella Franzen &#8212; Priority Agenda</div>
+  <div class="card-body">
+    <p><strong>1. TSA Wind-Down Cost Management:</strong> Transition service agreements with Qnity Electronics (through ~2027) and Arclin/Aramids (through ~2028) create embedded overhead. Franzen has signaled active management of TSA costs, with a goal of exiting as early as operationally feasible. Costs remain a headwind to reported margins during the wind-down period.</p>
+    <p><strong>2. Future Reimbursable Indirect Costs:</strong> $8M was excluded from Q2 2026 FCF on a transaction-adjusted basis as &#8220;future reimbursable indirect costs.&#8221; The timing and recognition of these reimbursements is a key income statement and cash flow watch item for audit.</p>
+    <p><strong>3. Reverse Stock Split Bookkeeping:</strong> The 1-for-3 reverse split (effective June 24, 2026) requires retroactive restatement of all per-share and share count data across prior periods in financial statements and SEC filings. Consistency of restatement is an ICFR item.</p>
+    <p><strong>4. Pension/OPEB Non-Cash Credits:</strong> Pension corridor credits and expected return on assets flow through continuing ops P&amp;L as non-cash items. With $432M pension/OPEB liability remaining, ASC 715 assumptions (discount rate, expected return) are material audit estimates.</p>
+    <p><strong>5. Aramids Note Receivable and Equity Stake:</strong> The Arclin transaction included ~$300M note receivable + ~$325M equity stake in Arclin (TJC LP affiliate). These non-cash components require fair value measurement at inception and at each reporting date; illiquid/non-public instruments.</p>
+  </div>
+</div>
+
+<div class="hl hl-info">
+  <strong>PwC Accounting Standards Focus:</strong>
+  <span class="pwc">ASC 205-20: Disc. Ops</span>
+  <span class="pwc">ASC 450: PFAS Contingency</span>
+  <span class="pwc">ASC 715: Pension/OPEB</span>
+  <span class="pwc">ASC 350: Goodwill &amp; Intangibles (~$275M/yr amort.)</span>
+  <span class="pwc">ASC 740: Pillar Two / Deferred Tax</span>
+  <span class="pwc">ASC 606: Revenue Recognition</span>
+  <span class="pwc">ASC 820: Fair Value (Aramids note + equity)</span>
+</div>
+
+<div class="hl hl-warn">
+  <strong>&#9888; Partner Talking Points for CFO Meeting:</strong>
+  <ol style="margin:.5rem 0 0 1.2rem">
+    <li style="margin-bottom:.3rem"><strong>Significant items definition</strong> &#8212; which charges are excluded from Adjusted EPS and EBITDA, and are the exclusions consistent with prior periods and peer practice? (Key FY 2025 net loss of -$779M vs +$703M FY 2024.)</li>
+    <li style="margin-bottom:.3rem"><strong>Future Reimbursable Indirect Costs</strong> &#8212; what is the contractual basis, expected timing, and appropriate recognition in the income statement vs. balance sheet?</li>
+    <li style="margin-bottom:.3rem"><strong>PFAS shared liability</strong> &#8212; mechanics of cost-sharing with Chemours/Corteva; what portion is probable and estimable? Natural resource damages update?</li>
+    <li style="margin-bottom:.3rem"><strong>Aramids note receivable ($300M) and equity interest ($325M in Arclin)</strong> &#8212; valuation methodology, key assumptions, and Level 3 disclosures under ASC 820.</li>
+    <li><strong>Pension corridor vs. PCAOB expectations</strong> &#8212; with recent rate moves and a $432M net liability, what is the discount rate assumption and sensitivity analysis?</li>
+  </ol>
+</div>
+
+<div class="card">
+  <div class="card-title">Quarterly Financial Summary</div>
+  <div class="card-body">
+    <table class="tbl">
+      <thead><tr><th>Period</th><th class="tbl-num">Revenue</th><th class="tbl-num">Net Income</th><th class="tbl-num">Adj EPS</th><th class="tbl-num">FCF</th></tr></thead>
+      <tbody>
+        <tr><td>Q2 2026</td><td class="tbl-num">$1,819M</td><td class="tbl-num">$191M</td><td class="tbl-num">$1.88</td><td class="tbl-num">$326M (TA)</td></tr>
+        <tr><td>Q1 2026</td><td class="tbl-num">$1,681M</td><td class="tbl-num">$161M</td><td class="tbl-num">$1.18</td><td class="tbl-num">$51M</td></tr>
+        <tr><td>Q4 2025</td><td class="tbl-num">$1,693M</td><td class="tbl-num">-$126M</td><td class="tbl-num"><span class="verify">VERIFY EPS</span></td><td class="tbl-num">$282M</td></tr>
+        <tr><td>Q3 2025</td><td class="tbl-num">$1,797M</td><td class="tbl-num">-$123M</td><td class="tbl-num"><span class="verify">VERIFY EPS</span></td><td class="tbl-num">$590M</td></tr>
+        <tr><td>Q2 2025</td><td class="tbl-num">$1,749M</td><td class="tbl-num">$24M</td><td class="tbl-num">$1.27</td><td class="tbl-num">$107M</td></tr>
+        <tr style="background:var(--muted)"><td><strong>FY 2025</strong></td><td class="tbl-num"><strong>$6,849M</strong></td><td class="tbl-num"><strong>-$779M</strong></td><td class="tbl-num"><span class="verify">VERIFY EPS</span></td><td class="tbl-num"><strong>$1,079M</strong></td></tr>
+        <tr><td>FY 2024</td><td class="tbl-num">$6,719M</td><td class="tbl-num">$703M</td><td class="tbl-num">$5.03</td><td class="tbl-num">$1,562M</td></tr>
+        <tr><td>FY 2023</td><td class="tbl-num">$6,614M</td><td class="tbl-num">$423M</td><td class="tbl-num"><span class="verify">VERIFY EPS</span></td><td class="tbl-num">$1,593M</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</template>
+
+<template id="tmpl-risks">
+<div class="card">
+  <div class="card-title">Risk Assessment Summary</div>
+  <div class="card-body">
+    <div class="risk-row">
+      <div class="risk-ic ri-h">&#9888;</div>
+      <div>
+        <div class="risk-n">PFAS Legacy Liability <span class="tag t-high">High</span></div>
+        <div class="risk-d">Tri-party indemnification with Chemours and Corteva. Scope of future eligible PFAS costs is undefined; natural resource damages still live. 2023 criminal negligence plea (methyl mercaptan, $12M fine) adds conduct history. PFOA/C8 contamination (Parkersburg, WV; 2017 $671M settlement mostly via Chemours). Liability could grow materially with new PFAS regulations.</div>
+        <div><span class="tag t-info">ASC 450</span><span class="tag t-info">IAS 37</span><span class="tag t-warn">Tri-party Indemnification</span></div>
+      </div>
+    </div>
+    <div class="risk-row">
+      <div class="risk-ic ri-h">&#9888;</div>
+      <div>
+        <div class="risk-n">Discontinued Ops Classification &amp; PPA <span class="tag t-high">High</span></div>
+        <div class="risk-d">Both Qnity Electronics (Nov 2025 spin) and Aramids (Apr 2026 sale) classified as discontinued operations. Prior period restatement required for all comparative financials. PPA intangibles from historic acquisitions still amortizing at ~$275M/year. Carve-out balance sheets, intercompany eliminations, and TSA cost allocations require careful audit scrutiny.</div>
+        <div><span class="tag t-info">ASC 205-20</span><span class="tag t-info">ASC 805</span><span class="tag t-warn">Prior Period Restatement</span></div>
+      </div>
+    </div>
+    <div class="risk-row">
+      <div class="risk-ic ri-m">&#9888;</div>
+      <div>
+        <div class="risk-n">Goodwill Impairment Risk <span class="tag t-med">Medium</span></div>
+        <div class="risk-d">Post-transformation, the revenue base is substantially reduced. Goodwill of <strong>$7.92B</strong> (Dec 2025, 10-K confirmed; down to $7.84B Jun 2026). Macro softness in either Healthcare or Industrials segment could trigger interim impairment testing. Recent GICS reclassification may affect peer group comparables used in DCF/market approach.</div>
+        <div><span class="tag t-info">ASC 350</span><span class="tag t-info">IAS 36</span></div>
+      </div>
+    </div>
+    <div class="risk-row">
+      <div class="risk-ic ri-m">&#9888;</div>
+      <div>
+        <div class="risk-n">ITGC / Controls Post-Separation <span class="tag t-med">Medium</span></div>
+        <div class="risk-d">Two major separations in 12 months. Shared IT systems with Qnity under TSA (through ~2027) and Arclin (through ~2028). Control environment is in flux; ERP instances may be shared; user access provisioning, change management, and SOC 1 reliance become complex in a TSA environment. AI tools in commercial workflows add new ITGC surface area.</div>
+        <div><span class="tag t-info">AS 2201 (ICFR)</span><span class="tag t-warn">SOC 1 Reliance</span></div>
+      </div>
+    </div>
+    <div class="risk-row">
+      <div class="risk-ic ri-m">&#9888;</div>
+      <div>
+        <div class="risk-n">China / Tariff Exposure <span class="tag t-med">Medium</span></div>
+        <div class="risk-d">Semiconductor water markets (Filmtec, Inge) are exposed to China export control and technology restrictions. IEEPA tariff invalidation risk cited in 10-K risk factors. Asia-Pacific revenue estimated ~15&#8211;20% of total <span class="verify">VERIFY %</span>. Trade policy uncertainty is a top-of-mind risk for industrial companies with Asian manufacturing or sales.</div>
+        <div><span class="tag t-info">ASC 450</span><span class="tag t-warn">Trade Policy Risk</span></div>
+      </div>
+    </div>
+    <div class="risk-row">
+      <div class="risk-ic ri-m">&#9888;</div>
+      <div>
+        <div class="risk-n">Valuation Pressure / Multiple Compression <span class="tag t-med">Medium</span></div>
+        <div class="risk-d">Stock trades at ~17.5x forward earnings with $7.24 EPS guidance mid. Any guidance miss risks meaningful derating in a recently reclassified industrial. GICS reclassification creates index-driven technical selling from materials ETFs. Morgan Stanley Hold at $156 reflects downside scenario if organic growth disappoints.</div>
+        <div><span class="tag t-warn">Forward P/E ~17.5x</span><span class="tag t-warn">GICS Reclassification</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sh">Risk Radar &#8212; Audit Priority Map (7 Axes, Score 1&#8211;5)</div>
+<div style="text-align:center;margin-bottom:.875rem">
+  <svg viewBox="0 0 300 285" style="width:100%;max-width:300px;display:inline-block">
+    <!-- Background rings -->
+    <polygon points="150,121 164.85,128.15 168.52,144.23 158.24,157.12 141.76,157.12 131.48,144.23 135.15,128.15" fill="#f5f1ee" stroke="#d8d0c8" stroke-width="0.6"/>
+    <polygon points="150,102 179.71,116.31 187.05,148.46 166.49,174.24 133.51,174.24 112.95,148.46 120.29,116.31" fill="none" stroke="#d8d0c8" stroke-width="0.6"/>
+    <polygon points="150,83 194.56,104.46 205.57,152.68 174.73,191.36 125.27,191.36 94.43,152.68 105.44,104.46" fill="none" stroke="#d8d0c8" stroke-width="0.6"/>
+    <polygon points="150,64 209.42,92.61 224.09,156.91 182.98,208.47 117.02,208.47 75.91,156.91 90.58,92.61" fill="none" stroke="#d8d0c8" stroke-width="0.6"/>
+    <polygon points="150,45 224.27,80.77 242.62,161.14 191.22,225.59 108.78,225.59 57.38,161.14 75.73,80.77" fill="none" stroke="#c8c0b8" stroke-width="0.8"/>
+    <!-- Spokes -->
+    <line x1="150" y1="140" x2="150" y2="45" stroke="#c8c0b8" stroke-width="0.6"/>
+    <line x1="150" y1="140" x2="224.27" y2="80.77" stroke="#c8c0b8" stroke-width="0.6"/>
+    <line x1="150" y1="140" x2="242.62" y2="161.14" stroke="#c8c0b8" stroke-width="0.6"/>
+    <line x1="150" y1="140" x2="191.22" y2="225.59" stroke="#c8c0b8" stroke-width="0.6"/>
+    <line x1="150" y1="140" x2="108.78" y2="225.59" stroke="#c8c0b8" stroke-width="0.6"/>
+    <line x1="150" y1="140" x2="57.38" y2="161.14" stroke="#c8c0b8" stroke-width="0.6"/>
+    <line x1="150" y1="140" x2="75.73" y2="80.77" stroke="#c8c0b8" stroke-width="0.6"/>
+    <!-- Score polygon (scores 3,2,4,4,3,2,3) -->
+    <polygon points="150,83 179.71,116.31 224.09,156.91 182.98,208.47 125.27,191.36 112.95,148.46 105.44,104.46" fill="#D04A02" fill-opacity="0.18" stroke="#D04A02" stroke-width="1.8" stroke-linejoin="round"/>
+    <!-- Score dots -->
+    <circle cx="150" cy="83" r="3.5" fill="#D04A02"/>
+    <circle cx="179.71" cy="116.31" r="3.5" fill="#D04A02"/>
+    <circle cx="224.09" cy="156.91" r="3.5" fill="#D04A02"/>
+    <circle cx="182.98" cy="208.47" r="3.5" fill="#D04A02"/>
+    <circle cx="125.27" cy="191.36" r="3.5" fill="#D04A02"/>
+    <circle cx="112.95" cy="148.46" r="3.5" fill="#D04A02"/>
+    <circle cx="105.44" cy="104.46" r="3.5" fill="#D04A02"/>
+    <!-- Axis labels -->
+    <text x="150" y="27" text-anchor="middle" font-size="7" fill="#2D2D2D" font-weight="600">Goodwill/</text>
+    <text x="150" y="35" text-anchor="middle" font-size="7" fill="#2D2D2D" font-weight="600">Impairment</text>
+    <text x="150" y="39" text-anchor="middle" font-size="6.5" fill="#888">(3)</text>
+    <text x="237" y="69" text-anchor="start" font-size="7" fill="#2D2D2D" font-weight="600">Rev.</text>
+    <text x="237" y="77" text-anchor="start" font-size="7" fill="#2D2D2D" font-weight="600">Recognition</text>
+    <text x="237" y="84" text-anchor="start" font-size="6.5" fill="#888">(2)</text>
+    <text x="255" y="158" text-anchor="start" font-size="7" fill="#2D2D2D" font-weight="600">Litigation/</text>
+    <text x="255" y="166" text-anchor="start" font-size="7" fill="#2D2D2D" font-weight="600">PFAS</text>
+    <text x="255" y="174" text-anchor="start" font-size="6.5" fill="#888">(4)</text>
+    <text x="199" y="240" text-anchor="start" font-size="7" fill="#2D2D2D" font-weight="600">Disc. Ops/</text>
+    <text x="199" y="248" text-anchor="start" font-size="7" fill="#2D2D2D" font-weight="600">PPA</text>
+    <text x="199" y="256" text-anchor="start" font-size="6.5" fill="#888">(4)</text>
+    <text x="101" y="240" text-anchor="end" font-size="7" fill="#2D2D2D" font-weight="600">ITGC/</text>
+    <text x="101" y="248" text-anchor="end" font-size="7" fill="#2D2D2D" font-weight="600">Controls</text>
+    <text x="101" y="256" text-anchor="end" font-size="6.5" fill="#888">(3)</text>
+    <text x="40" y="158" text-anchor="end" font-size="7" fill="#2D2D2D" font-weight="600">Activist</text>
+    <text x="40" y="166" text-anchor="end" font-size="7" fill="#2D2D2D" font-weight="600">Vuln.</text>
+    <text x="40" y="174" text-anchor="end" font-size="6.5" fill="#888">(2)</text>
+    <text x="63" y="69" text-anchor="end" font-size="7" fill="#2D2D2D" font-weight="600">Valuation</text>
+    <text x="63" y="77" text-anchor="end" font-size="7" fill="#2D2D2D" font-weight="600">Pressure</text>
+    <text x="63" y="84" text-anchor="end" font-size="6.5" fill="#888">(3)</text>
+    <!-- Scale labels -->
+    <text x="152" y="121" font-size="5.5" fill="#aaa">1</text>
+    <text x="152" y="102" font-size="5.5" fill="#aaa">2</text>
+    <text x="152" y="83" font-size="5.5" fill="#aaa">3</text>
+    <text x="152" y="64" font-size="5.5" fill="#aaa">4</text>
+    <text x="152" y="45" font-size="5.5" fill="#aaa">5</text>
+  </svg>
+</div>
+
+<div class="hl hl-info">
+  <strong>Audit Planning Focus:</strong> Discontinued ops restatement accuracy (ASC 205-20); PFAS liability adequacy and probability assessment (ASC 450); intangible amortization schedules and goodwill impairment testing triggers (ASC 350); ITGC over shared services during TSA periods; Aramids note receivable and equity stake fair value (ASC 820); pension/OPEB actuarial assumptions (ASC 715).
+</div>
+</template>
+
+<template id="tmpl-valuation">
+<div class="metrics">
+  <div class="metric"><div class="metric-label">Stock Price</div><div class="metric-value">$127.11</div><div class="metric-sub">Sep 10, 2026</div></div>
+  <div class="metric"><div class="metric-label">Fwd P/E</div><div class="metric-value">~17.5x</div><div class="metric-sub">At $7.24 EPS guidance</div></div>
+  <div class="metric"><div class="metric-label">EV/EBITDA</div><div class="metric-value">~12x</div><div class="metric-sub"><span class="verify">VERIFY</span></div></div>
+  <div class="metric"><div class="metric-label">P/S (TTM)</div><div class="metric-value">~2.5x</div><div class="metric-sub">TTM revenue</div></div>
+  <div class="metric"><div class="metric-label">Analyst Target</div><div class="metric-value">$170</div><div class="metric-sub">Avg; +34% upside</div></div>
+</div>
+
+<div class="card">
+  <div class="card-title">Peer Multiple Comparison</div>
+  <div class="card-body">
+    <table class="tbl">
+      <thead><tr><th>Company</th><th class="tbl-num">Fwd P/E</th><th class="tbl-num">EV/EBITDA</th><th class="tbl-num">P/S</th><th>Sector</th></tr></thead>
+      <tbody>
+        <tr style="background:var(--blue-bg)"><td><strong>DuPont (DD)</strong></td><td class="tbl-num"><strong>~17.5x</strong></td><td class="tbl-num"><strong>~12x</strong> <span class="verify">V</span></td><td class="tbl-num"><strong>~2.5x</strong></td><td>Industrials (reclassified Jul&#39;26)</td></tr>
+        <tr><td>Eastman Chemical (EMN)</td><td class="tbl-num">~14x</td><td class="tbl-num">~9x</td><td class="tbl-num">~1.2x</td><td>Materials</td></tr>
+        <tr><td>Celanese (CE)</td><td class="tbl-num"><span class="verify">VERIFY</span></td><td class="tbl-num"><span class="verify">VERIFY</span></td><td class="tbl-num">~1.0x</td><td>Materials</td></tr>
+        <tr><td>Honeywell (HON)</td><td class="tbl-num">~20x</td><td class="tbl-num">~15x</td><td class="tbl-num">~2.8x</td><td>Industrials</td></tr>
+        <tr><td>3M (MMM)</td><td class="tbl-num">~15x</td><td class="tbl-num">~11x</td><td class="tbl-num">~2.1x</td><td>Industrials</td></tr>
+        <tr><td>Pall/Danaher (DHR)</td><td class="tbl-num">~22x</td><td class="tbl-num">~18x</td><td class="tbl-num">~3.5x</td><td>Life Sciences</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:11px;color:#888">Note: DuPont trades at a discount to diversified industrials (HON) but premium to pure-play specialty chemicals. Reclassification may prompt peer group reset.</p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Analyst Price Targets &#8212; Bull / Base / Bear</div>
+  <div class="card-body">
+    <table class="tbl">
+      <thead><tr><th>Firm / Analyst</th><th>Rating</th><th class="tbl-num">Target</th><th>Key Thesis</th></tr></thead>
+      <tbody>
+        <tr><td>BMO Capital / John McNulty</td><td><span class="tag t-ok">Buy</span></td><td class="tbl-num"><strong>$186</strong></td><td>Full industrial re-rating; healthcare premium</td></tr>
+        <tr><td>UBS / Joshua Spector</td><td><span class="tag t-ok">Buy</span></td><td class="tbl-num">$178</td><td>FCF acceleration; margin expansion visibility</td></tr>
+        <tr><td>RBC Capital / Arun Viswanathan</td><td><span class="tag t-ok">Buy</span></td><td class="tbl-num">$176</td><td>Secular water + biopharma growth</td></tr>
+        <tr><td>J.P. Morgan / Chigusa Katoku</td><td><span class="tag t-ok">Buy</span></td><td class="tbl-num">$172</td><td>Capital returns; simplification multiple unlock</td></tr>
+        <tr style="background:var(--blue-bg)"><td><strong>Consensus (17 analysts)</strong></td><td><span class="tag t-ok">Buy</span></td><td class="tbl-num"><strong>$170</strong></td><td>+34% upside from $127.11</td></tr>
+        <tr><td>Morgan Stanley / Vincent Andrews</td><td><span class="tag t-med">Hold</span></td><td class="tbl-num">$156</td><td>TSA drag; PFAS overhang; show-me organic growth</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="two-col">
+  <div class="card">
+    <div class="card-title">Bull Case ($186) &#8212; BMO</div>
+    <div class="card-body">
+      <p>Full Industrials re-rating to HON-like multiples; Healthcare &amp; Water commands 18&#8211;22x EBITDA (Pall/Danaher comps); execution on 4%+ organic growth sustains through 2027; PFAS resolved without material incremental cost. EPS $8.00+ in 2027E.</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Bear Case ($156) &#8212; Morgan Stanley</div>
+    <div class="card-body">
+      <p>TSA costs and complexity dampen FCF conversion; organic growth disappoints in China/semicon water; PFAS natural resource damages become material; GICS reclassification causes persistent multiple compression versus chemicals peers. EPS misses vs. $7.24 guidance.</p>
+    </div>
+  </div>
+</div>
+</template>
+
+<template id="tmpl-shareholder">
+<div class="metrics">
+  <div class="metric"><div class="metric-label">Market Cap</div><div class="metric-value">$17.7B</div><div class="metric-sub">At $127.11</div></div>
+  <div class="metric"><div class="metric-label">Inst. Ownership</div><div class="metric-value">73.96%</div><div class="metric-sub">630 buyers vs 503 sellers (LTM)</div></div>
+  <div class="metric"><div class="metric-label">Buyback Auth.</div><div class="metric-value">$2.0B</div><div class="metric-sub">Announced Nov 2025</div></div>
+  <div class="metric"><div class="metric-label">Q3 Repurchase</div><div class="metric-value">$250M</div><div class="metric-sub">Intent announced Aug 2026</div></div>
+  <div class="metric"><div class="metric-label">Dividend/Yr</div><div class="metric-value">$2.40</div><div class="metric-sub">$0.60/qtr; 1.89% yield</div></div>
+</div>
+
+<div class="card">
+  <div class="card-title">Dividend History (per share, pre-/post-split adjusted)</div>
+  <div class="card-body">
+    <table class="tbl">
+      <thead><tr><th>Year</th><th class="tbl-num">Annual Dividend</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>FY 2021</td><td class="tbl-num">$3.60</td><td>Post-DowDuPont split era</td></tr>
+        <tr><td>FY 2022</td><td class="tbl-num">$3.96</td><td>+10% increase</td></tr>
+        <tr><td>FY 2023</td><td class="tbl-num">$4.32</td><td>+9% increase</td></tr>
+        <tr><td>FY 2024</td><td class="tbl-num">$4.56</td><td>+6% increase</td></tr>
+        <tr><td>FY 2025</td><td class="tbl-num">$4.29</td><td>Reduced post-Qnity spin (Nov 2025)</td></tr>
+        <tr style="background:var(--blue-bg)"><td><strong>FY 2026E</strong></td><td class="tbl-num"><strong>$2.40</strong></td><td>$0.60/qtr post 1-for-3 reverse split; ~1.89% yield at $127.11</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:11px;color:#888">Note: FY 2025 reduction reflects Qnity Electronics spin-off. Post-split $0.60/quarter represents continuation of dividend policy on adjusted share count basis.</p>
+  </div>
+</div>
+
+<div class="two-col">
+  <div class="card">
+    <div class="card-title">Capital Return Priority</div>
+    <div class="card-body">
+      <p><strong>Priority 1: Buybacks</strong> &#8212; $2B authorization; $250M Q3 2026 intent. At current leverage (&lt;1.5x Net Debt/EBITDA post-Aramids), buybacks are the highest-return use of capital vs. current multiple.</p>
+      <p><strong>Priority 2: Dividend</strong> &#8212; Maintained at $0.60/qtr. ~33% adjusted EPS payout ratio; well-covered by FCF.</p>
+      <p><strong>Priority 3: Debt reduction</strong> &#8212; Net debt already reduced from $2.7B (Dec &#39;25) to $1.4B (Jun &#39;26) via Aramids proceeds. No further aggressive paydown expected.</p>
+      <p><strong>Priority 4: M&amp;A (selective)</strong> &#8212; Bolt-on tuck-ins possible; no large deal appetite near-term.</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Notable Institutional Holders</div>
+    <div class="card-body">
+      <table class="tbl">
+        <thead><tr><th>Institution</th><th class="tbl-num">Est. Stake</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>CalSTRS</td><td class="tbl-num"><span class="verify">VERIFY %</span></td><td>Large position per 13F</td></tr>
+          <tr><td>Wellington Mgmt Group</td><td class="tbl-num"><span class="verify">VERIFY %</span></td><td>Long-term holder</td></tr>
+          <tr><td>Aggregate Institutional</td><td class="tbl-num">73.96%</td><td>630 buyers vs 503 sellers (LTM)</td></tr>
+          <tr><td>Float / Retail</td><td class="tbl-num">~26%</td><td>Includes insider/strategic</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:11px;color:#888">13F holders: $16.42B aggregate inflows (LTM). Net buyer sentiment positive but moderating. No activist with confirmed live public thesis as of Sep 2026 <span class="verify">VERIFY 13D/13G</span>.</p>
+    </div>
+  </div>
+</div>
+
+<div class="hl hl-info">
+  <strong>Shareholder Returns Math:</strong> At ~139M shares and $127.11 price, the $2B buyback authorization represents ~11.3% of market cap. Combined with $2.40/share dividend ($333M annual), total potential return yield is ~13.2% of current market cap from programmatic capital return alone&#8212;a compelling pitch in an 18x PE industrial peer group.
+</div>
+</template>
+
+<template id="tmpl-products">
+<div class="sh">Healthcare &amp; Water Technologies (47% of Revenue, $3,233M FY 2025)</div>
+<div class="two-col">
+  <div class="card">
+    <div class="card-title">Healthcare Technologies</div>
+    <div class="card-body">
+      <p><strong>Tyvek Medical</strong> &#8212; sterile barrier packaging; market leader globally. Used for packaging surgical kits, devices, implants. Demand driven by MedTech procedure volumes and aging demographics. FDA-critical material; high switching costs.</p>
+      <p><strong>Tychem</strong> &#8212; chemical protective garments and HAZMAT suits. Used by industrial workers, first responders, military. Complements Tyvek materials science platform.</p>
+      <p><strong>Liveo</strong> &#8212; pharma-grade silicones, biopharma tubing, drug delivery materials. Critical in bioreactors, IV bags, peristaltic pumping. Growing with biologics and GLP-1 demand wave.</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Water Technologies</div>
+    <div class="card-body">
+      <p><strong>Filmtec</strong> &#8212; reverse osmosis (RO) and nanofiltration membranes. ~40% global RO membrane share <span class="verify">VERIFY</span>. End markets: municipal water, semiconductor ultrapure water, desalination, industrial process water. Critical for chip fab water recycling.</p>
+      <p><strong>Amberlite</strong> &#8212; ion exchange resins for pharmaceutical water purification, biotech, nuclear water treatment, and food &amp; beverage processing.</p>
+      <p><strong>Inge/Integratec</strong> &#8212; ultrafiltration (UF) hollow fiber modules. Pre-treatment for RO systems; municipal wastewater reuse; direct lithium extraction (DLE) applications.</p>
+    </div>
+  </div>
+</div>
+
+<div class="sh">Diversified Industrials (53% of Revenue, $3,616M FY 2025)</div>
+<div class="two-col">
+  <div class="card">
+    <div class="card-title">Building Technologies</div>
+    <div class="card-body">
+      <p><strong>Tyvek Housewrap</strong> &#8212; weather-resistive barrier for residential and commercial construction. Market leader in North America. Demand tied to housing starts; energy efficiency mandates drive adoption.</p>
+      <p><strong>Styrofoam</strong> &#8212; licensed brand; extruded polystyrene insulation board. Commercial and residential. Facing competitive pressure from mineral wool but strong in cold-climate markets.</p>
+      <p><strong>Corian</strong> &#8212; solid surface material for countertops, healthcare surfaces, hospitality. Value brand; lower growth but stable commercial/healthcare revenue base.</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Industrial Technologies</div>
+    <div class="card-body">
+      <p><strong>Vespel</strong> &#8212; ultra-high performance polyimide shapes and parts. Aerospace (turbine seals, bushings), semiconductor equipment, defense. Extremely high barrier to entry; pricing power. Low volume, high margin.</p>
+      <p><strong>Molykote</strong> &#8212; specialty lubricants and greases. Automotive (incl. EV drivetrains), industrial machinery, electronics assembly. High technical service content; sticky customer relationships.</p>
+      <p><strong>Betaforce / Betaseal</strong> &#8212; structural adhesives and glass bonding sealants for automotive and EV battery modules. Battery assembly adhesives growing &gt;15% CAGR <span class="verify">VERIFY CAGR</span>; EV exposure is a key growth catalyst.</p>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Total Addressable Market Highlights</div>
+  <div class="card-body">
+    <table class="tbl">
+      <thead><tr><th>Market</th><th class="tbl-num">TAM Est.</th><th>DuPont Position</th><th>Growth Driver</th></tr></thead>
+      <tbody>
+        <tr><td>Global Water Treatment</td><td class="tbl-num">~$400B</td><td>RO membranes, UF, ion exchange</td><td>Water scarcity, regulations, DLE</td></tr>
+        <tr><td>Biopharma Packaging</td><td class="tbl-num">~$20B</td><td>Tyvek Medical (market leader)</td><td>Biologics, GLP-1 demand</td></tr>
+        <tr><td>EV Battery Adhesives</td><td class="tbl-num">Growing fast</td><td>Betaforce/Betaseal</td><td>&gt;15% CAGR <span class="verify">VERIFY</span></td></tr>
+        <tr><td>Semiconductor UPW</td><td class="tbl-num">Expanding</td><td>Filmtec, Inge</td><td>Fab build-out globally</td></tr>
+        <tr><td>Medical Protective Suits</td><td class="tbl-num">Niche premium</td><td>Tychem</td><td>Industrial safety mandates</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</template>
+
+<template id="tmpl-ma">
+<div class="card">
+  <div class="card-title">M&amp;A / Transformation Timeline</div>
+  <div class="card-body">
+    <div class="timeline-item">
+      <div class="tl-year">2015</div>
+      <div>
+        <div class="tl-title">Chemours Spin-Off</div>
+        <div class="tl-body">DuPont spun off The Chemours Company, housing fluoroproducts, TiO2, and performance chemicals. Critically, substantial PFAS liability transferred to Chemours&#8212;but under a tri-party indemnification arrangement that leaves DuPont partially on the hook. Foundation of the ongoing PFAS contingency.</div>
+        <div><span class="tag t-info">PFAS Legacy</span><span class="tag t-warn">ASC 450 Ongoing</span></div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-year">2017&#8211;19</div>
+      <div>
+        <div class="tl-title">DowDuPont Merger &amp; Three-Way Split</div>
+        <div class="tl-body">DuPont merged with Dow Chemical to form DowDuPont, then separated into three independent companies: Dow (commodity materials), Corteva (agriculture), and DuPont (specialty). This created the current DuPont entity focused on specialty materials. Massive goodwill generation and PPA intangibles still on the balance sheet.</div>
+        <div><span class="tag t-info">ASC 805</span><span class="tag t-info">Goodwill</span></div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-year">2021</div>
+      <div>
+        <div class="tl-title">Rogers Corp Acquisition Attempt &#8212; Blocked</div>
+        <div class="tl-body">DuPont agreed to acquire Rogers Corp (advanced electronic materials) for ~$5.2B. China&#39;s SAMR blocked the deal on antitrust grounds. DuPont paid a $162.5M termination fee. The failed deal established discipline on future M&amp;A appetite and left DuPont with a $162.5M expense.</div>
+        <div><span class="tag t-warn">$162.5M Break Fee</span><span class="tag t-info">ASC 805</span></div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-year">2023</div>
+      <div>
+        <div class="tl-title">Celanese Acquired M&amp;M Segment</div>
+        <div class="tl-body">Celanese Corporation acquired DuPont&#39;s Mobility &amp; Materials (M&amp;M) segment&#8212;engineering polymers including Nylon, Delrin, and Sorona. This removed a substantial commodity-adjacent revenue stream, tightening DuPont&#39;s focus on specialty materials and initiating the current portfolio simplification sequence.</div>
+        <div><span class="tag t-info">Divestiture</span><span class="tag t-info">ASC 205-20</span></div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-year">Nov 2025</div>
+      <div>
+        <div class="tl-title">Qnity Electronics Spin-Off (Tax-Free)</div>
+        <div class="tl-body">DuPont spun off Qnity Electronics, Inc.&#8212;semiconductor interconnect solutions (formerly known as the Electronics &amp; Industrial segment). Distributed tax-free to DuPont shareholders. ~$3&#8211;4B in revenue removed. TSA agreements in place through ~2027 for services and through 2040 for site leases. Major discontinued operations accounting event.</div>
+        <div><span class="tag t-high">Major Disc. Ops</span><span class="tag t-info">ASC 205-20</span><span class="tag t-warn">TSA Through 2027/2040</span></div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-year">Apr 2026</div>
+      <div>
+        <div class="tl-title">Aramids Divestiture &#8212; Kevlar/Nomex to Arclin (TJC LP)</div>
+        <div class="tl-body">DuPont sold its Aramids business (Kevlar, Nomex brands) to Arclin&#8212;an affiliate of TJC LP&#8212;for ~$1.2B cash + $300M note receivable + $325M equity stake in Arclin. Total consideration ~$1.5&#8211;1.8B. The note receivable and illiquid equity stake require ASC 820 fair value treatment. TSA obligations through ~2028. Net debt reduced materially on cash proceeds.</div>
+        <div><span class="tag t-high">Disc. Ops</span><span class="tag t-info">ASC 820 Fair Value</span><span class="tag t-warn">$300M Note + $325M Equity</span></div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-year">Jun 2026</div>
+      <div>
+        <div class="tl-title">1-for-3 Reverse Stock Split</div>
+        <div class="tl-body">Effective June 24, 2026. Reduced shares outstanding from ~417M to ~139M. All per-share data (EPS, dividends, book value per share) retroactively restated in financial statements. Bookkeeping and consistency review is an ICFR audit item.</div>
+        <div><span class="tag t-info">Retroactive Restatement</span><span class="tag t-warn">ICFR Check</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hl hl-warn">
+  <strong>&#9888; Audit Considerations:</strong> Each transaction generated goodwill (2017&#8211;19 splits) or a termination expense (Rogers, $162.5M). Qnity and Aramids discontinued operations require clean PPA carve-out balance sheets, intercompany eliminations, and proper period attribution. Reverse split requires retroactive restatement consistency across all filings. Aramids note receivable and equity stake fair value will be a recurring Level 3 measurement.
+</div>
+</template>
+
+<template id="tmpl-ai">
+<div class="card">
+  <div class="card-title">Operational AI Deployment &#8212; DuPont FY 2026</div>
+  <div class="card-body">
+    <p><strong>AI-Ready Labs Initiative:</strong> DuPont is deploying AI tools to accelerate R&amp;D laboratory workflows&#8212;faster formulation screening, predictive modeling for materials performance, front-end innovation pipeline acceleration. Designed to shorten development cycles in Liveo, Vespel, and membrane product lines.</p>
+    <p><strong>Sales Plays AI:</strong> Management cited ~150 commercial opportunities won using AI-enabled sales tooling with ~30% win rate (above historical and industry benchmarks). AI is being used to score leads, identify cross-sell opportunities, and prioritize geographic markets. Demand generation scaling is a stated strategic priority.</p>
+    <p><strong>Kaizen + AI/Automation:</strong> Reliability, maintenance, and quality pilots underway in manufacturing. Predictive maintenance AI reduces unplanned downtime; quality vision systems improve yield. Consistent with DuPont&#39;s 80/20 operational focus on highest-value production lines.</p>
+    <p><strong>80/20 Prioritization:</strong> AI tooling used to identify highest-value product families and geographies, enabling resource concentration. Management refers to this as &#8220;building a more systemic commercial engine.&#8221;</p>
+  </div>
+</div>
+
+<div class="two-col">
+  <div class="card">
+    <div class="card-title">ASC 350-40: Internal-Use Software</div>
+    <div class="card-body">
+      <p>AI lab automation tools and commercial AI platforms developed or customized in-house qualify for capitalization under ASC 350-40 during the application development stage.</p>
+      <p><strong>Audit questions:</strong>
+        <ul>
+          <li>Which AI tools are externally purchased vs. internally developed?</li>
+          <li>Are preliminary vs. application development vs. post-implementation stages correctly delineated?</li>
+          <li>Are cloud-based AI subscriptions expensed per ASU 2018-15?</li>
+          <li>What is the useful life and amortization period for capitalized AI software?</li>
+        </ul>
+      </p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">ITGC Implications of AI</div>
+    <div class="card-body">
+      <p>AI tools operating in customer-facing commercial workflows (sales play AI, lead scoring) introduce new ITGC review requirements:</p>
+      <ul>
+        <li><strong>Access controls</strong> &#8212; who can query, modify, or retrain AI models that influence financial reporting data?</li>
+        <li><strong>Change management</strong> &#8212; model updates require change management procedures equivalent to software changes</li>
+        <li><strong>SOC 1 reliance</strong> &#8212; if AI vendors provide SaaS platforms, SOC 1/2 reports must be evaluated</li>
+        <li><strong>TSA shared environment</strong> &#8212; Qnity&#39;s IT separation complicates AI platform ownership and access during TSA period through ~2027</li>
+        <li><strong>Data integrity</strong> &#8212; AI training data sourced from financial systems; input validation is critical</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="hl hl-info">
+  <strong>Partner Prep Note:</strong> DuPont&#39;s AI deployment is operational (not cutting-edge transformative) but the pace of expansion&#8212;150 commercial wins cited in Q2 2026 earnings&#8212;means AI now touches revenue-generating processes. The audit must assess whether AI-assisted commercial decisions (pricing, contract terms, customer selection) flow through appropriate review controls before recording revenue.
+</div>
+</template>
+
+<template id="tmpl-activist">
+<div class="metrics">
+  <div class="metric"><div class="metric-label">Market Cap</div><div class="metric-value">$17.7B</div><div class="metric-sub">Actionable for large activists</div></div>
+  <div class="metric"><div class="metric-label">Confirmed Activist</div><div class="metric-value">None</div><div class="metric-sub">As of Sep 2026 <span class="verify">VERIFY SEC 13D/G</span></div></div>
+  <div class="metric"><div class="metric-label">Inst. Net Buyers</div><div class="metric-value">+127</div><div class="metric-sub">630 buyers vs 503 sellers LTM</div></div>
+  <div class="metric"><div class="metric-label">Float</div><div class="metric-value">~74%</div><div class="metric-sub">Institutional; high liquidity</div></div>
+</div>
+
+<div class="card">
+  <div class="card-title">Current Activist Status</div>
+  <div class="card-body">
+    <p>No named public activist has a confirmed live thesis against DuPont as of September 2026 <span class="verify">VERIFY &#8212; search SEC 13D/13G for DD</span>. The company&#39;s proactive portfolio simplification (Qnity spin + Aramids sale) has largely executed the traditional activist playbook pre-emptively.</p>
+    <p>Short-seller thesis: No prominent short-seller thesis identified <span class="verify">VERIFY &#8212; check Hindenburg, Spruce Point, etc.</span>. PFAS liability is a perennial bear thesis used by generalist shorts, but no dedicated short report as of research date.</p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Activist Vulnerability Factors</div>
+  <div class="card-body">
+    <table class="tbl">
+      <thead><tr><th>Factor</th><th>Assessment</th><th>Severity</th></tr></thead>
+      <tbody>
+        <tr><td>Market cap $17.7B</td><td>Actionable size for large activists (Elliott, Starboard, etc.)</td><td><span class="tag t-med">Medium</span></td></tr>
+        <tr><td>Post-transformation complexity</td><td>TSA obligations, two discontinued ops, PFAS&#8212;creates narrative complexity</td><td><span class="tag t-med">Medium</span></td></tr>
+        <tr><td>GICS reclassification</td><td>Index-driven selling creates dislocation; multiple compression vs. prior comps</td><td><span class="tag t-med">Medium</span></td></tr>
+        <tr><td>PFAS overhang</td><td>Perennial bear catalyst; NRD exposure undefined</td><td><span class="tag t-high">High</span></td></tr>
+        <tr><td>Stock vs. targets</td><td>$127.11 vs. avg target $170&#8212;implies market skepticism</td><td><span class="tag t-med">Medium</span></td></tr>
+        <tr><td>Management tenure</td><td>Breen/Koch proactive; execution track record strong</td><td><span class="tag t-ok">Mitigant</span></td></tr>
+        <tr><td>Capital return program</td><td>$2B buyback + dividend preempts capital allocation critique</td><td><span class="tag t-ok">Mitigant</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Historical Activist Context</div>
+  <div class="card-body">
+    <p><strong>Nelson Peltz / Trian Fund Management (2015&#8211;2017):</strong> Peltz was DuPont&#39;s most prominent activist. He ran a high-profile proxy contest in 2015 (DuPont won the board vote), then in 2016 secured board representation. Trian&#39;s thesis pushed for the ultimate DowDuPont merger and three-way split&#8212;which occurred 2017&#8211;2019. The current DuPont is effectively the product of Peltz&#39;s activist campaign.</p>
+    <p><strong>Management Response Posture:</strong> CEO Lori Koch and Executive Chairman Edward Breen have been visibly proactive on portfolio simplification&#8212;executing both the Qnity spin and Aramids sale on accelerated timelines. This &#8220;self-help&#8221; narrative largely preempts traditional activist arguments about conglomerate discount, capital misallocation, or underperforming segments. The residual activist angle would require either (1) PFAS crystallization, or (2) sustained organic growth disappointment.</p>
+  </div>
+</div>
+</template>
+
+<template id="tmpl-journey">
+<div class="card">
+  <div class="card-title">Revenue Recognition (ASC 606) &#8212; DuPont Channel Walkthrough</div>
+  <div class="card-body">
+    <p>DuPont recognizes revenue across four primary commercial channels. Each requires distinct performance obligation identification and recognition timing under ASC 606.</p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Channel 1: Direct B2B (Industrial Customers, OEM Contracts)</div>
+  <div class="card-body">
+    <p><strong>Mechanism:</strong> DuPont ships materials (Tyvek, Vespel, membranes) directly to industrial manufacturers and OEMs under purchase order or supply agreement. Revenue recognized at point of delivery/acceptance (transfer of control).</p>
+    <p><strong>Key Judgment &#8212; Bill-and-Hold:</strong> Specialized products (Vespel, custom membranes) may involve bill-and-hold arrangements where the customer requests DuPont hold goods. Under ASC 606, bill-and-hold requires: (1) the arrangement is substantive; (2) the product is separately identified as belonging to the customer; (3) it is ready for transfer; (4) DuPont cannot redirect the asset.</p>
+    <p><strong>Audit Focus:</strong> Verify that bill-and-hold criteria are met before recording revenue. Confirm shipping terms (FOB Origin vs. Destination) are applied consistently.</p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Channel 2: Distributor Channel</div>
+  <div class="card-body">
+    <p><strong>Mechanism:</strong> Significant portions of Tyvek, Molykote, and building products move through distributors. DuPont recognizes revenue on a &#8220;sell-in&#8221; basis&#8212;when control transfers to the distributor on shipment.</p>
+    <p><strong>Key Judgment &#8212; Variable Consideration:</strong> DuPont offers rebates and volume discounts to distributors. Under ASC 606, variable consideration must be estimated using the expected value or most-likely-amount method and constrained to the amount not probable of significant reversal.</p>
+    <p><strong>Principal vs. Agent:</strong> In arrangements where DuPont engages third-party logistics or uses consignment inventory at distributors, principal vs. agent analysis determines whether to record gross or net revenue.</p>
+    <p><strong>Audit Focus:</strong> Review distributor rebate accruals for reasonableness; test sell-in vs. sell-through timing; confirm consignment inventory is not prematurely recognized.</p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Channel 3: Long-Term Supply Agreements (Water, Biopharma)</div>
+  <div class="card-body">
+    <p><strong>Mechanism:</strong> Water treatment (Filmtec, Inge) and biopharma (Liveo) customers often enter multi-year supply contracts with take-or-pay commitments or minimum purchase guarantees. Recognition requires: (1) identifying all distinct performance obligations in the contract; (2) allocating transaction price based on standalone selling prices; (3) recognizing revenue when each obligation is satisfied.</p>
+    <p><strong>Key Judgment &#8212; Shipping Terms and Milestones:</strong> Delivery terms determine when control transfers. Some supply agreements include installation or technical support as a bundled obligation&#8212;these must be separately identified and recognized over time.</p>
+    <p><strong>Significant Financing Component:</strong> Long-term contracts with upfront payments (customer prepays for supply guarantee) may contain a significant financing component under ASC 606-10-32-15, requiring interest accretion.</p>
+    <p><strong>Audit Focus:</strong> Trace multi-year contracts through the performance obligation matrix; confirm bundled services are separated; verify standalone selling prices for allocation.</p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Channel 4: Licensing / Royalties</div>
+  <div class="card-body">
+    <p><strong>Mechanism:</strong> Minimal for the current portfolio post-Chemours spin. Historical fluorochemistry and polymer patents generated royalties; most legacy IP transferred with Chemours or expired. Any remaining royalty streams (licensed technology) are recognized over the license period if usage-based, or at a point in time if access-based.</p>
+    <p><strong>Audit Focus:</strong> Confirm no material unidentified licensing arrangements exist post-restructuring. Review Aramids TSA period for any IP license components that should be separately recognized.</p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Key ASC 606 Judgment Summary</div>
+  <div class="card-body">
+    <table class="tbl">
+      <thead><tr><th>Judgment Area</th><th>Risk</th><th>DuPont Specifics</th></tr></thead>
+      <tbody>
+        <tr><td>Variable consideration</td><td><span class="tag t-med">Medium</span></td><td>Distributor rebates; volume tier pricing</td></tr>
+        <tr><td>Principal vs. agent</td><td><span class="tag t-med">Medium</span></td><td>Third-party logistics; consignment inventory</td></tr>
+        <tr><td>Contract modifications</td><td><span class="tag t-med">Medium</span></td><td>Long-term supply renegotiations post-spin</td></tr>
+        <tr><td>Significant financing component</td><td><span class="tag t-info">Low-Med</span></td><td>Long-term supply contracts with prepayments</td></tr>
+        <tr><td>Bill-and-hold</td><td><span class="tag t-med">Medium</span></td><td>Custom Vespel and specialty membrane orders</td></tr>
+        <tr><td>Disc. ops revenue separation</td><td><span class="tag t-high">High</span></td><td>Qnity and Aramids revenue correctly excluded from continuing ops</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</template>
+
+<template id="tmpl-sotp">
+<div class="sh">Sum-of-the-Parts Valuation &#8212; Football Field ($/ Share)</div>
+<div class="svg-wrap">
+  <svg viewBox="0 0 590 278" style="width:100%;min-width:480px;font-family:-apple-system,BlinkMacSystemFont,sans-serif">
+    <!-- X-axis baseline -->
+    <line x1="142" y1="32" x2="550" y2="32" stroke="#c8c0b8" stroke-width="0.8"/>
+    <!-- X-axis ticks and labels -->
+    <line x1="142" y1="28" x2="142" y2="36" stroke="#c8c0b8" stroke-width="0.8"/>
+    <text x="142" y="26" text-anchor="middle" font-size="7" fill="#888">-$18</text>
+    <line x1="189.7" y1="28" x2="189.7" y2="36" stroke="#c8c0b8" stroke-width="0.8"/>
+    <text x="189.7" y="26" text-anchor="middle" font-size="7" fill="#888">$0</text>
+    <line x1="322.2" y1="28" x2="322.2" y2="36" stroke="#c8c0b8" stroke-width="0.8"/>
+    <text x="322.2" y="26" text-anchor="middle" font-size="7" fill="#888">$50</text>
+    <line x1="454.5" y1="28" x2="454.5" y2="36" stroke="#c8c0b8" stroke-width="0.8"/>
+    <text x="454.5" y="26" text-anchor="middle" font-size="7" fill="#888">$100</text>
+    <line x1="526.2" y1="28" x2="526.2" y2="36" stroke="#c8c0b8" stroke-width="0.8"/>
+    <text x="526.2" y="26" text-anchor="middle" font-size="7" fill="#888">$127</text>
+    <line x1="550" y1="28" x2="550" y2="36" stroke="#c8c0b8" stroke-width="0.8"/>
+    <text x="550" y="26" text-anchor="middle" font-size="7" fill="#888">$136</text>
+    <!-- Vertical gridlines (faint) -->
+    <line x1="189.7" y1="36" x2="189.7" y2="270" stroke="#e8e4de" stroke-width="0.5" stroke-dasharray="2,3"/>
+    <line x1="322.2" y1="36" x2="322.2" y2="270" stroke="#e8e4de" stroke-width="0.5" stroke-dasharray="2,3"/>
+    <line x1="454.5" y1="36" x2="454.5" y2="270" stroke="#e8e4de" stroke-width="0.5" stroke-dasharray="2,3"/>
+    <line x1="526.2" y1="36" x2="526.2" y2="270" stroke="#e8e4de" stroke-width="0.5" stroke-dasharray="2,4"/>
+
+    <!-- Row 0: Healthcare & Water Tech: lo=68, hi=95, mid=82 -->
+    <text x="138" y="61" text-anchor="end" font-size="8" fill="#2D2D2D" font-weight="600">H&amp;W Tech.</text>
+    <rect x="369.8" y="51" width="71.5" height="12" rx="3" fill="#D04A02" fill-opacity="0.22"/>
+    <line x1="406.9" y1="46" x2="406.9" y2="63" stroke="#D04A02" stroke-width="2.5"/>
+    <text x="445" y="61" text-anchor="start" font-size="7.5" fill="#2D2D2D">$68&#8211;$95</text>
+
+    <!-- Row 1: Diversified Industrials: lo=45, hi=62, mid=54 -->
+    <text x="138" y="95" text-anchor="end" font-size="8" fill="#2D2D2D" font-weight="600">Div. Industrials</text>
+    <rect x="308.9" y="85" width="45.0" height="12" rx="3" fill="#175D5D" fill-opacity="0.22"/>
+    <line x1="332.8" y1="80" x2="332.8" y2="97" stroke="#175D5D" stroke-width="2.5"/>
+    <text x="357" y="95" text-anchor="start" font-size="7.5" fill="#2D2D2D">$45&#8211;$62</text>
+
+    <!-- Row 2: Corporate Overhead: lo=-18, hi=-10, mid=-14 -->
+    <text x="138" y="129" text-anchor="end" font-size="8" fill="#2D2D2D" font-weight="600">Corp. Overhead</text>
+    <rect x="142.0" y="119" width="21.2" height="12" rx="3" fill="#E0301E" fill-opacity="0.22"/>
+    <line x1="152.6" y1="114" x2="152.6" y2="131" stroke="#E0301E" stroke-width="2.5"/>
+    <text x="167" y="129" text-anchor="start" font-size="7.5" fill="#E0301E">($18)&#8211;($10)</text>
+
+    <!-- Row 3: Net Debt: lo=-11, hi=-9, mid=-10 -->
+    <text x="138" y="163" text-anchor="end" font-size="8" fill="#2D2D2D" font-weight="600">Net Debt</text>
+    <rect x="160.5" y="153" width="5.3" height="12" rx="3" fill="#E0301E" fill-opacity="0.22"/>
+    <line x1="163.2" y1="148" x2="163.2" y2="165" stroke="#E0301E" stroke-width="2.5"/>
+    <text x="170" y="163" text-anchor="start" font-size="7.5" fill="#E0301E">($11)&#8211;($9)</text>
+
+    <!-- Row 4: Pension/OPEB: lo=-4, hi=-2, mid=-3 -->
+    <text x="138" y="197" text-anchor="end" font-size="8" fill="#2D2D2D" font-weight="600">Pension/OPEB</text>
+    <rect x="179.1" y="187" width="5.3" height="12" rx="3" fill="#EB8C00" fill-opacity="0.22"/>
+    <line x1="181.7" y1="182" x2="181.7" y2="199" stroke="#EB8C00" stroke-width="2.5"/>
+    <text x="188" y="197" text-anchor="start" font-size="7.5" fill="#EB8C00">($4)&#8211;($2)</text>
+
+    <!-- Row 5: SOTP Base Case: lo=80, hi=136, mid=109 -->
+    <text x="138" y="231" text-anchor="end" font-size="8" fill="#2D2D2D" font-weight="700">SOTP Base</text>
+    <rect x="401.6" y="221" width="148.4" height="12" rx="3" fill="#D04A02" fill-opacity="0.28"/>
+    <line x1="478.5" y1="216" x2="478.5" y2="233" stroke="#D04A02" stroke-width="2.5"/>
+    <text x="403" y="230" text-anchor="start" font-size="7.5" fill="#D04A02" font-weight="600">$80&#8211;$136</text>
+
+    <!-- Row 6: Current Price: lo=hi=127 (vertical line) -->
+    <text x="138" y="265" text-anchor="end" font-size="8" fill="#2D2D2D" font-weight="700">Current Price</text>
+    <line x1="526.2" y1="252" x2="526.2" y2="270" stroke="#2D2D2D" stroke-width="3"/>
+    <circle cx="526.2" cy="261" r="4" fill="#2D2D2D"/>
+    <text x="532" y="265" text-anchor="start" font-size="7.5" fill="#2D2D2D" font-weight="700">$127.11</text>
+  </svg>
+</div>
+
+<div class="two-col">
+  <div class="card">
+    <div class="card-title">Segment Valuation Methodology</div>
+    <div class="card-body">
+      <p><strong>H&amp;W Technologies ($68&#8211;$95/share):</strong> 16&#8211;19x EBITDA applied to ~$0.95&#8211;1.05B implied segment EBITDA. Comparable companies: Pall (pre-DHR), Entegris, Cytiva. High-end justified by biopharma packaging moat and Filmtec membrane leadership.</p>
+      <p><strong>Div. Industrials ($45&#8211;$62/share):</strong> 10&#8211;13x EBITDA applied to ~$0.80&#8211;0.90B implied segment EBITDA. Comparable companies: Graco, ITW, specialty industrial peers. Lower multiple reflects more cyclicality and construction exposure.</p>
+      <p><strong>Corporate Overhead (&#8211;$10 to &#8211;$18/share):</strong> ~$1.5B EV of unallocated corporate costs capitalized at 8&#8211;10x.</p>
+      <p><strong>Net Debt (&#8211;$9 to &#8211;$11/share):</strong> Based on Jun 2026 net debt of $1.4B &#247; ~139M shares = ~$10/share.</p>
+      <p><strong>Pension/OPEB (&#8211;$2 to &#8211;$4/share):</strong> $432M liability / 139M shares = ~$3/share.</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Analyst SOTP Thesis</div>
+    <div class="card-body">
+      <p><strong>Bull Case ($136):</strong> Healthcare &amp; Water re-rates to 19&#8211;22x EBITDA as Pall/Danaher comps are adopted. Organic growth sustains above 4%. PFAS resolved without incremental cost. Multiple compression in Industrials offset by H&amp;W premium.</p>
+      <p><strong>Base Case ($109):</strong> Market consensus. 16&#8211;17x H&amp;W, 11&#8211;12x DI. Steady organic growth. TSA costs normalizing. PFAS continues to be a discount factor.</p>
+      <p><strong>Bear Case ($80):</strong> Organic growth disappoints; China/tariff headwinds hit water segment; PFAS natural resource damages become material; multiple compression to specialty chemicals (10&#8211;13x) as industrial re-rating fails to materialize.</p>
+      <p><strong>Current Price ($127.11):</strong> Inside the base/bull range. Market is pricing in execution on guidance but not awarding full industrial reclassification premium yet.</p>
+    </div>
+  </div>
+</div>
+</template>
+
+<template id="tmpl-earnings">
+<div class="card">
+  <div class="card-title">Q2 2026 Earnings Call &#8212; Aug 4, 2026 &#8212; Key Takeaways</div>
+  <div class="card-body">
+    <table class="tbl">
+      <thead><tr><th>Metric</th><th class="tbl-num">Q2 2026</th><th class="tbl-num">Q2 2025</th><th class="tbl-num">Change</th></tr></thead>
+      <tbody>
+        <tr><td>Revenue (cont. ops)</td><td class="tbl-num">$1,819M</td><td class="tbl-num">$1,749M</td><td class="tbl-num" style="color:var(--green)">+4% organic</td></tr>
+        <tr><td>Adj. EBITDA</td><td class="tbl-num">$448M</td><td class="tbl-num">~$423M</td><td class="tbl-num" style="color:var(--green)">+6%</td></tr>
+        <tr><td>EBITDA Margin</td><td class="tbl-num">24.6%</td><td class="tbl-num">24.2%</td><td class="tbl-num" style="color:var(--green)">+40bps</td></tr>
+        <tr><td>Adj. EPS</td><td class="tbl-num">$1.88</td><td class="tbl-num">$1.27</td><td class="tbl-num" style="color:var(--green)">+48%</td></tr>
+        <tr><td>FCF (transaction-adj.)</td><td class="tbl-num">$326M</td><td class="tbl-num">$107M</td><td class="tbl-num" style="color:var(--green)">+205%</td></tr>
+        <tr><td>FCF Conversion (H1)</td><td class="tbl-num">127%</td><td class="tbl-num">&#8212;</td><td class="tbl-num" style="color:var(--green)">&#9650; Strong</td></tr>
+      </tbody>
+    </table>
+    <p><strong>H&amp;W Technologies:</strong> $856M (+5%); EBITDA $258M, margin 30.1%. Led by biopharma packaging (Liveo, Tyvek Medical) and personal protection. Water technologies steady.</p>
+    <p><strong>Diversified Industrials:</strong> $963M (+3%); EBITDA $213M, margin 22.1%. Led by aerospace (Vespel) and EV materials (Betaforce). Building products stable.</p>
+  </div>
+</div>
+
+<div class="two-col">
+  <div class="card">
+    <div class="card-title">Management Highlights</div>
+    <div class="card-body">
+      <ul>
+        <li>Exceeded guidance on all metrics</li>
+        <li>Second consecutive full-year guidance raise</li>
+        <li>1-for-3 reverse stock split completed June 24, 2026</li>
+        <li>GICS reclassification to Industrials eff. July 31, 2026</li>
+        <li>$250M Q3 share repurchase intent announced</li>
+        <li>Management tone: confident, execution-focused</li>
+        <li>&#8220;Building a more systemic commercial engine&#8221;</li>
+        <li>H2 outlook: &#8220;mid-single digit organic growth&#8221;</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">FY 2026 Guidance (Raised Aug 4)</div>
+    <div class="card-body">
+      <table class="tbl">
+        <tbody>
+          <tr><td>Revenue</td><td class="tbl-num"><strong>$7,160&#8211;7,190M</strong></td></tr>
+          <tr><td>Op. EBITDA</td><td class="tbl-num"><strong>$1,750&#8211;1,770M</strong></td></tr>
+          <tr><td>Adj. EPS</td><td class="tbl-num"><strong>$7.17&#8211;7.32</strong></td></tr>
+          <tr><td>Organic Growth</td><td class="tbl-num">Slightly above 4%</td></tr>
+          <tr><td>FCF Conversion</td><td class="tbl-num">&gt;90% target</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="sh">Five-Quarter Revenue Trend (Continuing Ops, $M)</div>
+<div class="chart-labels">
+  <span>Q2&#39;25</span><span>Q3&#39;25</span><span>Q4&#39;25</span><span>Q1&#39;26</span><span>Q2&#39;26</span>
+</div>
+<div style="margin-bottom:.25rem">
+  <svg viewBox="0 0 280 70" style="width:100%;max-width:500px;overflow:visible">
+    <!-- Grid lines -->
+    <line x1="20" y1="12" x2="260" y2="12" stroke="#e8e4de" stroke-width="0.5"/>
+    <line x1="20" y1="30" x2="260" y2="30" stroke="#e8e4de" stroke-width="0.5"/>
+    <line x1="20" y1="48" x2="260" y2="48" stroke="#e8e4de" stroke-width="0.5"/>
+    <!-- Area fill -->
+    <polygon points="20,30.26 80,17.74 140,44.87 200,48.00 260,12.00 260,55 20,55" fill="#D04A02" fill-opacity="0.08"/>
+    <!-- Revenue line -->
+    <polyline points="20,30.26 80,17.74 140,44.87 200,48.00 260,12.00" fill="none" stroke="#D04A02" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+    <!-- Dots -->
+    <circle cx="20" cy="30.26" r="3" fill="#D04A02"/>
+    <circle cx="80" cy="17.74" r="3" fill="#D04A02"/>
+    <circle cx="140" cy="44.87" r="3" fill="#D04A02"/>
+    <circle cx="200" cy="48.00" r="3" fill="#D04A02"/>
+    <circle cx="260" cy="12.00" r="3" fill="#D04A02"/>
+    <!-- Value labels -->
+    <text x="20" y="27" text-anchor="middle" font-size="6.5" fill="#D04A02">1,749</text>
+    <text x="80" y="14" text-anchor="middle" font-size="6.5" fill="#D04A02">1,797</text>
+    <text x="140" y="57" text-anchor="middle" font-size="6.5" fill="#D04A02">1,693 <tspan fill="#888" font-size="5.5">&#x2193;</tspan></text>
+    <text x="200" y="62" text-anchor="middle" font-size="6.5" fill="#D04A02">1,681</text>
+    <text x="260" y="9" text-anchor="middle" font-size="6.5" fill="#D04A02" font-weight="700">1,819</text>
+    <!-- Y axis labels -->
+    <text x="16" y="14" text-anchor="end" font-size="5.5" fill="#aaa">$1,819</text>
+    <text x="16" y="50" text-anchor="end" font-size="5.5" fill="#aaa">$1,681</text>
+  </svg>
+</div>
+<div class="chart-labels" style="margin-bottom:.875rem">
+  <span>Q2&#39;25</span><span>Q3&#39;25</span><span>Q4&#39;25</span><span>Q1&#39;26</span><span>Q2&#39;26</span>
+</div>
+
+<div class="sh">Five-Quarter Adj. EBITDA Margin Trend (%)</div>
+<div class="chart-labels">
+  <span>Q2&#39;25</span><span>Q3&#39;25</span><span>Q4&#39;25</span><span>Q1&#39;26</span><span>Q2&#39;26</span>
+</div>
+<div style="margin-bottom:.25rem">
+  <svg viewBox="0 0 280 70" style="width:100%;max-width:500px;overflow:visible">
+    <!-- Grid lines -->
+    <line x1="20" y1="12" x2="260" y2="12" stroke="#e8e4de" stroke-width="0.5"/>
+    <line x1="20" y1="30" x2="260" y2="30" stroke="#e8e4de" stroke-width="0.5"/>
+    <line x1="20" y1="48" x2="260" y2="48" stroke="#e8e4de" stroke-width="0.5"/>
+    <!-- Area fill -->
+    <polygon points="20,25.09 80,31.64 140,48.00 200,28.36 260,12.00 260,55 20,55" fill="#175D5D" fill-opacity="0.08"/>
+    <!-- Margin line -->
+    <polyline points="20,25.09 80,31.64 140,48.00 200,28.36 260,12.00" fill="none" stroke="#175D5D" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+    <!-- Dots -->
+    <circle cx="20" cy="25.09" r="3" fill="#175D5D"/>
+    <circle cx="80" cy="31.64" r="3" fill="#175D5D"/>
+    <circle cx="140" cy="48.00" r="3" fill="#175D5D"/>
+    <circle cx="200" cy="28.36" r="3" fill="#175D5D"/>
+    <circle cx="260" cy="12.00" r="3" fill="#175D5D"/>
+    <!-- Value labels -->
+    <text x="20" y="22" text-anchor="middle" font-size="6.5" fill="#175D5D">24.2%</text>
+    <text x="80" y="38" text-anchor="middle" font-size="6.5" fill="#175D5D">24.0%</text>
+    <text x="140" y="62" text-anchor="middle" font-size="6.5" fill="#175D5D">23.5%* <tspan fill="#888" font-size="5">&#x2193;</tspan></text>
+    <text x="200" y="25" text-anchor="middle" font-size="6.5" fill="#175D5D">24.1%</text>
+    <text x="260" y="9" text-anchor="middle" font-size="6.5" fill="#175D5D" font-weight="700">24.6%</text>
+    <!-- Y axis labels -->
+    <text x="16" y="14" text-anchor="end" font-size="5.5" fill="#aaa">24.6%</text>
+    <text x="16" y="50" text-anchor="end" font-size="5.5" fill="#aaa">23.5%</text>
+  </svg>
+</div>
+<div class="chart-labels" style="margin-bottom:.5rem">
+  <span>Q2&#39;25</span><span>Q3&#39;25</span><span>Q4&#39;25</span><span>Q1&#39;26</span><span>Q2&#39;26</span>
+</div>
+<p style="font-size:10px;color:#888;margin-bottom:.875rem">* Q4&#39;25 EBITDA margin estimate pending verification from 10-K earnings supplement <span class="verify">VERIFY Q4&#39;25 margin</span></p>
+
+<div class="hl hl-success">
+  <strong>&#10003; Trend Reading:</strong> Revenue dipped in Q4&#39;25&#8211;Q1&#39;26 (seasonal + integration noise) then recovered strongly to $1,819M in Q2&#39;26&#8212;a new high on the continuing ops basis. EBITDA margin trajectory shows recovery from Q4&#39;25 trough to 24.6% Q2&#39;26. Execution is on-track for the raised FY 2026 guidance of $7.16&#8211;7.19B revenue and $1.75&#8211;1.77B EBITDA.
+</div>
+</template>
+
+<!-- END TEMPLATES -->
+
+<script>
+var state = {tab: 'overview', rendered: {}};
+function getTemplate(tab) {
+  var tmpl = document.getElementById('tmpl-' + tab);
+  return tmpl ? tmpl.innerHTML : null;
+}
+function renderTab(tab) {
+  if (state.rendered[tab]) return;
+  var placeholder = document.getElementById(tab);
+  if (!placeholder) return;
+  var html = getTemplate(tab);
+  if (html) { placeholder.innerHTML = html; state.rendered[tab] = true; }
+}
+function selectTab(tab, btn) {
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.tab-content').forEach(function(t) { t.classList.remove('active'); });
+  renderTab(tab);
+  var el = document.getElementById(tab);
+  if (el) el.classList.add('active');
+  if (btn) btn.classList.add('active');
+  state.tab = tab;
+}
+document.addEventListener('DOMContentLoaded', function() { renderTab('overview'); });
+</script>
+</body>
+</html>
